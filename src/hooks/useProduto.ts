@@ -1,7 +1,6 @@
 import Produto from "../core/Produto"
 import { useState,useEffect  } from 'react'
-import ProdutoRepositorio from '../core/ProdutoRepositorio'
-import ColecaoProduto from '../firebase/bd/ColecaoProduto'
+import ColecaoProduto from '../backend/bd/ColecaoProduto'
 import useTabelaOuForm from './useTabelaOuForm'
 
 export default function useProduto(){
@@ -13,9 +12,9 @@ export default function useProduto(){
         tabelaVisivel
       } = useTabelaOuForm()
 
-    const repo: ProdutoRepositorio = new ColecaoProduto()
+    const repo = new ColecaoProduto()
 
-    const [Produto,setProduto]   = useState<Produto>(Produto.vazio())
+    const [Produto,setProduto]   = useState([])
     const [Produtos,setProdutos] = useState<Produto[]>([])
 
     useEffect(obterTodos, [])
@@ -27,24 +26,24 @@ export default function useProduto(){
       })
     }
   
-    function editarProduto(Produto: Produto){
+    function editarProduto(Produto){
       setProduto(Produto)
       exibirFormulario()
     }
   
-    async function excluirProduto(Produto: Produto){
+    async function excluirProduto(Produto){
       await repo.excluir(Produto)
       obterTodos();
     }
     
-    async function salvarProduto(Produto: Produto){
+    async function salvarProduto(Produto){
       await repo.salvar(Produto)
       obterTodos();
       exibirTabela()
     }
   
     function novoProduto(){
-      setProduto(Produto.vazio)
+      setProduto([])
       exibirFormulario()
     }
 

@@ -1,14 +1,38 @@
 import FormularioProduto from "../../components/template/cadastros/produtos/FormularioProduto"
+import TabelaProduto from "../../components/template/cadastros/produtos/TabelaProduto"
 import LayoutCadastros from "../../components/template/cadastros/layoutCadastros";
 import Layout from "../../components/template/Layout"
 import Produto from "../../core/Produto";
+import usePoduto from '../../hooks/useProduto'
+import Botao from '../../components/template/cadastros/Botao'
 
 export default function telaProduto() {
-  
+
+  const { 
+    exibirTabela,
+    tabelaVisivel,
+    novoProduto
+  } = usePoduto()
+
   return (
     <Layout titulo = "Produto" subtitulo = "Grenciamento de produtos">
       <LayoutCadastros>
-        <FormularioProduto produto ={new Produto('','','','',0)} />
+      {tabelaVisivel ? (
+        <>
+        <div className = "flex justify-end">
+          <Botao 
+            cor = "indigo-500" 
+            className ="mb-4" 
+            onClick = {() => novoProduto()}>
+            Novo cliente</Botao>
+        </div>
+        <TabelaProduto produtos ={[]}/>
+        </>
+      ):(
+        <>
+        <FormularioProduto produto ={[]} exibirTabela = {() => exibirTabela()}/>
+        </>
+      )}
       </LayoutCadastros>
     </Layout>
   )
