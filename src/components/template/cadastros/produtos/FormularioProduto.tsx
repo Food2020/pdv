@@ -9,7 +9,7 @@ interface FormularioProdutoProps{
     cancelado?: () => void
 }
 
-export default function FormularioProduto(props: FormularioProdutoProps){
+export default function FormularioProduto(props){
     const id                       = props.produto?.id
     const [nome,setNome]           = useState(props.produto?.nome ?? '');
     const [codigo,setCodigo]       = useState(props.produto?.codigo ?? '');
@@ -18,35 +18,56 @@ export default function FormularioProduto(props: FormularioProdutoProps){
     const [preco,setPreco]         = useState(props.produto?.preco ?? 0);
 
     return (
-        <div>
+        <>
+            <div className = "grid grid-cols-12">
             {
                 id ? (
                 <Entrada 
                     somenteLeitura 
                     texto = "Id" 
                     valor = {id}
-                    className = "mb-4" />
+                    className = "col-span-2" />
                 ) : false
             }
             <Entrada 
                 texto = "Código" 
                 valor = {codigo}
-                valorMudou = {setCodigo} />
+                valorMudou = {setCodigo}
+                className = "col-span-4" />
             <Entrada 
                 texto = "Nome" 
                 valor = {nome} 
                 valorMudou = {setNome} 
-                className = "mb-4"/>
+                className = "col-span-4"/>
+            <Entrada 
+                texto = "Preço" 
+                valor = {preco} 
+                valorMudou = {setPreco} 
+                tipo = "number"
+                className = "col-span-4" />
+             <Entrada 
+                texto = "Categoria" 
+                valor = {categoria} 
+                valorMudou = {setCategoria} 
+                tipo = "text"
+                className = "col-span-4" />
+             <Entrada 
+                texto = "Unidade" 
+                valor = {unidade} 
+                valorMudou = {setUnidade} 
+                tipo = "text"
+                className = "col-span-4" />
+            </div>
             <div className = "flex justify-end mt-4">
                 <Botao 
-                    cor = "indigo" className = "mr-2"
-                    onClick = {() => props.produtoMudou?.(new Produto(codigo,nome,unidade,categoria,preco,id))} >
+                    cor = "indigo-500" className = "mr-2"  >
                     {id ? 'Alterar' : 'Salvar'}
                 </Botao>
-                <Botao cor = "red"  onClick = {props.cancelado} >
+                <Botao cor = "red-600"  onClick = {props.exibirTabela} >
                     Voltar
                 </Botao>
             </div>
-        </div>
+        </>
         )
+        //onClick = {() => props.produtoMudou?.([codigo,nome,unidade,categoria,preco,id])}
 }

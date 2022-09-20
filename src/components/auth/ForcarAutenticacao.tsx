@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import Image from "../../../node_modules/next/image"
 import Router from "../../../node_modules/next/router"
 import loading from '../../../public/images/loading.gif'
@@ -24,7 +23,7 @@ export default function ForcarAutenticacao(props){
             </div>
         )
     }
-
+    console.log("Usu - "+usuario)
     if(!carregando && usuario?.email){
         return renderizarConteudo()
     } else if(carregando){
