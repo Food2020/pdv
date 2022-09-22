@@ -39,8 +39,14 @@ export default function FormularioProduto(props: FormularioProdutoProps){
                 className = "mb-4"/>
             <div className = "flex justify-end mt-4">
                 <Botao 
+<<<<<<< HEAD
                     cor = "indigo" className = "mr-2"
                     onClick = {() => props.produtoMudou?.(new Produto(codigo,nome,unidade,categoria,preco,id))} >
+=======
+                    cor = "indigo-500" className = "mr-2" 
+                    onClick = {() => props.salvarProduto?.(codigo,nome,preco)}
+                    >
+>>>>>>> 9ccbca1 (Cadastro de produto sincronizado com o back)
                     {id ? 'Alterar' : 'Salvar'}
                 </Botao>
                 <Botao cor = "red"  onClick = {props.cancelado} >

@@ -1,7 +1,12 @@
 import Produto from "../core/Produto"
 import { useState,useEffect  } from 'react'
+<<<<<<< HEAD
 import ProdutoRepositorio from '../core/ProdutoRepositorio'
 import ColecaoProduto from '../firebase/bd/ColecaoProduto'
+=======
+import ColecaoProduto from '../backend/bd/ColecaoProduto'
+import PostProduto from '../backend/bd/ResquestsProdutos'
+>>>>>>> 9ccbca1 (Cadastro de produto sincronizado com o back)
 import useTabelaOuForm from './useTabelaOuForm'
 
 export default function useProduto(){
@@ -21,10 +26,10 @@ export default function useProduto(){
     useEffect(obterTodos, [])
   
     function obterTodos(){
-      repo.obterTodos().then(Produtos => {
+      /*repo.obterTodos().then(Produtos => {
         setProdutos(Produtos)
         exibirTabela()
-      })
+      })*/
     }
   
     function editarProduto(Produto: Produto){
@@ -37,8 +42,13 @@ export default function useProduto(){
       obterTodos();
     }
     
+<<<<<<< HEAD
     async function salvarProduto(Produto: Produto){
       await repo.salvar(Produto)
+=======
+    async function salvarProduto(codigo,nome,preco){
+      await PostProduto(codigo,nome,preco)
+>>>>>>> 9ccbca1 (Cadastro de produto sincronizado com o back)
       obterTodos();
       exibirTabela()
     }
