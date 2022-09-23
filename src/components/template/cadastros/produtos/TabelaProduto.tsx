@@ -8,7 +8,7 @@ interface TabelaProps{
     produtoExcluir?:(produto:Produto) => void
 }
 
-export default function Tabela(props: TabelaProps){
+export default function Tabela(props){
 
     const flagExibeAcoes = props.produtoEditar || props.produtoExcluir;
 
@@ -33,7 +33,7 @@ export default function Tabela(props: TabelaProps){
         })
     }
 
-    function renderizarAcoes(produto:Produto){
+    function renderizarAcoes(produto){
 
         return (
             <div>

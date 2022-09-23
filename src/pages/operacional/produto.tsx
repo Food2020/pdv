@@ -11,7 +11,9 @@ export default function telaProduto() {
   const { 
     exibirTabela,
     tabelaVisivel,
-    novoProduto
+    novoProduto,
+    salvarProduto,
+    Produtos
   } = usePoduto()
 
   return (
@@ -26,11 +28,11 @@ export default function telaProduto() {
             onClick = {() => novoProduto()}>
             Novo cliente</Botao>
         </div>
-        <TabelaProduto produtos ={[]}/>
+        <TabelaProduto produtos ={Produtos}/>
         </>
       ):(
         <>
-        <FormularioProduto produto ={[]} exibirTabela = {() => exibirTabela()}/>
+        <FormularioProduto produto ={[]} salvarProduto = {salvarProduto} exibirTabela = {() => exibirTabela()}/>
         </>
       )}
       </LayoutCadastros>

@@ -2,6 +2,7 @@ import Produto from "../core/Produto"
 import { useState,useEffect  } from 'react'
 import ColecaoProduto from '../backend/bd/ColecaoProduto'
 import useTabelaOuForm from './useTabelaOuForm'
+import {PostProduto,GetProduto} from '../backend/bd/ResquestsProdutos'
 
 export default function useProduto(){
 
@@ -15,15 +16,20 @@ export default function useProduto(){
     const repo = new ColecaoProduto()
 
     const [Produto,setProduto]   = useState([])
-    const [Produtos,setProdutos] = useState<Produto[]>([])
+    const [Produtos,setProdutos] = useState([])
 
     useEffect(obterTodos, [])
   
     function obterTodos(){
-      repo.obterTodos().then(Produtos => {
-        setProdutos(Produtos)
-        exibirTabela()
-      })
+        GetProduto().then(prods => {
+          console.log(prods)
+          setProdutos(prods)
+          exibirTabela()
+        })
+        /*.then(prods => {
+
+          console.log(prods)
+      })*/
     }
   
     function editarProduto(Produto){
@@ -36,8 +42,8 @@ export default function useProduto(){
       obterTodos();
     }
     
-    async function salvarProduto(Produto){
-      await repo.salvar(Produto)
+    async function salvarProduto(codigo,nome,preco){
+      await PostProduto(codigo,nome,preco)
       obterTodos();
       exibirTabela()
     }

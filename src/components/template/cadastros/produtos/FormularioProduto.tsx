@@ -60,7 +60,8 @@ export default function FormularioProduto(props){
             </div>
             <div className = "flex justify-end mt-4">
                 <Botao 
-                    cor = "indigo-500" className = "mr-2"  >
+                    cor = "indigo-500" className = "mr-2" 
+                    onClick = {() => props.salvarProduto?.(codigo,nome,preco)} >
                     {id ? 'Alterar' : 'Salvar'}
                 </Botao>
                 <Botao cor = "red-600"  onClick = {props.exibirTabela} >
