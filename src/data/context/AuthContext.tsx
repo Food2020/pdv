@@ -15,9 +15,7 @@ const AuthContext = createContext<AuthContextProps>({});
 
 function gerenciarCookie(logado: boolean){
     if(logado){
-        console.log("dddddddddd")
         Cookies.set('pdv',logado,{expires:7})
-        console.log("pppp")
     } else {
         Cookies.remove('pdv')
     }
@@ -30,7 +28,6 @@ export function AuthProvider(props) {
     async function configurarSessao(usuario:Usuario){
 
         if(usuario?.email){
-            console.log("Entrou no set : "+usuario)
             setUsuario(usuario);
             gerenciarCookie(true); 
             setCarregando(false);
@@ -47,7 +44,6 @@ export function AuthProvider(props) {
         try {
             setCarregando(true)
             const user = checkUser(email,senha);
-            console.log("Entrou no login : "+user)
             await configurarSessao(user)
             /*const resp = await firebase.auth().signInWithEmailAndPassword(email,senha)
 

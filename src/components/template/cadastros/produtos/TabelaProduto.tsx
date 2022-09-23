@@ -8,10 +8,9 @@ interface TabelaProps{
     produtoExcluir?:(produto:Produto) => void
 }
 
-export default function Tabela(props){
+export default function TabelaProduto(props){
 
     const flagExibeAcoes = props.produtoEditar || props.produtoExcluir;
-
     function renderizarDados(){
         return props.produtos?.map((produto,i) => {
             let color = "";
@@ -23,6 +22,7 @@ export default function Tabela(props){
             return (
                 <tr key ={produto.id} className = {` ${i % 2 === 0 ? 'bg-purple-200' : 'bg-purple-300' } `} >
                     <td className='text-left p-3' >{produto.id}</td>
+                    <td className='text-left p-3' >{produto.codigo}</td>
                     <td className='text-left p-3' >{produto.nome}</td>
                     <td className='text-left p-3' >{produto.categoria}</td>
                     <td className='text-left p-3' >{produto.unidade}</td>

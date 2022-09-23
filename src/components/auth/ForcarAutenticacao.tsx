@@ -23,7 +23,6 @@ export default function ForcarAutenticacao(props){
             </div>
         )
     }
-    console.log("Usu - "+usuario)
     if(!carregando && usuario?.email){
         return renderizarConteudo()
     } else if(carregando){

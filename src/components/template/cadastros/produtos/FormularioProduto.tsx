@@ -16,7 +16,7 @@ export default function FormularioProduto(props){
     const [unidade,setUnidade]     = useState(props.produto?.unidade ?? '');
     const [categoria,setCategoria] = useState(props.produto?.categoria ?? '');
     const [preco,setPreco]         = useState(props.produto?.preco ?? 0);
-
+    
     return (
         <>
             <div className = "grid grid-cols-12">
@@ -26,7 +26,7 @@ export default function FormularioProduto(props){
                     somenteLeitura 
                     texto = "Id" 
                     valor = {id}
-                    className = "col-span-2" />
+                    className = "col-span-4" />
                 ) : false
             }
             <Entrada 
@@ -61,7 +61,7 @@ export default function FormularioProduto(props){
             <div className = "flex justify-end mt-4">
                 <Botao 
                     cor = "indigo-500" className = "mr-2" 
-                    onClick = {() => props.salvarProduto?.(codigo,nome,preco)} >
+                    onClick = {() => props.salvarProduto?.(codigo,nome,preco,categoria,unidade)} >
                     {id ? 'Alterar' : 'Salvar'}
                 </Botao>
                 <Botao cor = "red-600"  onClick = {props.exibirTabela} >

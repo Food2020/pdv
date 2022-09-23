@@ -13,7 +13,10 @@ export default function telaProduto() {
     tabelaVisivel,
     novoProduto,
     salvarProduto,
-    Produtos
+    Produtos,
+    Produto,
+    editarProduto,
+    excluirProduto
   } = usePoduto()
 
   return (
@@ -26,13 +29,20 @@ export default function telaProduto() {
             cor = "indigo-500" 
             className ="mb-4" 
             onClick = {() => novoProduto()}>
-            Novo cliente</Botao>
+            Novo Produto</Botao>
         </div>
-        <TabelaProduto produtos ={Produtos}/>
+        <TabelaProduto produtos ={Produtos} 
+                       produtoEditar = {editarProduto}
+                       produtoExcluir = {excluirProduto}
+        />
+
         </>
       ):(
         <>
-        <FormularioProduto produto ={[]} salvarProduto = {salvarProduto} exibirTabela = {() => exibirTabela()}/>
+        <FormularioProduto produto ={Produto} 
+                           salvarProduto = {salvarProduto} 
+                           exibirTabela = {() => exibirTabela()}
+        />
         </>
       )}
       </LayoutCadastros>

@@ -2,25 +2,22 @@ import { json } from "stream/consumers";
 
 const url = "http://localhost:4001/products";
 
-export function PostProduto(codigo,nome,preco){
+export async function PostProduto(codigo,nome,preco,categoria,unidade){
     let data = {
         "nome":nome,
         "preco":preco,
-        "codigo":codigo
+        "codigo":codigo,
+        "categoria":categoria,
+        "unidade":unidade
     }
-    console.log(data)
-    console.log(JSON.stringify(data))
-    //    mode: 'cors',
-    fetch(url, {
+    return fetch(url, {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
     },
     body: JSON.stringify(data)
-    }).then(response => {
-        console.log(response)
-    }).catch(() => {
-   
+    }).then(response => response )
+    .catch(() => {
         console.log("Eroooo 121")     
     });
 }
@@ -28,6 +25,18 @@ export function PostProduto(codigo,nome,preco){
 export async function GetProduto(){
      return fetch(url, {
         method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }).then(data => data.json())
+    .catch(() => {
+        console.log("Eroooo 121")     
+    });
+}
+
+export async function ExcluirProduto(id){
+    return fetch(url, {
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         },

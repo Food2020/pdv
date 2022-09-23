@@ -2,7 +2,7 @@ import Produto from "../core/Produto"
 import { useState,useEffect  } from 'react'
 import ColecaoProduto from '../backend/bd/ColecaoProduto'
 import useTabelaOuForm from './useTabelaOuForm'
-import {PostProduto,GetProduto} from '../backend/bd/ResquestsProdutos'
+import {PostProduto,GetProduto, ExcluirProduto} from '../backend/bd/ResquestsProdutos'
 
 export default function useProduto(){
 
@@ -13,7 +13,7 @@ export default function useProduto(){
         tabelaVisivel
       } = useTabelaOuForm()
 
-    const repo = new ColecaoProduto()
+    //const repo = new ColecaoProduto()
 
     const [Produto,setProduto]   = useState([])
     const [Produtos,setProdutos] = useState([])
@@ -22,14 +22,9 @@ export default function useProduto(){
   
     function obterTodos(){
         GetProduto().then(prods => {
-          console.log(prods)
           setProdutos(prods)
           exibirTabela()
         })
-        /*.then(prods => {
-
-          console.log(prods)
-      })*/
     }
   
     function editarProduto(Produto){
@@ -38,14 +33,15 @@ export default function useProduto(){
     }
   
     async function excluirProduto(Produto){
-      await repo.excluir(Produto)
+      await ExcluirProduto(Produto.id)
       obterTodos();
     }
     
-    async function salvarProduto(codigo,nome,preco){
-      await PostProduto(codigo,nome,preco)
-      obterTodos();
-      exibirTabela()
+    async function salvarProduto(codigo,nome,preco,categoria,unidade){
+        PostProduto(codigo,nome,preco,categoria,unidade)
+        .then(resp => {
+          obterTodos();
+        })
     }
   
     function novoProduto(){
