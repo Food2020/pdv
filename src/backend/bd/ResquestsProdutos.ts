@@ -34,8 +34,28 @@ export async function GetProduto(){
     });
 }
 
+export async function UpdateProduto(id,codigo,nome,preco,categoria,unidade){
+    let data = {
+        "nome":nome,
+        "preco":preco,
+        "codigo":codigo,
+        "categoria":categoria,
+        "unidade":unidade
+    }
+    return fetch(`${url}/${id}`, {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+    }).then(response => response )
+    .catch(() => {
+        console.log("Eroooo 121")     
+    });
+}
+
 export async function ExcluirProduto(id){
-    return fetch(url+"/"+id, {
+    return fetch(`${url}/${id}`, {
         method: 'DELETE'
     }).then(data => data.json())
     .catch(() => {

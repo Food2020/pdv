@@ -2,7 +2,7 @@ import Produto from "../core/Produto"
 import { useState,useEffect  } from 'react'
 import ColecaoProduto from '../backend/bd/ColecaoProduto'
 import useTabelaOuForm from './useTabelaOuForm'
-import {PostProduto,GetProduto, ExcluirProduto} from '../backend/bd/ResquestsProdutos'
+import {PostProduto,GetProduto, ExcluirProduto, UpdateProduto} from '../backend/bd/ResquestsProdutos'
 
 export default function useProduto(){
 
@@ -37,11 +37,16 @@ export default function useProduto(){
       obterTodos();
     }
     
-    async function salvarProduto(codigo,nome,preco,categoria,unidade){
-        PostProduto(codigo,nome,preco,categoria,unidade)
+    async function salvarProduto(id,codigo,nome,preco,categoria,unidade){
+      console.log('id edit',id)
+        id? 
+          (UpdateProduto(id,codigo,nome,preco,categoria,unidade) .then(resp => {
+            obterTodos();
+          })):(
+          PostProduto(codigo,nome,preco,categoria,unidade)
         .then(resp => {
           obterTodos();
-        })
+        }))
     }
   
     function novoProduto(){
