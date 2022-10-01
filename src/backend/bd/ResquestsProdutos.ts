@@ -35,11 +35,8 @@ export async function GetProduto(){
 }
 
 export async function ExcluirProduto(id){
-    return fetch(url, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+    return fetch(url+"/"+id, {
+        method: 'DELETE'
     }).then(data => data.json())
     .catch(() => {
         console.log("Eroooo 121")     
