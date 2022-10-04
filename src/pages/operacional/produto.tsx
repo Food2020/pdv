@@ -16,9 +16,15 @@ export default function telaProduto() {
     Produtos,
     Produto,
     editarProduto,
-    excluirProduto
+    excluirProduto,
+    ordenacao,
+    setOrdenacao,
+    alterarOrdenacao,
+    ProdutosOrdenados,
+    getClassNamesFor
   } = usePoduto()
 
+  console.log(Produtos)
   return (
     <Layout titulo = "Produto" subtitulo = "Grenciamento de produtos">
       <LayoutCadastros>
@@ -32,8 +38,13 @@ export default function telaProduto() {
             Novo Produto</Botao>
         </div>
         <TabelaProduto produtos ={Produtos} 
+                       produtosOrdenados ={ProdutosOrdenados}
                        produtoEditar = {editarProduto}
                        produtoExcluir = {excluirProduto}
+                       ordenacao = {ordenacao}
+                       setOrdenacao = {setOrdenacao}
+                       alterarOrdenacao = {alterarOrdenacao}
+                       getClassNamesFor = {getClassNamesFor}
         />
 
         </>

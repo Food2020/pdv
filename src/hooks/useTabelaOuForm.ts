@@ -2,8 +2,27 @@ import { useState } from "react"
 
 export default function useTaelaOuForm(){
 
-    const [visivel,setVisivel]   = useState<'tabela' | 'form'>('tabela')
+    const [visivel,setVisivel]                = useState<'tabela' | 'form'>('tabela')
+    const [ordenacao, setOrdenacao]           = useState(null);
+    const [totalPaginas, setTotalPaginas]     = useState(1)
+    const [totalRegistros, setTotalRegistros] = useState(1)
 
+    const alterarOrdenacao = chave => {
+        let direcao = 'ascending';
+        if (ordenacao && ordenacao.chave === chave && ordenacao.direcao === 'ascending') {
+            direcao = 'descending';
+        }
+        console.log(chave+" -- "+direcao)
+        setOrdenacao({ chave, direcao });
+      }
+    
+    const getClassNamesFor = (nome) => {
+        if (!ordenacao) {
+            return;
+        }
+        return ordenacao.chave === nome ? ordenacao.direcao : undefined;
+    };
+      
     const exibirTabela     = () => setVisivel('tabela')
     const exibirFormulario = () => setVisivel('form')
 
@@ -11,6 +30,10 @@ export default function useTaelaOuForm(){
         formularioVisivel: visivel === 'form',
         tabelaVisivel: visivel === 'tabela',
         exibirTabela,
-        exibirFormulario
+        exibirFormulario,
+        ordenacao,
+        setOrdenacao,
+        alterarOrdenacao,
+        getClassNamesFor
     }
 }

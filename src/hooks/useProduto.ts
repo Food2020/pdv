@@ -1,5 +1,5 @@
 import Produto from "../core/Produto"
-import { useState,useEffect  } from 'react'
+import { useState,useEffect,useMemo  } from 'react'
 import ColecaoProduto from '../backend/bd/ColecaoProduto'
 import useTabelaOuForm from './useTabelaOuForm'
 import {PostProduto,GetProduto, ExcluirProduto, UpdateProduto} from '../backend/bd/ResquestsProdutos'
@@ -10,7 +10,11 @@ export default function useProduto(){
         exibirTabela,
         exibirFormulario,
         formularioVisivel,
-        tabelaVisivel
+        tabelaVisivel,
+        ordenacao,
+        setOrdenacao,
+        alterarOrdenacao,
+        getClassNamesFor
       } = useTabelaOuForm()
 
     //const repo = new ColecaoProduto()
@@ -54,6 +58,32 @@ export default function useProduto(){
       exibirFormulario()
     }
 
+    function TratarVariavel(variavel){
+      console.log(variavel+" - tipo : "+typeof variavel)
+      if(typeof variavel == "string") {
+        return variavel.toLowerCase();
+      } 
+      else {
+        return variavel;
+      }
+    }
+
+    const ProdutosOrdenados = useMemo(() => {
+      let ProdutosOrdenadosAux = [...Produtos];
+      if (ordenacao !== null) {
+        ProdutosOrdenadosAux.sort((a, b) => {
+          if (TratarVariavel(a[ordenacao.chave]) < TratarVariavel(b[ordenacao.chave])) {
+            return ordenacao.direcao === 'ascending' ? -1 : 1;
+          }
+          if (TratarVariavel(a[ordenacao.chave]) > TratarVariavel(b[ordenacao.chave])) {
+            return ordenacao.direcao === 'ascending' ? 1 : -1;
+          }
+          return 0;
+        });
+      }
+      return ProdutosOrdenadosAux;
+  }, [Produtos, ordenacao]);
+
     return{
         Produto,
         Produtos,
@@ -64,6 +94,11 @@ export default function useProduto(){
         obterTodos,
         formularioVisivel,
         tabelaVisivel,
-        exibirTabela
+        exibirTabela,
+        ordenacao,
+        setOrdenacao,
+        alterarOrdenacao,
+        ProdutosOrdenados,
+        getClassNamesFor
     }
 }
