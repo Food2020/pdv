@@ -14,7 +14,8 @@ import {
         useAsyncDebounce,
         useFilters,
         useSortBy,
-        usePagination  
+        usePagination,
+        useExpanded  
       } from 'react-table';
 
 import SelectColumnFilter from '../../SelectColumnFilter'
@@ -97,7 +98,12 @@ export default function TabelaProduto(props){
           Header: "Preço",
           accessor: "preco",
         },
+        {
+          Header: "Ações", 
+          Cell: ({ row }) => renderizarAcoesTable({row}),
+        },
       ],
+
       []
     );
 
@@ -116,7 +122,9 @@ export default function TabelaProduto(props){
             setPageSize,
             state, 
             preGlobalFilteredRows, 
-            setGlobalFilter
+            setGlobalFilter,
+            state: { expanded },
+            rows
           } =
     useTable(
     {
@@ -153,7 +161,6 @@ export default function TabelaProduto(props){
     }
 
     function renderizarAcoes(produto){
-
         return (
             <div>
                 { props.produtoEditar ? (
@@ -179,11 +186,11 @@ export default function TabelaProduto(props){
                     ) : false
                 }
             </div>
-        )
+        ) 
     }
 
-    function renderizarAcoesTable({value, column, row}){
-      const produto = row;
+    function renderizarAcoesTable({row}){
+      const produto = row.values;
 
       return (
           <div>
@@ -212,68 +219,6 @@ export default function TabelaProduto(props){
           </div>
       )
   }
-    /*
-    return (
-        <table className='w-full' > 
-            <thead className='bg-gradient-to-r from-purple-500 to bg-purple-800 text-white'>
-                <tr>
-                    <th className='text-left p-3'>
-                        <button type="button" 
-                                onClick={() => props.alterarOrdenacao('id')} 
-                                className={props.getClassNamesFor('id')}
-                        >
-                        Id
-                        </button>
-                    </th>
-                    <th className='text-left p-3'>
-                        <button type="button" 
-                                onClick={() => props.alterarOrdenacao('codigo')} 
-                                className={props.getClassNamesFor('codigo')}
-                        >
-                        Código
-                        </button>
-                    </th>
-                    <th className='text-left p-3'>
-                        <button type="button" 
-                                onClick={() => props.alterarOrdenacao('nome')} 
-                                className={props.getClassNamesFor('nome')}
-                        >
-                        Nome
-                        </button>
-                    </th>
-                    <th className='text-left p-3'>
-                        <button type="button" 
-                                onClick={() => props.alterarOrdenacao('categoria')} 
-                                className={props.getClassNamesFor('categoria')}
-                        >
-                        Categoria
-                        </button>
-                    </th>
-                    <th className='text-left p-3'>
-                        <button type="button" 
-                                onClick={() => props.alterarOrdenacao('unidade')} 
-                                className={props.getClassNamesFor('unidade')}
-                        >
-                        Unidade
-                        </button>
-                    </th>
-                    <th className='text-left p-3'>
-                        <button type="button"                                 
-                                onClick={() => props.alterarOrdenacao('preco')} 
-                                className={props.getClassNamesFor('preco')}
-                        >
-                        Preço
-                        </button>
-                    </th>
-                    { flagExibeAcoes ? ( <th className='p-3'>Ações</th> ) : false }
-                </tr>
-            </thead>
-            <tbody>
-                {renderizarDados()}
-            </tbody>
-        </table>    
-    ) */
-
     if(Produtos) {
         
         return (
