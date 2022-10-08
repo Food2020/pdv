@@ -19,8 +19,9 @@ export default function useProduto(){
 
     //const repo = new ColecaoProduto()
 
-    const [Produto,setProduto]   = useState([])
-    const [Produtos,setProdutos] = useState([])
+    const [Produto,setProduto]        = useState([])
+    const [ProdutoDup,setProdutoDup]  = useState([])
+    const [Produtos,setProdutos]      = useState([])
 
     useEffect(obterTodos, [])
   
@@ -33,12 +34,20 @@ export default function useProduto(){
   
     function editarProduto(Produto){
       setProduto(Produto)
+      setProdutoDup([])
       exibirFormulario()
     }
   
     async function excluirProduto(Produto){
       await ExcluirProduto(Produto.id)
       obterTodos();
+    }
+
+     
+    function duplicarProduto(Produto){
+      setProdutoDup(Produto)
+      setProduto([])
+      exibirFormulario()
     }
     
     async function salvarProduto(id,codigo,nome,preco,categoria,unidade){
@@ -55,6 +64,7 @@ export default function useProduto(){
   
     function novoProduto(){
       setProduto([])
+      setProdutoDup([])
       exibirFormulario()
     }
 
@@ -68,22 +78,6 @@ export default function useProduto(){
       }
     }
 
-    const ProdutosOrdenados = useMemo(() => {
-      let ProdutosOrdenadosAux = [...Produtos];
-      if (ordenacao !== null) {
-        ProdutosOrdenadosAux.sort((a, b) => {
-          if (TratarVariavel(a[ordenacao.chave]) < TratarVariavel(b[ordenacao.chave])) {
-            return ordenacao.direcao === 'ascending' ? -1 : 1;
-          }
-          if (TratarVariavel(a[ordenacao.chave]) > TratarVariavel(b[ordenacao.chave])) {
-            return ordenacao.direcao === 'ascending' ? 1 : -1;
-          }
-          return 0;
-        });
-      }
-      return ProdutosOrdenadosAux;
-  }, [Produtos, ordenacao]);
-
     return{
         Produto,
         Produtos,
@@ -91,6 +85,7 @@ export default function useProduto(){
         salvarProduto,
         excluirProduto,
         editarProduto,
+        duplicarProduto,
         obterTodos,
         formularioVisivel,
         tabelaVisivel,
@@ -98,7 +93,7 @@ export default function useProduto(){
         ordenacao,
         setOrdenacao,
         alterarOrdenacao,
-        ProdutosOrdenados,
-        getClassNamesFor
+        getClassNamesFor,
+        ProdutoDup
     }
 }

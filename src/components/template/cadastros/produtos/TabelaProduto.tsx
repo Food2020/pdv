@@ -1,5 +1,6 @@
 import { IconeEdicao,
-         IconeLixo
+         IconeLixo,
+         IconeDuplicar
         } from "../../../icons/index";
 
 import React from 'react'
@@ -12,10 +13,11 @@ export default function TabelaProduto(props){
       
     const produto = row.values;
    
+    console.log("Renderiza acoes "+produto)
     return (
         <div>
             { props.produtoEditar ? (
-                <button onClick = {() => props.produtoEditar?.(produto)} className = {`
+                <button onClick = {() => props.produtoEditar(produto)} className = {`
                     text-green-500
                     rounded-full
                     hover:bg-purple-50 
@@ -26,7 +28,7 @@ export default function TabelaProduto(props){
             ) : false 
             }
             { props.produtoExcluir ? (
-                    <button onClick = {() => props.produtoExcluir?.(produto)} className = {`
+                    <button onClick = {() => props.produtoExcluir(produto)} className = {`
                         text-red-600
                         rounded-full
                         hover:bg-purple-50 
@@ -36,12 +38,22 @@ export default function TabelaProduto(props){
                     </button>
                 ) : false
             }
+            { props.produtoDuplicar ? (
+                    <button onClick = {() => props.produtoDuplicar(produto)} className = {`
+                        text-black
+                        rounded-full
+                        hover:bg-purple-50 
+                        p-3
+                    `}>
+                    { IconeDuplicar }
+                    </button>
+                ) : false
+            }
         </div>
     )
   }
 
   const flagExibeAcoes    = props.produtoEditar || props.produtoExcluir;
-  const ProdutosOrdenados = props.ProdutosOrdenados
   const Produtos          = props.produtos
 
   const getData = () => {

@@ -1,11 +1,12 @@
 import React,{useState} from 'react'
-import {CSVLink, CSVDownload} from 'react-csv';
+import {CSVLink} from 'react-csv';
 import {PageButton,ButtonPagination} from './PageButton'
 
 import { ChevronLeftIcon, 
          ChevronRightIcon,
          ChevronDobleRightIcon,
-         ChevronDobleLeftIcon
+         ChevronDobleLeftIcon,
+         documentArrow
    } from "../../icons/index";
 
 import { 
@@ -93,7 +94,13 @@ export default function Tabela({ columns, data }){
               ) : null
             )
           )}
-          <CSVLink data={data} separator={";"} >Download me</CSVLink>
+          <CSVLink 
+                data={data} 
+                separator={";"} 
+                className={`text-white
+                bg-green-700
+                px-1 py-1 rounded-md`}
+                >{documentArrow('h-8 w-8')}</CSVLink>
           </div>
           <div className="mt-2 flex flex-col">
             <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">

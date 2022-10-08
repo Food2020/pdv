@@ -11,12 +11,15 @@ interface FormularioProdutoProps{
 
 export default function FormularioProduto(props){
     const id                       = props.produto?.id
-    const [nome,setNome]           = useState(props.produto?.nome ?? '');
-    const [codigo,setCodigo]       = useState(props.produto?.codigo ?? '');
-    const [unidade,setUnidade]     = useState(props.produto?.unidade ?? '');
-    const [categoria,setCategoria] = useState(props.produto?.categoria ?? '');
-    const [preco,setPreco]         = useState(props.produto?.preco ?? 0);
+    const [nome,setNome]           = useState((props.produto?.nome || props.produtoDup?.nome) ?? '');
+    const [codigo,setCodigo]       = useState((props.produto?.codigo || props.produtoDup?.codigo) ?? '');
+    const [unidade,setUnidade]     = useState((props.produto?.unidade || props.produtoDup?.unidade) ?? '');
+    const [categoria,setCategoria] = useState((props.produto?.categoria || props.produtoDup?.categoria) ?? '');
+    const [preco,setPreco]         = useState((props.produto?.preco || props.produtoDup?.preco) ?? 0);
     
+    console.log("Produtos : "+props.produto)
+    console.log("Produtos Dupli: "+props.produtoDup)
+
     return (
         <>
             <div className = "grid grid-cols-12">
