@@ -19,7 +19,6 @@ import {
     useExpanded  
 } from 'react-table';
 
-// Define a default UI for filtering
 function GlobalFilter({
     preGlobalFilteredRows,
     globalFilter,

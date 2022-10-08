@@ -16,9 +16,6 @@ export default function FormularioProduto(props){
     const [unidade,setUnidade]     = useState((props.produto?.unidade || props.produtoDup?.unidade) ?? '');
     const [categoria,setCategoria] = useState((props.produto?.categoria || props.produtoDup?.categoria) ?? '');
     const [preco,setPreco]         = useState((props.produto?.preco || props.produtoDup?.preco) ?? 0);
-    
-    console.log("Produtos : "+props.produto)
-    console.log("Produtos Dupli: "+props.produtoDup)
 
     return (
         <>
@@ -73,5 +70,4 @@ export default function FormularioProduto(props){
             </div>
         </>
         )
-        //onClick = {() => props.produtoMudou?.([codigo,nome,unidade,categoria,preco,id])}
 }

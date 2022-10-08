@@ -17,8 +17,6 @@ export default function useProduto(){
         getClassNamesFor
       } = useTabelaOuForm()
 
-    //const repo = new ColecaoProduto()
-
     const [Produto,setProduto]        = useState([])
     const [ProdutoDup,setProdutoDup]  = useState([])
     const [Produtos,setProdutos]      = useState([])
