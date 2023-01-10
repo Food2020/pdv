@@ -1,34 +1,29 @@
 import Link from 'next/link'
 
-interface MenuItemProps{
+interface MenuItemFixoProps{
     url?:string
-    texto:string
     icone:any
     onClick?: (evento: any) => void
     className?:string
-
 }
 
-export default function MenuItem(props) {
+export default function MenuItemFixo(props) {
     function renderizarLink(){
         return(
             <a className={`
-                    flex flex-col justify-center items-center text-white
-                    h-18 w-20 
+                    flex flex-col 
+                    justify-center 
+                    items-center 
+                    text-white
+                    h-19 w-20
                     ${props.className}
                 `}>
                 {props.icone}
-                <span className = {`
-                    text-xs font-light
-                `}>
-                    {props.texto}
-                </span>
             </a>
         )
     }
     return(
         <li onClick = {props.onClick} className = {`
-            hover:bg-indigo-400 
             cursor-pointer
         `}>
             {props.url ? ( 

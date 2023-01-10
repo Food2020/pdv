@@ -11,9 +11,7 @@ export default function MenuLateral(){
         <aside className = {`
                 flex flex-col
                 text-gray-200
-                text-gray-700
-                dark:bg-gray-900
-                dark:text-gray-200
+                 
             `}>
             <div className={`
                 flex flex-col items-center justify-center

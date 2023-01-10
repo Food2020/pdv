@@ -8,13 +8,16 @@ export default function AvatarUsuario(props:AvatarUsuarioProps){
     const {usuario} = useAuth()
 
     return (
-        <Link href = "/perfil">
-            <img 
-                src = {usuario?.imagemURL ?? '/images/avatar.svg'} 
-                alt = "Avatar do Usuário"
-                className = {`h-10 w-10 rounded-full cursor-pointer
-                    ${props.className}
-                `} />
-        </Link>     
+        <li>
+            <Link href = "/perfil">
+                <img src = {usuario?.imagemURL ?? '../../public/images/avatar_img.jpg'}  />
+            </Link>    
+        </li>
     )
+    /*
+
+                    className = {`h-10 w-10 rounded-full cursor-pointer
+                        ${props.className}
+                    `}
+    */
 }
