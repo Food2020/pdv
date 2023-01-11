@@ -1,38 +1,74 @@
-import Link from 'next/link'
-
-interface MenuItemFixoProps{
-    url?:string
-    icone:any
-    onClick?: (evento: any) => void
-    className?:string
-}
+import useAuth from "../../data/hook/useAuth";
+import { Dropdown } from "flowbite-react";
+import { IconeSair,
+    IconeUsuario,
+    IconeSino } from "../icons/index";
 
 export default function MenuItemFixo(props) {
-    function renderizarLink(){
-        return(
-            <a className={`
-                    flex flex-col 
-                    justify-center 
-                    items-center 
-                    text-white
-                    p-1
-                    ${props.className}
-                `}>
-                {props.icone}
-            </a>
-        )
-    }
+
+    const {logout} = useAuth();
+
     return(
-        <li onClick = {props.onClick} className = {`
-            cursor-pointer
-        `}>
-            {props.url ? ( 
-                <Link href ={props.url}>
-                    {renderizarLink()} 
-                </Link>
-            ) : (
-                renderizarLink()
-            )}
-        </li>
+            <ul className={` 
+                        flex text-white
+                    `}>
+            <li className = {`
+                cursor-pointer p-1
+            `}>
+            <Dropdown
+                arrowIcon={false}
+                inline={true}
+                label={IconeSino}
+            >
+                <Dropdown.Header>
+                <span className="block text-sm">
+                    Notificações
+                </span>
+                </Dropdown.Header>
+                <Dropdown.Item>
+                    Notificação 1
+                </Dropdown.Item>
+                <Dropdown.Item>
+                    Notificação 2
+                </Dropdown.Item>
+                <Dropdown.Item>
+                    Notificação 3
+                </Dropdown.Item>
+            </Dropdown>
+            </li>
+            <li className = {`
+                cursor-pointer p-1
+            `}>
+            <Dropdown
+                arrowIcon={false}
+                inline={true}
+                label={IconeUsuario}
+            >
+                <Dropdown.Header>
+                <span className="block text-sm">
+                    Configurações do usuário
+                </span>
+                </Dropdown.Header>
+                <Dropdown.Item>
+                    Opção 1
+                </Dropdown.Item>
+                <Dropdown.Item>
+                    Opção 2
+                </Dropdown.Item>
+                <Dropdown.Item>
+                    Opção 3
+                </Dropdown.Item>
+            </Dropdown>
+            </li>
+            <li className = {`
+                cursor-pointer p-1
+            `}>
+                <a onClick = {logout} className={`
+                        text-red-600 hover:text-white
+                    `}>
+                    {IconeSair}
+                </a>
+            </li>
+        </ul>
     )
 }
