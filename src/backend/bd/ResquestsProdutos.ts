@@ -1,6 +1,6 @@
 import { json } from "stream/consumers";
 
-const url = "http://localhost:4001/products";
+const url = "http://localhost:4001/api/products";
 
 export async function PostProduto(codigo,nome,preco,categoria,unidade){
     let data = {
