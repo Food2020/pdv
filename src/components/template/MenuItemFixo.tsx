@@ -15,7 +15,7 @@ export default function MenuItemFixo(props) {
                     justify-center 
                     items-center 
                     text-white
-                    h-19 w-20
+                    p-1
                     ${props.className}
                 `}>
                 {props.icone}

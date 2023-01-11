@@ -24,13 +24,12 @@ export default function MenuSuperior(){
                 flex 
                 items-center 
                 mx-auto 
-                max-w-screen-xl 
-                px-4 
+                max-w-screen-xl  
                 py-2.5
             `}>
                 <Logo></Logo> 
                 <div className={`  
-                    flex justify-between w-full
+                    flex justify-between w-full items-center
                 `}>
                     <ul className={` 
                         flex 
