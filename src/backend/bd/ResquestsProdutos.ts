@@ -1,4 +1,5 @@
 import { json } from "stream/consumers";
+import { Alert } from "flowbite-react";
 
 const url = "http://localhost:4000/api/products";
 
@@ -18,7 +19,7 @@ export async function PostProduto(codigo,nome,preco,categoria,unidade){
     body: JSON.stringify(data)
     }).then(response => response )
     .catch(() => {
-        console.log("Eroooo 121")     
+        alert("Erro ao cadastrar !")   
     });
 }
 
@@ -30,7 +31,7 @@ export async function GetProduto(){
         },
     }).then(data => data.json())
     .catch(() => {
-        console.log("Eroooo 144")     
+        alert("Erro na consulta de produtos!")     
     });
 }
 
@@ -49,8 +50,8 @@ export async function UpdateProduto(id,codigo,nome,preco,categoria,unidade){
     },
     body: JSON.stringify(data)
     }).then(response => response )
-    .catch(() => {
-        console.log("Eroooo 196")     
+    .catch(() => { 
+        alert("Erro ao editar Produto !")   
     });
 }
 
@@ -59,6 +60,6 @@ export async function ExcluirProduto(id){
         method: 'DELETE'
     }).then(data => data.json())
     .catch(() => {
-        console.log("Eroooo 169")     
+        alert("Erro ao deletar produto !")     
     });
 }

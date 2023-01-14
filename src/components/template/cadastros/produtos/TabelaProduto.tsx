@@ -100,15 +100,5 @@ export default function TabelaProduto(props){
     ],
     []
   );
-
-    if(Produtos) {
-      
-      return <Tabela  columns = {columns} data = {data}/>
-
-    } else {
-        return (
-            <>
-            </>
-        )
-    }
+  return <Tabela  columns = {columns} data = {data}/>
 }
