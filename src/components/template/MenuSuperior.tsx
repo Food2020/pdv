@@ -1,41 +1,78 @@
-
 import MenuItem from "./MenuItem";
 import MenuItemFixo from "./MenuItemFixo";
 import Logo from "./Logo";
-import {  IconeConfig,
-         IconeGlobo,
-         IconeRelatorio
-         } from "../icons/index";
-         
-export default function MenuSuperior(){
+import { IconeConfig, IconeGlobo, IconeRelatorio } from "../icons/index";
 
-    return ( 
-        <nav className={` 
+export default function MenuSuperior() {
+  const urlsOperacional = [
+    {
+      url: "/operacional/produto",
+      texto: "Cadastro de produtos",
+    },
+  ];
+
+  const urlsConfig = [
+    {
+      url: "../ajustes",
+      texto: "Configguração y",
+    },
+  ];
+  const urlsRelatorios = [
+    {
+      url: "../notificacoes",
+      texto: "Relatorio x",
+    },
+  ];
+
+  return (
+    <nav
+      className={` 
             bg-indigo-500	 
             border-gray-200 
-        `}>
-            <div className={` 
+        `}
+    >
+      <div
+        className={` 
                 flex 
                 items-center 
                 mx-auto 
                 max-w-screen-xl  
                 py-2.5
-            `}>
-                <Logo></Logo> 
-                <div className={`  
+            `}
+      >
+        <Logo></Logo>
+        <div
+          className={`  
                     flex justify-between w-full items-center
-                `}>
-                    <ul className={` 
+                `}
+        >
+          <ul
+            className={` 
                         flex 
-                    `}>
-                        <MenuItem url = "/operacional/produto" texto = "Operacional" icone = {IconeGlobo}></MenuItem>
-                        <MenuItem url = "../ajustes" texto = "Configurações" icone = {IconeConfig}></MenuItem>
-                        <MenuItem url = "../notificacoes" texto = "Relatórios" icone = {IconeRelatorio}></MenuItem>
-                    </ul>
-                    <MenuItemFixo />
-                </div>
-            </div>
-        </nav>
-    )
-
+                    `}
+          >
+            <MenuItem
+              urls={urlsOperacional}
+              texto="Operacional"
+              icone={IconeGlobo}
+              className="p-4"
+            ></MenuItem>
+            <MenuItem
+              urls={urlsConfig}
+              texto="Configurações"
+              icone={IconeConfig}
+              className="p-4"
+            ></MenuItem>
+            <MenuItem
+              urls={urlsRelatorios}
+              texto="Relatórios"
+              icone={IconeRelatorio}
+              className="p-4"
+            ></MenuItem>
+          </ul>
+          <MenuItemFixo />
+        </div>
+      </div>
+    </nav>
+  );
 }

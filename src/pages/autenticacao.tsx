@@ -20,7 +20,6 @@ export default function Autenticacao() {
         try{
             if(modo == 'login'){
                 await dados.login(email,senha)
-                console.log("aaaaaaa")
             } else {
                 await dados.cadastrar(email,senha)
             }
