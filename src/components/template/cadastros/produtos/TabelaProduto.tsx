@@ -6,6 +6,7 @@ import { IconeEdicao,
 import React from 'react'
 import SelectColumnFilter from '../../SelectColumnFilter'
 import Tabela from "../Tabela";
+import {trataNull} from "../../../Util"
 
 export default function TabelaProduto(props){
 
@@ -57,12 +58,12 @@ export default function TabelaProduto(props){
   const Produtos          = props.produtos
 
   const getData = () => {
-    const data = Produtos
-
+    const data = trataNull(Produtos)
+    console.log(data)
     return [...data]
   }
   
-  const data = React.useMemo(() => getData(), []);
+  const data = getData();
 
   const columns = React.useMemo(
     () => [

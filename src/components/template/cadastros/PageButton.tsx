@@ -1,6 +1,6 @@
 // src/shared/Button.js
 import React from "react";
-import { classNames } from "../Util";
+import { classNames } from "../../Util";
 
 export function ButtonPagination({ children, className, ...rest }) {
   return (

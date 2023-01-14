@@ -1,6 +1,6 @@
 import { json } from "stream/consumers";
 
-const url = "http://localhost:4001/api/products";
+const url = "http://localhost:4000/api/products";
 
 export async function PostProduto(codigo,nome,preco,categoria,unidade){
     let data = {
@@ -30,7 +30,7 @@ export async function GetProduto(){
         },
     }).then(data => data.json())
     .catch(() => {
-        console.log("Eroooo 121")     
+        console.log("Eroooo 144")     
     });
 }
 
@@ -50,7 +50,7 @@ export async function UpdateProduto(id,codigo,nome,preco,categoria,unidade){
     body: JSON.stringify(data)
     }).then(response => response )
     .catch(() => {
-        console.log("Eroooo 121")     
+        console.log("Eroooo 196")     
     });
 }
 
@@ -59,6 +59,6 @@ export async function ExcluirProduto(id){
         method: 'DELETE'
     }).then(data => data.json())
     .catch(() => {
-        console.log("Eroooo 121")     
+        console.log("Eroooo 169")     
     });
 }
