@@ -6,7 +6,7 @@ import { IconeEdicao,
 import React from 'react'
 import SelectColumnFilter from '../../SelectColumnFilter'
 import Tabela from "../Tabela";
-import {trataNull} from "../../../Util"
+import {trataArrayNull} from "../../../Util"
 
 export default function TabelaProduto(props){
 
@@ -58,7 +58,7 @@ export default function TabelaProduto(props){
   const Produtos          = props.produtos
 
   const getData = () => {
-    const data = trataNull(Produtos)
+    const data = trataArrayNull(Produtos)
     console.log(data)
     return [...data]
   }

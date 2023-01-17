@@ -2,6 +2,8 @@ import Produto from "../core/Produto";
 import { useState, useEffect, useMemo } from "react";
 import ColecaoProduto from "../backend/bd/ColecaoProduto";
 import useTabelaOuForm from "./useTabelaOuForm";
+import useAuth from "../data/hook/useAuth";
+
 import {
   PostProduto,
   GetProduto,
@@ -10,6 +12,9 @@ import {
 } from "../backend/bd/ResquestsProdutos";
 
 export default function useProduto() {
+
+  const {usuario,setCarregando} = useAuth()
+  
   const {
     exibirTabela,
     exibirFormulario,
@@ -28,9 +33,11 @@ export default function useProduto() {
   useEffect(obterTodos, []);
 
   function obterTodos() {
+    setCarregando(true)
     GetProduto().then((prods) => {
       setProdutos(prods);
       exibirTabela();
+      setCarregando(false)
     });
   }
 
@@ -59,15 +66,17 @@ export default function useProduto() {
     categoria,
     unidade,
   }) {
-    console.log("id edit", id);
+    setCarregando(true)
     id
       ? UpdateProduto({ id, codigo, nome, preco, categoria, unidade }).then(
           (resp) => {
+            setCarregando(false)
             obterTodos();
           }
         )
       : PostProduto({ codigo, nome, preco, categoria, unidade }).then(
           (resp) => {
+            setCarregando(false)
             obterTodos();
           }
         );

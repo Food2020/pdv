@@ -11,7 +11,7 @@ interface AuthContextProps{
     logout: () => Promise<void>
 }
 
-const AuthContext = createContext<AuthContextProps>({});
+const AuthContext = createContext({});
 
 function gerenciarCookie(logado: boolean){
     if(logado){
@@ -96,7 +96,8 @@ export function AuthProvider(props) {
             login,
             cadastrar,
             logout,
-            carregando
+            carregando,
+            setCarregando
         }}>
         {props.children}
         </AuthContext.Provider>
