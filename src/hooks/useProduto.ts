@@ -64,7 +64,7 @@ export default function useProduto() {
     nome,
     preco,
     categoria,
-    unidade,
+    unidade
   }) {
     setCarregando(true)
     id
@@ -89,7 +89,6 @@ export default function useProduto() {
   }
 
   function TratarVariavel(variavel) {
-    console.log(variavel + " - tipo : " + typeof variavel);
     if (typeof variavel == "string") {
       return variavel.toLowerCase();
     } else {

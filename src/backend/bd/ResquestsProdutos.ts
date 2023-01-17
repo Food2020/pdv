@@ -10,7 +10,7 @@ export async function PostProduto({ codigo, nome, preco, categoria, unidade }) {
     codigo: codigo,
     categoria: categoria,
     unidade: unidade,
-    ativo: 1,
+    ativo: 1
   };
   return fetch(url, {
     method: "POST",

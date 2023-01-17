@@ -18,9 +18,6 @@ export default function FormularioProduto(props){
     const [categoria,setCategoria] = useState((props.produto?.categoria || props.produtoDup?.categoria) ?? '');
     const [preco,setPreco]         = useState((props.produto?.preco || props.produtoDup?.preco) ?? 0);
 
-    console.log("id")
-    console.log(id)
-
     return (
         <>
             <div className = "grid grid-cols-12">
@@ -65,7 +62,7 @@ export default function FormularioProduto(props){
             <div className = "flex justify-end mt-4">
                 <Botao 
                     cor = "indigo-500" className = "mr-2" 
-                    onClick = {() => props.salvarProduto?.(id,codigo,nome,preco,categoria,unidade,1)} >
+                    onClick = {() => props.salvarProduto?.({id,codigo,nome,preco,categoria,unidade})} >
                     {id ? 'Alterar' : 'Salvar'}
                 </Botao>
                 <Botao cor = "red-600"  onClick = {props.exibirTabela} >

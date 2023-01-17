@@ -12,7 +12,6 @@ export default function useTaelaOuForm(){
         if (ordenacao && ordenacao.chave === chave && ordenacao.direcao === 'ascending') {
             direcao = 'descending';
         }
-        console.log(chave+" -- "+direcao)
         setOrdenacao({ chave, direcao });
       }
     

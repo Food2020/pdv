@@ -24,7 +24,6 @@ export default function Autenticacao() {
                 await dados.cadastrar(email,senha)
             }
         } catch(e) {
-            console.log(e.message)
             exibirErro(e?.message ?? 'Erro inesperado !')
         }
     }

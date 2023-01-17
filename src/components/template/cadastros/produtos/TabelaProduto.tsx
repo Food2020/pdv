@@ -14,7 +14,6 @@ export default function TabelaProduto(props){
       
     const produto = row.values;
    
-    console.log("Renderiza acoes "+produto)
     return (
         <div>
             { props.produtoEditar ? (
@@ -59,7 +58,6 @@ export default function TabelaProduto(props){
 
   const getData = () => {
     const data = trataArrayNull(Produtos)
-    console.log(data)
     return [...data]
   }
   
