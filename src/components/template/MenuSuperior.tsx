@@ -9,6 +9,10 @@ export default function MenuSuperior() {
       url: "/operacional/produto",
       texto: "Cadastro de produtos",
     },
+    {
+      url: "/operacional/categoria",
+      texto: "Cadastro de categorias",
+    },
   ];
 
   const urlsConfig = [
