@@ -1,17 +1,22 @@
 import { useState } from "react";
-import Categoria from "../../../../core/categoria";
+import Produto from "../../../../core/Produto";
 import { trataNull } from "../../../Util";
 import Botao from "../Botao";
 import Entrada from "../Entrada"
 
 interface FormularioProdutoProps{
-    categoria: Categoria
-    categoriaMudou?:(categoria: Categoria) => void
+    produto: Produto
+    produtoMudou?:(produto: Produto) => void
     cancelado?: () => void
 }
 
-export default function FormularioCategoria(props){
-    const [nome,setNome]           = useState((props.categoria?.nome || props.categoriaDup?.nome) ?? '');
+export default function FormularioProduto(props){
+    const id                       = trataNull(props.produto?.id)
+    const [nome,setNome]           = useState((props.produto?.nome || props.produtoDup?.nome) ?? '');
+    const [codigo,setCodigo]       = useState((props.produto?.codigo || props.produtoDup?.codigo) ?? '');
+    const [unidade,setUnidade]     = useState((props.produto?.unidade || props.produtoDup?.unidade) ?? '');
+    const [categoria,setCategoria] = useState((props.produto?.categoria || props.produtoDup?.categoria) ?? '');
+    const [preco,setPreco]         = useState((props.produto?.preco || props.produtoDup?.preco) ?? 0);
 
     return (
         <>
