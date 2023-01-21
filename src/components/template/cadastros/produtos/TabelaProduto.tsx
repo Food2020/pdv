@@ -79,7 +79,7 @@ export default function TabelaProduto(props){
       },
       {
         Header: "Categoria",
-        accessor: "categoria",
+        accessor: "categoria", 
         Filter: SelectColumnFilter,  // new
         filter: 'includes',  // new
       },

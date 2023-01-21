@@ -5,113 +5,105 @@ import useTabelaOuForm from "./useTabelaOuForm";
 import useAuth from "../data/hook/useAuth";
 
 import {
-  PostProduto,
-  GetProduto,
-  ExcluirProduto,
-  UpdateProduto,
+	PostProduto,
+	GetProduto,
+	ExcluirProduto,
+	UpdateProduto,
 } from "../backend/bd/ResquestsProdutos";
 
 export default function useProduto() {
+	const { usuario, setCarregando } = useAuth();
 
-  const {usuario,setCarregando} = useAuth()
-  
-  const {
-    exibirTabela,
-    exibirFormulario,
-    formularioVisivel,
-    tabelaVisivel,
-    ordenacao,
-    setOrdenacao,
-    alterarOrdenacao,
-    getClassNamesFor,
-  } = useTabelaOuForm();
+	const {
+		exibirTabela,
+		exibirFormulario,
+		formularioVisivel,
+		tabelaVisivel,
+		ordenacao,
+		setOrdenacao,
+		alterarOrdenacao,
+		getClassNamesFor,
+	} = useTabelaOuForm();
 
-  const [Produto, setProduto] = useState([]);
-  const [ProdutoDup, setProdutoDup] = useState([]);
-  const [Produtos, setProdutos] = useState([]);
+	const [Produto, setProduto] = useState([]);
+	const [ProdutoDup, setProdutoDup] = useState([]);
+	const [Produtos, setProdutos] = useState([]);
 
-  useEffect(obterTodos, []);
+	useEffect(obterTodos, []);
 
-  function obterTodos() {
-    setCarregando(true)
-    GetProduto().then((prods) => {
-      setProdutos(prods);
-      exibirTabela();
-      setCarregando(false)
-    });
-  }
+	function obterTodos() {
+		setCarregando(true);
+		GetProduto().then((prods) => {
+			setProdutos(prods);
+			exibirTabela();
+			setCarregando(false);
+		});
+	}
 
-  function editarProduto(Produto) {
-    setProduto(Produto);
-    setProdutoDup([]);
-    exibirFormulario();
-  }
+	function editarProduto(Produto) {
+		setProduto(Produto);
+		setProdutoDup([]);
+		exibirFormulario();
+	}
 
-  async function excluirProduto(Produto) {
-    await ExcluirProduto(Produto.id);
-    obterTodos();
-  }
+	async function excluirProduto(Produto) {
+		await ExcluirProduto(Produto.id);
+		obterTodos();
+	}
 
-  function duplicarProduto(Produto) {
-    setProdutoDup(Produto);
-    setProduto([]);
-    exibirFormulario();
-  }
+	function duplicarProduto(Produto) {
+		setProdutoDup(Produto);
+		setProduto([]);
+		exibirFormulario();
+	}
 
-  async function salvarProduto({
-    id,
-    codigo,
-    nome,
-    preco,
-    categoria,
-    unidade
-  }) {
-    setCarregando(true)
-    id
-      ? UpdateProduto({ id, codigo, nome, preco, categoria, unidade }).then(
-          (resp) => {
-            setCarregando(false)
-            obterTodos();
-          }
-        )
-      : PostProduto({ codigo, nome, preco, categoria, unidade }).then(
-          (resp) => {
-            setCarregando(false)
-            obterTodos();
-          }
-        );
-  }
+	async function salvarProduto(id, codigo, nome, preco, categoria, unidade) {
+		setCarregando(true);
+		id
+			? UpdateProduto({ id, codigo, nome, preco, categoria, unidade }).then(
+					(resp) => {
+						setCarregando(false);
+						obterTodos();
+					}
+			  )
+			: PostProduto({ codigo, nome, preco, categoria, unidade }).then(
+					(resp) => {
+						setCarregando(false);
+						obterTodos();
+					}
+			  );
+	}
 
-  function novoProduto() {
-    setProduto([]);
-    setProdutoDup([]);
-    exibirFormulario();
-  }
+	function novoProduto() {
+		setProduto([]);
+		setProdutoDup([]);
+		exibirFormulario();
+	}
 
-  function TratarVariavel(variavel) {
-    if (typeof variavel == "string") {
-      return variavel.toLowerCase();
-    } else {
-      return variavel;
-    }
-  }
+	function TratarVariavel(variavel) {
+		if (typeof variavel == "string") {
+			return variavel.toLowerCase();
+		} else {
+			return variavel;
+		}
+	}
 
-  return {
-    Produto,
-    Produtos,
-    novoProduto,
-    salvarProduto,
-    excluirProduto,
-    editarProduto,
-    duplicarProduto,
-    obterTodos,
-    formularioVisivel,
-    tabelaVisivel,
-    exibirTabela,
-    ordenacao,
-    setOrdenacao,
-    alterarOrdenacao,
-    getClassNamesFor,
-    ProdutoDup,
-  };
+	return {
+		Produto,
+		Produtos,
+		novoProduto,
+		salvarProduto,
+		excluirProduto,
+		editarProduto,
+		duplicarProduto,
+		obterTodos,
+		formularioVisivel,
+		tabelaVisivel,
+		exibirTabela,
+		ordenacao,
+		setOrdenacao,
+		alterarOrdenacao,
+		getClassNamesFor,
+		ProdutoDup,
+	};
 }

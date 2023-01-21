@@ -26,18 +26,33 @@ export default function useCategoria() {
     getClassNamesFor,
   } = useTabelaOuForm();
 
-  const [Categoria, setCategoria] = useState([]);
-  const [CategoriaDup, setCategoriaDup] = useState([]);
-  const [Categorias, setCategorias] = useState([]);
+  const [Categoria, setCategoria]                 = useState([]);
+  const [CategoriaDup, setCategoriaDup]           = useState([]);
+  const [Categorias, setCategorias]               = useState([]);
+  const [CategoriasOptions, setCategoriasOptions] = useState([]);
+
   useEffect(obterTodos, []);
 
   function obterTodos() {
     setCarregando(true)
     GetCategoria().then((categoria) => {
       setCategorias(categoria);
+      setCategoriasOptions(ArrayToOption(categoria))
       exibirTabela();
       setCarregando(false)
     });
+  }
+
+  function ArrayToOption(categoria){
+    let categoriasOptions = categoria.map(categoria => {
+      let properties = {
+        "value": categoria.id,
+        "label": categoria.nome
+      };
+      return properties;
+     });
+     
+    return categoriasOptions
   }
 
   function editarCategoria(Categoria) {
@@ -90,6 +105,7 @@ export default function useCategoria() {
   return {
     Categoria,
     Categorias,
+    CategoriasOptions,
     novoCategoria,
     salvarCategoria,
     excluirCategoria,

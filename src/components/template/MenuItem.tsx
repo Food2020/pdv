@@ -7,7 +7,6 @@ interface MenuItemProps{
     icone:any
     onClick?: (evento: any) => void
     className?:string
-
 }
 
 export default function MenuItem(props) {
