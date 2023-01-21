@@ -29,13 +29,11 @@ export default function useCategoria() {
   const [Categoria, setCategoria] = useState([]);
   const [CategoriaDup, setCategoriaDup] = useState([]);
   const [Categorias, setCategorias] = useState([]);
-
   useEffect(obterTodos, []);
 
   function obterTodos() {
     setCarregando(true)
     GetCategoria().then((categoria) => {
-      console.log(categoria)
       setCategorias(categoria);
       exibirTabela();
       setCarregando(false)
@@ -59,13 +57,9 @@ export default function useCategoria() {
     exibirFormulario();
   }
 
-  async function salvarCategoria({
-    id,
-    nome
-  }) {
+  async function salvarCategoria({id,nome, ativo}) {
     setCarregando(true)
-    id
-      ? UpdateCategoria({ id,nome}).then(
+    id? UpdateCategoria({ id,nome}).then(
           (resp) => {
             setCarregando(false)
             obterTodos();
