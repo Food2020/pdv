@@ -13,6 +13,10 @@ export default function MenuSuperior() {
       url: "/operacional/categoria",
       texto: "Cadastro de categorias",
     },
+    {
+      url: "/operacional/usuario",
+      texto: "Cadastro de usuarios",
+    },
   ];
 
   const urlsConfig = [

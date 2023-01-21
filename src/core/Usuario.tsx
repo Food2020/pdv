@@ -1,5 +1,5 @@
 export default interface Usuario {
-    uid?:string
+    id?:string
     email:string
     senha:string
     nome:string
