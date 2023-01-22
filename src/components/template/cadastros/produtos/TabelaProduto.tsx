@@ -84,6 +84,7 @@ export default function TabelaProduto(props) {
 			},
 			{
 				Header: "Categoria",
+        accessor: "categoria",
 				Cell: ({ row }) =>
 					renderizaLabelSelect(row.original.categoria, props.categoriasOptions),
 				Filter: SelectColumnFilter, // new
