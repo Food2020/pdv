@@ -3,7 +3,7 @@ import { IconeEdicao, IconeLixo, IconeDuplicar } from "../../../icons/index";
 import React from "react";
 import SelectColumnFilter from "../../SelectColumnFilter";
 import Tabela from "../Tabela";
-import { trataArrayNull } from "../../../Util";
+import { renderizaLabelSelect, trataArrayNull } from "../../../Util";
 
 export default function TabelaProduto(props) {
 	function renderizarAcoesTable({ row }) {
@@ -59,11 +59,6 @@ export default function TabelaProduto(props) {
 			</div>
 		);
 	}
-	function renderizaCategoria({ row }) {
-    let objCategoria = props.categoriasOptions.find((item) => item.value == row.original.categoria);
-    return objCategoria ? objCategoria.label : "";
-	}
-
 	const flagExibeAcoes = props.produtoEditar || props.produtoExcluir;
 	const Produtos = props.produtos;
 
@@ -89,7 +84,8 @@ export default function TabelaProduto(props) {
 			},
 			{
 				Header: "Categoria",
-				Cell: ({ row }) => renderizaCategoria({ row }),
+				Cell: ({ row }) =>
+					renderizaLabelSelect(row.original.categoria, props.categoriasOptions),
 				Filter: SelectColumnFilter, // new
 				filter: "includes", // new
 			},
