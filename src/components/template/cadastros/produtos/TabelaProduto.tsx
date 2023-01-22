@@ -3,7 +3,7 @@ import { IconeEdicao, IconeLixo, IconeDuplicar } from "../../../icons/index";
 import React from "react";
 import SelectColumnFilter from "../../SelectColumnFilter";
 import Tabela from "../Tabela";
-import { renderizaLabelSelect, trataArrayNull } from "../../../Util";
+import { renderizaDateTime, renderizaLabelSelect, trataArrayNull } from "../../../Util";
 
 export default function TabelaProduto(props) {
 	function renderizarAcoesTable({ row }) {
@@ -96,6 +96,12 @@ export default function TabelaProduto(props) {
 			{
 				Header: "Preço",
 				accessor: "preco",
+			},
+			{
+				Header: "Dt criação",
+				accessor: "createdAt",
+        Cell: ({ row }) =>
+					renderizaDateTime(row.original.createdAt),
 			},
 			{
 				Header: "Ações",
