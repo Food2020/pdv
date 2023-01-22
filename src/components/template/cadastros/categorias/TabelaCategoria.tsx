@@ -12,7 +12,7 @@ export default function TabelaCategoria(props){
 
   function renderizarAcoesTable({row}){
       
-    const categoria = row.values;
+    const categoria = row.original;
    
     return (
         <div>
