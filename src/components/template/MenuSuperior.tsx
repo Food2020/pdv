@@ -7,26 +7,30 @@ export default function MenuSuperior() {
   const urlsOperacional = [
     {
       url: "/operacional/produto",
-      texto: "Cadastro de produtos",
+      texto: "Cadastro Produtos",
     },
     {
       url: "/operacional/categoria",
-      texto: "Cadastro de categorias",
+      texto: "Cadastro Categorias",
     },
     {
       url: "/operacional/usuario",
-      texto: "Cadastro de usuarios",
+      texto: "Cadastro Usuarios",
     },
     {
       url: "/operacional/unidade",
-      texto: "Cadastro de Unidade de Medidas",
+      texto: "Cadastro Unidade de Medidas",
+    },
+    {
+      url: "/operacional/formaPagamento",
+      texto: "Cadastro Forma de Pagamentos",
     },
   ];
 
   const urlsConfig = [
     {
       url: "../ajustes",
-      texto: "Configguração y",
+      texto: "Configuração y",
     },
   ];
   const urlsRelatorios = [
