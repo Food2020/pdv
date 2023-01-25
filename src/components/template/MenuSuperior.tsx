@@ -25,6 +25,10 @@ export default function MenuSuperior() {
       url: "/operacional/formaPagamento",
       texto: "Cadastro Forma de Pagamentos",
     },
+    {
+      url: "/operacional/cliente",
+      texto: "Cadastro Clientes",
+    },
   ];
 
   const urlsConfig = [
