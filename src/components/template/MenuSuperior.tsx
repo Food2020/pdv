@@ -17,6 +17,10 @@ export default function MenuSuperior() {
       url: "/operacional/usuario",
       texto: "Cadastro de usuarios",
     },
+    {
+      url: "/operacional/unidade",
+      texto: "Cadastro de Unidade de Medidas",
+    },
   ];
 
   const urlsConfig = [
