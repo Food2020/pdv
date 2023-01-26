@@ -1,3 +1,4 @@
+import { IMaskInput } from "react-imask";
 interface EntradaProps{
     tipo?: 'text' | 'number' | 'password' | 'email',
     texto: string,
