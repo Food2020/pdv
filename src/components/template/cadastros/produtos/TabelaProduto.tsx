@@ -3,7 +3,11 @@ import { IconeEdicao, IconeLixo, IconeDuplicar } from "../../../icons/index";
 import React from "react";
 import SelectColumnFilter from "../../SelectColumnFilter";
 import Tabela from "../Tabela";
-import { renderizaDateTime, renderizaLabelSelect, trataArrayNull } from "../../../Util";
+import {
+	renderizaDateTime,
+	renderizaLabelSelect,
+	trataArrayNull,
+} from "../../../Util";
 
 export default function TabelaProduto(props) {
 	function renderizarAcoesTable({ row }) {
@@ -68,48 +72,43 @@ export default function TabelaProduto(props) {
 	};
 
 	const data = getData();
-	const columns = React.useMemo(
-		() => [
-			{
-				Header: "Id",
-				accessor: "id",
-			},
-			{
-				Header: "Código",
-				accessor: "codigo",
-			},
-			{
-				Header: "Nome",
-				accessor: "nome",
-			},
-			{
-				Header: "Categoria",
-        accessor: "categoria",
-				Cell: ({ row }) =>
-					renderizaLabelSelect(row.original.categoria, props.categoriasOptions),
-				Filter: SelectColumnFilter, // new
-				filter: "includes", // new
-			},
-			{
-				Header: "Unidade",
-				accessor: "unidade",
-			},
-			{
-				Header: "Preço",
-				accessor: "preco",
-			},
-			{
-				Header: "Dt criação",
-				accessor: "createdAt",
-        Cell: ({ row }) =>
-					renderizaDateTime(row.original.createdAt),
-			},
-			{
-				Header: "Ações",
-				Cell: ({ row }) => renderizarAcoesTable({ row }),
-			},
-		],
-		[]
-	);
+	const columns = [
+		{
+			Header: "Id",
+			accessor: "id",
+		},
+		{
+			Header: "Código",
+			accessor: "codigo",
+		},
+		{
+			Header: "Nome",
+			accessor: "nome",
+		},
+		{
+			Header: "Categoria",
+			accessor: "categoria",
+			Cell: ({ row }) =>
+				renderizaLabelSelect(row.original.categoria, props.categoriasOptions),
+		},
+		{
+			Header: "Unidade",
+			accessor: "unidade",
+		},
+		{
+			Header: "Preço",
+			accessor: "preco",
+		},
+		{
+			Header: "Dt criação",
+			accessor: "createdAt",
+			Cell: ({ row }) => renderizaDateTime(row.original.createdAt),
+		},
+		{
+			Header: "Ações",
+			Cell: ({ row }) => renderizarAcoesTable({ row }),
+		},
+	];
+
 	return <Tabela columns={columns} data={data} />;
 }
