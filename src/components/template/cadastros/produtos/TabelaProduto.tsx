@@ -87,13 +87,13 @@ export default function TabelaProduto(props) {
 		},
 		{
 			Header: "Categoria",
-			accessor: "categoria",
+			accessor: row => renderizaLabelSelect(row.categoria, props.categoriasOptions),
 			Cell: ({ row }) =>
 				renderizaLabelSelect(row.original.categoria, props.categoriasOptions),
 		},
 		{
 			Header: "Unidade",
-			accessor: "unidade",
+			accessor: row => renderizaLabelSelect(row.unidade, props.unidadesOptions),
 			Cell: ({ row }) =>
 				renderizaLabelSelect(row.original.unidade, props.unidadesOptions),
 		},
