@@ -104,7 +104,7 @@ export default function TabelaProduto(props) {
 		},
 		{
 			Header: "Dt criação",
-			accessor: "createdAt",
+			accessor: row => renderizaDateTime(row.createdAt),
 			Cell: ({ row }) => renderizaDateTime(row.original.createdAt),
 		},
 		{
