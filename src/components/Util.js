@@ -1,10 +1,6 @@
 export function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
 }
-export const renderizaLabelSelect = (valor, options) => {
-	let obj = options.find((item) => item.value == valor);
-	return obj ? obj.label : "";
-};
 export const renderizaDateTime = (dateTime) => {
 	function checkZero(data) {
 		if (data.length == 1) {
@@ -30,15 +26,19 @@ export const renderizaDateTime = (dateTime) => {
 
 	return day + "/" + month + "/" + year + " " + hour + ":" + minutes;
 };
+export const renderizaLabelSelect = (valor, options) => {
+	let obj = options.find((item) => item.value == valor);
+	return obj ? obj.label : "";
+};
+export const renderizaSituacao = (situacao) => {
+	return situacao === 1 ? "Ativo" : "Inativo";
+};
 export const trataArrayNull = (Array) => {
 	if (Array === null || !Array) {
 		return [];
 	} else {
 		return Array;
 	}
-};
-export const renderizaSituacao = (situacao) => {
-	return situacao === 1 ? "Ativo" : "Inativo";
 };
 export const trataNull = (elem) => {
 	if (elem === null || !elem) {
