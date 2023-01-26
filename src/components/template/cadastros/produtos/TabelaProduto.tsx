@@ -94,6 +94,8 @@ export default function TabelaProduto(props) {
 		{
 			Header: "Unidade",
 			accessor: "unidade",
+			Cell: ({ row }) =>
+				renderizaLabelSelect(row.original.unidade, props.unidadesOptions),
 		},
 		{
 			Header: "Preço",

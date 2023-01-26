@@ -68,11 +68,11 @@ export default function FormularioProduto(props) {
 					texto="Categoria"
 					className="col-span-4"
 				/>
-				<Entrada
-					texto="Unidade"
-					valor={unidade}
+				<Selecao
+					options={props.unidadesOptions}
 					valorMudou={setUnidade}
-					tipo="text"
+					valor={unidade}
+					texto="Unidade"
 					className="col-span-4"
 				/>
 			</div>

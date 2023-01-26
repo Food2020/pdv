@@ -6,6 +6,7 @@ import Produto from "../../core/Produto";
 import usePoduto from '../../hooks/useProduto'
 import Botao from '../../components/template/cadastros/Botao'
 import useCategoria from "../../hooks/useCategoria"
+import useUnidade from "../../hooks/useUnidade";
 
 export default function telaProduto() {
 
@@ -27,6 +28,7 @@ export default function telaProduto() {
   } = usePoduto()
 
   const { CategoriasOptions } = useCategoria();
+  const { UnidadesOptions } = useUnidade();
 
   return (
     <Layout titulo = "Produto" subtitulo = "Grenciamento de produtos">
@@ -43,6 +45,7 @@ export default function telaProduto() {
         <TabelaProduto produtos = {Produtos} 
                        produtoEditar = {editarProduto}
                        categoriasOptions = {CategoriasOptions}
+                       unidadesOptions = {UnidadesOptions}
                        produtoExcluir = {excluirProduto}
                        produtoDuplicar = {duplicarProduto}
                        ordenacao = {ordenacao}
@@ -56,6 +59,7 @@ export default function telaProduto() {
         <>
         <FormularioProduto produto ={Produto} 
                            categoriasOptions = {CategoriasOptions}
+                           unidadesOptions = {UnidadesOptions}
                            produtoDup = {ProdutoDup}
                            salvarProduto = {salvarProduto} 
                            exibirTabela = {() => exibirTabela()}
