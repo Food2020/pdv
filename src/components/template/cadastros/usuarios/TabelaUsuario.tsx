@@ -6,7 +6,7 @@ import { IconeEdicao,
 import React from 'react'
 import SelectColumnFilter from '../../SelectColumnFilter'
 import Tabela from "../Tabela";
-import {trataArrayNull} from "../../../Util"
+import {renderizaSituacao, trataArrayNull} from "../../../Util"
 
 export default function TabelaUsuario(props){
 
@@ -86,8 +86,10 @@ export default function TabelaUsuario(props){
         accessor: "cargo",
       },
       {
-        Header: "Ativo",
-        accessor: "ativo",
+        Header: "Situação",
+        accessor: row => renderizaSituacao(row.ativo),
+        Cell: ({ row }) =>
+        renderizaSituacao(row.original.ativo),
       },
       {
         Header: "Ações", 

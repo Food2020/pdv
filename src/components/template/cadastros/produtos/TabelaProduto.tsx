@@ -7,6 +7,7 @@ import {
 	renderizaDateTime,
 	renderizaLabelSelect,
 	trataArrayNull,
+	renderizaSituacao
 } from "../../../Util";
 
 export default function TabelaProduto(props) {
@@ -105,6 +106,12 @@ export default function TabelaProduto(props) {
 			Header: "Dt criação",
 			accessor: "createdAt",
 			Cell: ({ row }) => renderizaDateTime(row.original.createdAt),
+		},
+		{
+			Header: "Situação",
+			accessor: row => renderizaSituacao(row.ativo),
+			Cell: ({ row }) =>
+			renderizaSituacao(row.original.ativo),
 		},
 		{
 			Header: "Ações",
