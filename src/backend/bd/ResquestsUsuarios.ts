@@ -3,7 +3,7 @@ import { Alert } from "flowbite-react";
 
 const url = "http://localhost:4000/api/usuario";
 
-export async function PostUsuario({  nome, email, senha, cargo,ativo }) {
+export async function PostUsuario({  nome, email, senha, cargo }) {
   let data = {
     nome,
     email,

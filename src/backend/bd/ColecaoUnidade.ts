@@ -1,4 +1,4 @@
-import Unidade from "../../core/unidade";
+import Unidade from "../../core/Unidade";
 
 export default class ColecaoUnidade{
     

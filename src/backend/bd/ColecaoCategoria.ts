@@ -1,4 +1,4 @@
-import Categoria from "../../core/categoria";
+import Categoria from "../../core/Categoria";
 
 export default class ColecaoCategoria{
     

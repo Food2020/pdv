@@ -31,7 +31,7 @@ export function AuthProvider(props) {
             setUsuario(usuario);
             gerenciarCookie(true); 
             setCarregando(false);
-            
+
             return usuario.email;
         } else {
             setUsuario(null);
@@ -40,7 +40,7 @@ export function AuthProvider(props) {
             return false;
         }
     }
-    async function login (email,senha){
+    async function login(email,senha){
         try {
             setCarregando(true)
             const user = checkUser(email,senha);
