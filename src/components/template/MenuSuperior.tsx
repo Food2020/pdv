@@ -29,6 +29,10 @@ export default function MenuSuperior() {
       url: "/operacional/cliente",
       texto: "Cadastro Clientes",
     },
+    {
+      url: "/operacional/cargo",
+      texto: "Cadastro Funções",
+    },
   ];
 
   const urlsConfig = [
