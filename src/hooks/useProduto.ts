@@ -11,7 +11,7 @@ import {
 	UpdateProduto,
 } from "../backend/bd/ResquestsProdutos";
 
-export default function useProduto() {
+export default function UseProduto() {
 	const { usuario, setCarregando } = useAuth();
 
 	const {
