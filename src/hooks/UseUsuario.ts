@@ -1,7 +1,7 @@
 import Usuario from "../core/Usuario";
 import { useState, useEffect, useMemo } from "react";
 import ColecaoUsuario from "../backend/bd/ColecaoUsuario";
-import useTabelaOuForm from "./useTabelaOuForm";
+import useTabelaOuForm from "./UseTabelaOuForm";
 import useAuth from "../data/hook/useAuth";
 
 import {

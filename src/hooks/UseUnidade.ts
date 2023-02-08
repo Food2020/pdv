@@ -1,7 +1,7 @@
-import Unidade from "../core/unidade";
+import Unidade from "../core/Unidade";
 import { useState, useEffect, useMemo } from "react";
 import ColecaoUnidade from "../backend/bd/ColecaoUnidade";
-import useTabelaOuForm from "./useTabelaOuForm";
+import useTabelaOuForm from "./UseTabelaOuForm";
 import useAuth from "../data/hook/useAuth";
 
 import {

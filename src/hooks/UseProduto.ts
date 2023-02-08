@@ -1,7 +1,7 @@
 import Produto from "../core/Produto";
 import { useState, useEffect, useMemo } from "react";
 import ColecaoProduto from "../backend/bd/ColecaoProduto";
-import useTabelaOuForm from "./useTabelaOuForm";
+import useTabelaOuForm from "./UseTabelaOuForm";
 import useAuth from "../data/hook/useAuth";
 
 import {
