@@ -1,7 +1,7 @@
 import { json } from "stream/consumers";
 import { Alert } from "flowbite-react";
 
-const url = "https://backend-pdv-production.up.railway.app/api/cliente";
+const url = "http://pdvfood.kinghost.net:21026/api/cliente";
 
 export async function PostCliente({ nome }) {
 	let data = {
