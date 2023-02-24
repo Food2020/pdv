@@ -67,3 +67,22 @@ export async function ExcluirUsuario(id) {
 			alert("Erro ao deletar usuario !");
 		});
 }
+
+export async function checkUser(email, senha) {
+	let data = {
+		email,
+		senha,
+	};
+
+	return fetch(`${url}/login`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(data),
+	})
+		.then((data) => data.json())
+		.catch((erro) => {
+			console.log(erro);
+		});
+}
