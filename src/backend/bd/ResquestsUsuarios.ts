@@ -70,11 +70,10 @@ export async function ExcluirUsuario(id) {
 
 export async function checkUser(email, senha) {
 	let data = {
-		email,
 		senha,
 	};
 
-	return fetch(`${url}/login`, {
+	return fetch(`${url}/${email}`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
