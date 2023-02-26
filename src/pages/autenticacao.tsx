@@ -19,9 +19,9 @@ export default function Autenticacao() {
     async function submeter(){
         try{
             if(modo == 'login'){
-                await dados.login(email,senha)
+                 dados.login(email,senha)
             } else {
-                await dados.cadastrar(email,senha)
+                dados.cadastrar(email,senha)
             }
         } catch(e) {
             exibirErro(e?.message ?? 'Erro inesperado !')

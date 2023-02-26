@@ -59,6 +59,7 @@ export async function UpdateUsuario({ id, nome, email, senha, cargo, ativo }) {
 }
 
 export async function ExcluirUsuario(id) {
+	
 	return fetch(`${url}/${id}`, {
 		method: "DELETE",
 	})
