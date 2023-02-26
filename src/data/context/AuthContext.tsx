@@ -2,6 +2,7 @@ import Router from "../../../node_modules/next/router";
 import { createContext, useEffect, useState } from "react";
 import Usuario from "../../core/Usuario";
 import Cookies from "js-cookie";
+import {checkUser} from "../../backend/bd/ResquestsUsuarios";
 
 interface AuthContextProps{
     usuario?:Usuario
@@ -25,7 +26,7 @@ export function AuthProvider(props) {
     const [usuario,setUsuario]       = useState<Usuario>(null)
     const [carregando,setCarregando] = useState(true)
 
-    async function configurarSessao(usuario:Usuario){
+    async function configurarSessao(usuario){
 
         if(usuario?.email){
             setUsuario(usuario);
@@ -43,24 +44,20 @@ export function AuthProvider(props) {
     async function login(email,senha){
         try {
             setCarregando(true)
-            const user = checkUser(email,senha);
-            await configurarSessao(user)
-            /*const resp = await firebase.auth().signInWithEmailAndPassword(email,senha)
-
-            await configurarSessao(resp.user)*/
+            let user ={
+                email: email,
+                senha:senha
+            }
+              checkUser(email,senha);
+             configurarSessao(user)
+       
             Router.push('/')
         } finally {
             setCarregando(false)
         }
     }
-    function checkUser(email,senha){
-        return {
-                email:email,
-                senha:senha,
-                nome:"xxxx",
-                imagemURL:""
-                };
-    }
+
+  
     async function cadastrar (email,senha){
         try {
             setCarregando(true)

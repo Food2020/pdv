@@ -59,11 +59,30 @@ export async function UpdateUsuario({ id, nome, email, senha, cargo, ativo }) {
 }
 
 export async function ExcluirUsuario(id) {
+	
 	return fetch(`${url}/${id}`, {
 		method: "DELETE",
 	})
 		.then((data) => data.json())
 		.catch(() => {
 			alert("Erro ao deletar usuario !");
+		});
+}
+
+export async function checkUser(email,senha){
+	let data = {
+		senha
+	};
+	
+	return fetch( (`${url}/${email}`), {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(data),
+	})
+		.then((response) => response)
+		.catch(() => {
+			alert("Erro ao cadastrar Usuario!");
 		});
 }

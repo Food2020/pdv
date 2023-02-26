@@ -60,11 +60,13 @@ export default function UseProduto() {
 	async function salvarUsuario({ id, nome, email, senha, cargo, ativo = 1 }) {
 		setCarregando(true);
 		id
-			? UpdateUsuario({ id, nome, email, senha, cargo, ativo }).then((resp) => {
+			? UpdateUsuario({ id, nome, email, senha, cargo, ativo })
+			.then((resp) => {
 					setCarregando(false);
 					obterTodos();
 			  })
-			: PostUsuario({ nome, email, senha, cargo, ativo }).then((resp) => {
+			: PostUsuario({ nome, email, senha, cargo, ativo })
+				.then((resp) => {
 					setCarregando(false);
 					obterTodos();
 			  });
