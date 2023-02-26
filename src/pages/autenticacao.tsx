@@ -6,6 +6,7 @@ import useAuth from "../data/hook/useAuth";
 export default function Autenticacao() {
 
     const dados = useAuth()
+    console.log(dados)
 
     const [modo,setModo]   = useState<'login' | 'cadastro'>('login')
     const [email,setEmail] = useState('')

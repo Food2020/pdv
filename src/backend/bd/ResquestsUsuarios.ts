@@ -82,6 +82,7 @@ export async function checkUser(email, senha) {
 		body: JSON.stringify(data),
 	})
 		.then((data) => data.json())
+		.then((response)=>response[0])
 		.catch((erro) => {
 			console.log(erro);
 		});

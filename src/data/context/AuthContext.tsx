@@ -43,10 +43,9 @@ export function AuthProvider(props) {
 	async function login(email, senha) {
 		try {
 			setCarregando(true);
-			const user = checkUser(email, senha);
-
-			await configurarSessao(user);
-
+			const user = await checkUser(email, senha);
+            console.log('user',user)
+			 configurarSessao(user);
 			Router.push("/");
 		} catch (e) {
 			console.log(e);
