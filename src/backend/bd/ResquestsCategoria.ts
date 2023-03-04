@@ -1,7 +1,7 @@
 import { json } from "stream/consumers";
 import { Alert } from "flowbite-react";
 
-const url = "http://pdvfood.kinghost.net:21026/api/categoria";
+const url = "http://pdvfood.kinghost.net:21012/api/categoria";
 
 export async function PostCategoria({ nome }) {
 	let data = {
