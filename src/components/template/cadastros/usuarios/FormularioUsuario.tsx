@@ -19,8 +19,7 @@ export default function FormularioUsuario(props){
 
     return (
         <>
-            <div className = "grid grid-cols-12">
-           
+            <div className = "grid grid-cols-1 md:grid-cols-4">
             <Entrada 
                 texto = "Email" 
                 valor = {email}

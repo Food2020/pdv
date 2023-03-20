@@ -15,7 +15,7 @@ export default function FormularioUnidade(props){
 
     return (
         <div>
-            <div className = "grid grid-cols-12">
+            <div className = "grid grid-cols-4">
                  <Entrada 
                     texto = "Nome" 
                     valor = {nome} 
