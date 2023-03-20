@@ -45,7 +45,7 @@ export default function FormularioCliente(props) {
 
 	return (
 		<div>
-			<div className="grid grid-cols-12">
+			<div className="grid grid-cols-4">
 				<Entrada
 					texto="Nome"
 					valor={nome}
@@ -53,7 +53,7 @@ export default function FormularioCliente(props) {
 					className="col-span-4"
 				/>
 			</div>
-			<div className="grid grid-cols-12">
+			<div className="grid grid-cols-1 md:grid-cols-5">
 				<Entrada
 					texto="Cep"
 					valor={cep}
@@ -78,34 +78,67 @@ export default function FormularioCliente(props) {
 					valorMudou={setCidade}
 					className="col-span-2"
 				/>
+				<Entrada
+					texto="Estado"
+					valor={estado}
+					valorMudou={setEstado}
+					className="col-span-2"
+				/>
 			</div>
-			<div className="grid grid-cols-12">
-				<table>
-					<thead>
-						<tr>
-							<th>CEP</th>
-							<th>LOGRADOURO</th>
-							<th>BAIRRO</th>
-							<th>CIDADE</th>
-							<th>ESTADO</th>
-							<th>COMPLEMENTO</th>
-							<th>OBS</th>
-						</tr>
-					</thead>
-					<tbody>
-						{enderecos.map((item, index) => (
-							<tr key={index}>
-								<td>{item.cep}</td>
-								<td>{item.logradouro}</td>
-								<td>{item.bairro}</td>
-								<td>{item.cidade}</td>
-								<td>{item.estado}</td>
-								<td>{item.complemento}</td>
-								<td>{item.obs}</td>
+			<div className="grid grid-cols-1 md:grid-cols-5">
+				<Entrada
+					texto="Número"
+					valor={numero}
+					valorMudou={setNumero}
+					className="col-span-2"
+					/>
+				<Entrada
+					texto="Complemento"
+					valor={complemento}
+					valorMudou={setComplemento}
+					className="col-span-2"
+					/>
+				<Entrada
+					texto="Obs"
+					valor={obs}
+					valorMudou={setObs}
+					className="col-span-2"
+					/>
+			</div>
+			<div className="grid grid-cols-1">
+				<div>
+					<table className="table-auto border border-gray-300 border-collapse">
+						<thead>
+							<tr>
+								<th className="px-4 py-2 border border-gray-300">CEP</th>
+								<th className="px-4 py-2 border border-gray-300">LOGRADOURO</th>
+								<th className="px-4 py-2 border border-gray-300">BAIRRO</th>
+								<th className="px-4 py-2 border border-gray-300">CIDADE</th>
+								<th className="px-4 py-2 border border-gray-300">ESTADO</th>
+								<th className="px-4 py-2 border border-gray-300">COMPLEMENTO</th>
+								<th className="px-4 py-2 border border-gray-300">OBS</th>
 							</tr>
-						))}
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							{enderecos.map((item, index) => (
+								<tr key={index}>
+									<td>{item.cep}</td>
+									<td>{item.logradouro}</td>
+									<td>{item.bairro}</td>
+									<td>{item.cidade}</td>
+									<td>{item.estado}</td>
+									<td>{item.complemento}</td>
+									<td>{item.obs}</td>
+								</tr>
+							))}
+							{enderecos.length === 0 && (
+								<tr key={1} >
+									<td colSpan={7}>Nenhum registro adicionado</td>
+								</tr>
+							)}
+						</tbody>
+					</table>
+				</div>
 			</div>
 			<div className="flex justify-end mt-4">
 				<Botao
