@@ -2,7 +2,7 @@
 import React from "react";
 import { classNames } from "../../Util";
 
-export function ButtonPagination({ children, className, ...rest }) {
+export function ButtonPagination({ children, className, ...rest }: any) {
 	return (
 		<button
 			type="button"
@@ -17,7 +17,7 @@ export function ButtonPagination({ children, className, ...rest }) {
 	);
 }
 
-export function PageButton({ children, className, ...rest }) {
+export function PageButton({ children, className, ...rest }: any) {
 	return (
 		<button
 			type="button"

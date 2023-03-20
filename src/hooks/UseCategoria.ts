@@ -12,7 +12,7 @@ import {
 } from "../backend/bd/ResquestsCategoria";
 
 export default function useCategoria() {
-	const { usuario, setCarregando } = useAuth();
+	const dados = useAuth();
 
 	const {
 		exibirTabela,
@@ -33,12 +33,12 @@ export default function useCategoria() {
 	useEffect(obterTodos, []);
 
 	function obterTodos() {
-		setCarregando(true);
+		dados.setCarregando(true);
 		GetCategoria().then((categoria) => {
 			setCategorias(categoria);
 			setCategoriasOptions(ArrayToOption(categoria));
 			exibirTabela();
-			setCarregando(false);
+			dados.setCarregando(false);
 		});
 	}
 

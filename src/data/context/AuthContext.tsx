@@ -44,8 +44,7 @@ export function AuthProvider(props) {
 		try {
 			setCarregando(true);
 			const user = await checkUser(email, senha);
-            console.log('user',user)
-			 configurarSessao(user);
+			configurarSessao(user);
 			Router.push("/");
 		} catch (e) {
 			console.log(e);
@@ -53,14 +52,7 @@ export function AuthProvider(props) {
 			setCarregando(false);
 		}
 	}
-	// function checkUser(email, senha) {
-	// 	// return {
-	// 	// 	email: email,
-	// 	// 	senha: senha,
-	// 	// 	nome: "xxxx",
-	// 	// 	imagemURL: "",
-	// 	// };
-	// }
+
 	async function cadastrar(email, senha) {
 		try {
 			setCarregando(true);
@@ -82,11 +74,11 @@ export function AuthProvider(props) {
 
 	useEffect(() => {
 		if (Cookies.get("pdv")) {
-			return () => configurarSessao(usuario);
+			configurarSessao(usuario);
 		} else {
 			setCarregando(false);
 		}
-	}, []);
+	}, [usuario]);
 
 	return (
 		<AuthContext.Provider

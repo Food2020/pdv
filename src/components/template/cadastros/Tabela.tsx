@@ -167,12 +167,18 @@ export default function Tabela({ columns, data }) {
 			<div className="py-3 flex items-center justify-between">
 				<div className="flex-1 flex justify-between sm:hidden">
 					<ButtonPagination
-						onClick={() => previousPage()}
+						className={""}
 						disabled={!canPreviousPage}
+						onClick={() => previousPage()}
 					>
 						Previous
 					</ButtonPagination>
-					<ButtonPagination onClick={() => nextPage()} disabled={!canNextPage}>
+
+					<ButtonPagination
+						className={""}
+						onClick={() => nextPage()}
+						disabled={!canNextPage}
+					>
 						Next
 					</ButtonPagination>
 				</div>
