@@ -11,21 +11,23 @@ interface EntradaProps{
 export default function Entrada(props: EntradaProps){
     
     return (
-        <div className = {`px-3 mb-4 ${props.className}`}>
-            <label className = "block mb-2">
-                {props.texto}
-            </label>
-            <input 
-                type = {props.tipo ?? "text" } 
-                value = {props.valor}
-                readOnly = {props.somenteLeitura}
-                onChange = {e => props.valorMudou?.(e.target.value)}
-                className = {`
-                    border border-blue-500 border-md rounded-lg
-                    focus: outline-none bg-gray-50 px-4 py-2
-                    ${props.somenteLeitura ? '' : 'focus:bg-white'}
-                `}     
-            />
+        <div>
+            <div className = {`px-3 mb-4 ${props.className}`}>
+                <label className = "block mb-2">
+                    {props.texto}
+                </label>
+                <input 
+                    type = {props.tipo ?? "text" } 
+                    value = {props.valor}
+                    readOnly = {props.somenteLeitura}
+                    onChange = {e => props.valorMudou?.(e.target.value)}
+                    className = {`w-full
+                        border border-blue-500 border-md rounded-lg
+                        focus: outline-none bg-gray-50 px-4 py-2
+                        ${props.somenteLeitura ? '' : 'focus:bg-white'}
+                    `}     
+                />
+            </div>
         </div>
         )
 }

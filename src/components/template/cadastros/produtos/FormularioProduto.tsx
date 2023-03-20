@@ -31,13 +31,13 @@ export default function FormularioProduto(props) {
 
 	return (
 		<>
-			<div className="grid grid-cols-12">
+			<div className="grid grid-cols-1 md:grid-cols-4">
 				{id ? (
 					<Entrada
 						somenteLeitura
 						texto="Id"
 						valor={id}
-						className="col-span-4"
+						className="col-span-12"
 					/>
 				) : (
 					false
@@ -46,13 +46,13 @@ export default function FormularioProduto(props) {
 					texto="Código"
 					valor={codigo}
 					valorMudou={setCodigo}
-					className="col-span-4"
+					className="col-span-12"
 				/>
 				<Entrada
 					texto="Nome"
 					valor={nome}
 					valorMudou={setNome}
-					className="col-span-4"
+					className="col-span-12"
 				/>
 				<Entrada
 					texto="Preço"
@@ -61,6 +61,8 @@ export default function FormularioProduto(props) {
 					tipo="number"
 					className="col-span-4"
 				/>
+			</div>
+			<div className="grid grid-cols-1 md:grid-cols-4">
 				<Selecao
 					options={props.categoriasOptions}
 					valorMudou={setCategoria}

@@ -34,9 +34,11 @@ export default function Selecao(props) {
 	}
 
 	return (
-		<div className={`px-3 mb-4 ${props.className}`}>
-			<label className="block mb-2">{props.texto}</label>
-			{renderizaSelect()}
+		<div>
+			<div className={`px-3 mb-4 ${props.className}`}>
+				<label className="block mb-2">{props.texto}</label>
+				{renderizaSelect()}
+			</div>
 		</div>
 	);
 }
