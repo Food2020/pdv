@@ -17,7 +17,7 @@ export default function FormularioCategoria(props) {
 
 	return (
 		<div>
-			<div className="grid grid-cols-4">
+			<div className="grid grid-cols-1 md:grid-cols-4">
 				<Entrada
 					texto="Nome"
 					valor={nome}
