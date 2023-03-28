@@ -14,37 +14,28 @@ interface AuthContextProps {
 
 const AuthContext = createContext({});
 
-function gerenciarCookie(logado: boolean) {
-	if (logado) {
-		Cookies.set("pdv", logado, { expires: 7 });
-	} else {
-		Cookies.remove("pdv");
-	}
-}
-
 export function AuthProvider(props) {
 	const [usuario, setUsuario] = useState<Usuario>(null);
 	const [carregando, setCarregando] = useState(true);
 
-	async function configurarSessao(usuario) {
-		if (usuario?.email) {
-			setUsuario(usuario);
-			gerenciarCookie(true);
+	async function configurarSessao(usuarioLogado) {
+		if (usuarioLogado) {
+			 setUsuario(usuarioLogado);
+			 setCarregando(false);
+			sessionStorage.setItem('usuario',JSON.stringify(usuarioLogado))
+			return;
+		} 
+			setUsuario(null);
 			setCarregando(false);
 
-			return usuario.email;
-		} else {
-			setUsuario(null);
-			gerenciarCookie(false);
-			setCarregando(false);
-			return false;
-		}
+			return;
 	}
+
 	async function login(email, senha) {
 		try {
 			setCarregando(true);
-			const user = await checkUser(email, senha);
-			configurarSessao(user);
+			const usuarioLogado = await checkUser(email, senha);
+			await configurarSessao(usuarioLogado);
 			Router.push("/");
 		} catch (e) {
 			console.log(e);
@@ -66,19 +57,19 @@ export function AuthProvider(props) {
 	async function logout() {
 		try {
 			setCarregando(true);
-			await configurarSessao(null);
+			configurarSessao(null);
+			sessionStorage.removeItem('usuario')
+
 		} finally {
 			setCarregando(false);
 		}
 	}
-
+	
 	useEffect(() => {
-		if (Cookies.get("pdv")) {
-			configurarSessao(usuario);
-		} else {
-			setCarregando(false);
-		}
-	}, [usuario]);
+		if (sessionStorage.getItem("usuario")) {
+			 configurarSessao(JSON.parse(sessionStorage.getItem("usuario")));
+		} 
+	}, []);
 
 	return (
 		<AuthContext.Provider
