@@ -1,5 +1,5 @@
 import Categoria from "../core/Categoria";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useContext, useCallback } from "react";
 import ColecaoCategoria from "../backend/bd/ColecaoCategoria";
 import useTabelaOuForm from "./UseTabelaOuForm";
 import useAuth from "../data/hook/useAuth";
@@ -10,9 +10,10 @@ import {
 	ExcluirCategoria,
 	UpdateCategoria,
 } from "../backend/bd/ResquestsCategoria";
+import AuthContext from "../data/context/AuthContext";
 
 export default function useCategoria() {
-	const dados = useAuth();
+	const { setCarregando } = useContext(AuthContext);
 
 	const {
 		exibirTabela,
@@ -30,17 +31,19 @@ export default function useCategoria() {
 	const [Categorias, setCategorias] = useState([]);
 	const [CategoriasOptions, setCategoriasOptions] = useState([]);
 
-	useEffect(obterTodos, []);
-
-	function obterTodos() {
-		dados.setCarregando(true);
+	const obterTodos = useCallback(() => {
+		setCarregando(true);
 		GetCategoria().then((categoria) => {
 			setCategorias(categoria);
 			setCategoriasOptions(ArrayToOption(categoria));
 			exibirTabela();
-			dados.setCarregando(false);
+			setCarregando(false);
 		});
-	}
+	}, [exibirTabela, setCarregando]);
+
+	useEffect(() => {
+		obterTodos();
+	}, []);
 
 	function ArrayToOption(categoria) {
 		let categoriasOptions = categoria.map((categoria) => {
@@ -54,41 +57,50 @@ export default function useCategoria() {
 		return categoriasOptions;
 	}
 
-	function editarCategoria(Categoria) {
-		setCategoria(Categoria);
-		setCategoriaDup([]);
-		exibirFormulario();
-	}
+	const editarCategoria = useCallback(
+		(Categoria) => {
+			setCategoria(Categoria);
+			setCategoriaDup([]);
+			exibirFormulario();
+		},
+		[exibirFormulario]
+	);
 
-	async function excluirCategoria(Categoria) {
+	async function excluirCategoria(Categoria: any) {
 		await ExcluirCategoria(Categoria.id);
 		obterTodos();
 	}
 
-	function duplicarCategoria(Categoria) {
-		setCategoriaDup(Categoria);
-		setCategoria([]);
-		exibirFormulario();
-	}
+	const duplicarCategoria = useCallback(
+		(Categoria) => {
+			setCategoriaDup(Categoria);
+			setCategoria([]);
+			exibirFormulario();
+		},
+		[exibirFormulario]
+	);
 
-	async function salvarCategoria({ id, nome, ativo }) {
-		setCarregando(true);
-		id
-			? UpdateCategoria({ id, nome }).then((resp) => {
-					setCarregando(false);
-					obterTodos();
-			  })
-			: PostCategoria({ nome }).then((resp) => {
-					setCarregando(false);
-					obterTodos();
-			  });
-	}
+	const salvarCategoria = useCallback(
+		({ id, nome, ativo }) => {
+			setCarregando(true);
+			id
+				? UpdateCategoria({ id, nome }).then((resp) => {
+						setCarregando(false);
+						obterTodos();
+				  })
+				: PostCategoria({ nome }).then((resp) => {
+						setCarregando(false);
+						obterTodos();
+				  });
+		},
+		[obterTodos, setCarregando]
+	);
 
-	function novoCategoria() {
+	const novoCategoria = useCallback(() => {
 		setCategoria([]);
 		setCategoriaDup([]);
 		exibirFormulario();
-	}
+	}, [exibirFormulario]);
 
 	function TratarVariavel(variavel) {
 		if (typeof variavel == "string") {

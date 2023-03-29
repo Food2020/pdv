@@ -1,5 +1,11 @@
 import Router from "../../../node_modules/next/router";
-import { createContext, useEffect, useState } from "react";
+import {
+	createContext,
+	Dispatch,
+	SetStateAction,
+	useEffect,
+	useState,
+} from "react";
 import Usuario from "../../core/Usuario";
 import Cookies from "js-cookie";
 import { checkUser } from "../../backend/bd/ResquestsUsuarios";
@@ -9,10 +15,16 @@ interface AuthContextProps {
 	carregando?: boolean;
 	login?: (email: string, senha: string) => Promise<void>;
 	cadastrar?: (email: string, senha: string) => Promise<void>;
-	logout: () => Promise<void>;
+	logout?: () => Promise<void>;
+	setCarregando?: Dispatch<SetStateAction<boolean>>;
 }
 
-const AuthContext = createContext({});
+const authContext = {
+	usuario: { id: "", email: "", senha: "", nome: "", imagemURL: "" },
+	carregando: true,
+};
+
+const AuthContext = createContext<AuthContextProps>(authContext);
 
 export function AuthProvider(props) {
 	const [usuario, setUsuario] = useState<Usuario>(null);
@@ -88,12 +100,12 @@ export function AuthProvider(props) {
 	return (
 		<AuthContext.Provider
 			value={{
-				usuario,
-				login,
 				cadastrar,
-				logout,
 				carregando,
+				login,
+				logout,
 				setCarregando,
+				usuario,
 			}}
 		>
 			{props.children}

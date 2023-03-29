@@ -2,7 +2,7 @@ import FormularioUnidade from "../../components/template/cadastros/unidade_medid
 import TabelaUnidade from "../../components/template/cadastros/unidade_medida/TabelaUnidade";
 import LayoutCadastros from "../../components/template/cadastros/layoutCadastros";
 import Layout from "../../components/template/Layout";
-import Unidade from "../../core/unidade";
+import Unidade from "../../core/Unidade";
 import UseUnidade from "../../hooks/UseUnidade";
 import Botao from "../../components/template/cadastros/Botao";
 
