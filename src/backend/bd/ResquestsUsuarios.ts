@@ -59,7 +59,6 @@ export async function UpdateUsuario({ id, nome, email, senha, cargo, ativo }) {
 }
 
 export async function ExcluirUsuario(id) {
-	
 	return fetch(`${url}/${id}`, {
 		method: "DELETE",
 	})
@@ -71,10 +70,11 @@ export async function ExcluirUsuario(id) {
 
 export async function checkUser(email, senha) {
 	let data = {
+		email,
 		senha,
 	};
 
-	return fetch(`${url}/${email}`, {
+	return fetch(`${url}/login`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -82,7 +82,7 @@ export async function checkUser(email, senha) {
 		body: JSON.stringify(data),
 	})
 		.then((data) => data.json())
-		.then((response)=>response[0])
+		.then((response) => response[0])
 		.catch((erro) => {
 			console.log(erro);
 		});
