@@ -7,7 +7,6 @@ import {
 	useState,
 } from "react";
 import Usuario from "../../core/Usuario";
-import Cookies from "js-cookie";
 import { checkUser } from "../../backend/bd/ResquestsUsuarios";
 
 interface AuthContextProps {
@@ -27,16 +26,15 @@ const authContext = {
 const AuthContext = createContext<AuthContextProps>(authContext);
 
 export function AuthProvider(props) {
-	const [usuario, setUsuario] = useState<Usuario>(null);
+	const [usuario, setUsuario] = useState(null);
 	const [carregando, setCarregando] = useState(true);
 
-	async function configurarSessao(usuario) {
-		if (usuario) {
-			setUsuario(usuario);
-
-			sessionStorage.setItem("usuario", JSON.stringify(usuario));
+	async function configurarSessao(usuarioLogado) {
+		if (usuarioLogado) {
+			setUsuario(usuarioLogado);
+			sessionStorage.setItem("usuario", JSON.stringify(usuarioLogado));
 			setCarregando(false);
-			return usuario;
+			return usuarioLogado;
 		} else {
 			sessionStorage.removeItem("usuario");
 			Router.push("/autenticacao");
@@ -45,20 +43,14 @@ export function AuthProvider(props) {
 			setCarregando(false);
 			return false;
 		}
-		setUsuario(null);
-		setCarregando(false);
-
-		return;
-		setUsuario(null);
-		setCarregando(false);
-
-		return;
 	}
 
 	async function login(email, senha) {
 		try {
 			setCarregando(true);
-			const usuarioLogado = await checkUser(email, senha);
+			const usuarioLogado = await checkUser(email, senha).then(
+				(body) => body.usuarioLogado
+			);
 			await configurarSessao(usuarioLogado);
 			Router.push("/");
 		} catch (e) {

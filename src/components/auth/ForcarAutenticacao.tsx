@@ -20,7 +20,7 @@ export default function ForcarAutenticacao(props) {
 			</div>
 		);
 	}
-	if (!carregando && usuario?.email) {
+	if (!carregando && usuario?.nome) {
 		return renderizarConteudo();
 	} else if (carregando) {
 		return renderizarCarregando();
