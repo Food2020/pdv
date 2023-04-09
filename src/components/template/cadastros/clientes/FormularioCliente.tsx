@@ -3,6 +3,15 @@ import Cliente from "../../../../core/Cliente";
 import { trataNull } from "../../../Util";
 import Botao from "../Botao";
 import Entrada from "../Entrada";
+import {
+	Button,
+	Divider,
+	Grid,
+	Paper,
+	TextField,
+	Typography,
+} from "@mui/material";
+
 interface FormularioClienteProps {
 	cliente: Cliente;
 	categoriaMudou?: (cliente: Cliente) => void;
@@ -14,12 +23,20 @@ export default function FormularioCliente(props) {
 	const [nome, setNome] = useState(
 		(props.cliente?.nome || props.clienteDup?.nome) ?? ""
 	);
-	const [enderecos, setEnderecos] = useState(
-		(props.cliente?.enderecos || props.clienteDup?.enderecos) ?? []
+	const [razao, setRazao] = useState(
+		(props.cliente?.razao || props.clienteDup?.razao) ?? ""
 	);
-
 	const [cep, setCep] = useState(
 		(props.cliente?.cep || props.clienteDup?.cep) ?? ""
+	);
+	const [cpf, setCpf] = useState(
+		(props.cliente?.cpf || props.clienteDup?.cpf) ?? ""
+	);
+	const [ie, setIe] = useState(
+		(props.cliente?.ie || props.clienteDup?.ie) ?? ""
+	);
+	const [im, setIm] = useState(
+		(props.cliente?.im || props.clienteDup?.im) ?? ""
 	);
 	const [logradouro, setLogradouro] = useState(
 		(props.cliente?.logradouro || props.clienteDup?.logradouro) ?? ""
@@ -33,125 +50,104 @@ export default function FormularioCliente(props) {
 	const [estado, setEstado] = useState(
 		(props.cliente?.estado || props.clienteDup?.estado) ?? ""
 	);
-    const [numero, setNumero] = useState(
+	const [numero, setNumero] = useState(
 		(props.cliente?.numero || props.clienteDup?.numero) ?? ""
 	);
 	const [complemento, setComplemento] = useState(
 		(props.cliente?.complemento || props.clienteDup?.complemento) ?? ""
 	);
-	const [obs, setObs] = useState(
-		(props.cliente?.obs || props.clienteDup?.obs) ?? ""
+	const [tipo, setTipo] = useState(
+		(props.cliente?.tipo || props.clienteDup?.tipo) ?? ""
 	);
 
+	const changeAddress = (data) => {
+		setLogradouro(data.logradouro)
+		setBairro(data.bairro)
+		setCidade(data.localidade)
+		setEstado(data.uf)
+	}
+
+	const handleSearch = () => {
+		if(cep.length === 8){
+			fetch(`https://viacep.com.br/ws/${cep}/json/`)
+			.then(response => response.json())
+			.then(data => changeAddress(data))
+			.catch(error => console.error(error));
+		}
+	  };
 	return (
-		<div>
-			<div className="grid grid-cols-1 md:grid-cols-4">
-				<Entrada
-					texto="Nome"
-					valor={nome}
-					valorMudou={setNome}
-					className="col-span-4"
-				/>
-			</div>
-			<div className="grid grid-cols-1 md:grid-cols-5">
-				<Entrada
-					texto="Cep"
-					valor={cep}
-					valorMudou={setCep}
-					className="col-span-2"
-				/>
+		<Grid container spacing={3}>
+			<Grid item xs={12}>
+				<Divider textAlign="left">Informações</Divider>
+			</Grid>
+			<Grid item xs={12} md={3}>
+				<Entrada texto="Nome" valor={nome} valorMudou={setNome} />
+			</Grid>
+			<Grid item xs={12} md={3}>
+				<Entrada texto="Razão social" valor={razao} valorMudou={setRazao} />
+			</Grid>
+			<Grid item xs={12} md={3}>
+				<Entrada texto="Tipo" valor={tipo} valorMudou={setTipo} />
+			</Grid>
+			<Grid item xs={12} md={3}>
+				<Entrada texto="CPF/CNPJ" valor={cpf} valorMudou={setCpf} />
+			</Grid>
+			<Grid item xs={12} md={2}>
+				<Entrada texto="IE" valor={ie} valorMudou={setIe} />
+			</Grid>
+			<Grid item xs={12} md={2}>
+				<Entrada texto="IM" valor={im} valorMudou={setIm} />
+			</Grid>
+			<Grid item xs={12}>
+				<Divider textAlign="left">Endereço</Divider>
+			</Grid>
+			<Grid item xs={12} md={2}>
+				<Entrada texto="Cep" valor={cep} valorMudou={setCep} onKeyUp = {handleSearch} />
+			</Grid>
+			<Grid item xs={12} md={3}>
 				<Entrada
 					texto="Logradouro"
 					valor={logradouro}
 					valorMudou={setLogradouro}
-					className="col-span-2"
 				/>
-                <Entrada
-					texto="Bairro"
-					valor={bairro}
-					valorMudou={setBairro}
-					className="col-span-2"
-				/>
-                <Entrada
-					texto="Cidade"
-					valor={cidade}
-					valorMudou={setCidade}
-					className="col-span-2"
-				/>
-				<Entrada
-					texto="Estado"
-					valor={estado}
-					valorMudou={setEstado}
-					className="col-span-2"
-				/>
-			</div>
-			<div className="grid grid-cols-1 md:grid-cols-5">
-				<Entrada
-					texto="Número"
-					valor={numero}
-					valorMudou={setNumero}
-					className="col-span-2"
-					/>
+			</Grid>
+			<Grid item xs={12} md={3}>
+				<Entrada texto="Bairro" valor={bairro} valorMudou={setBairro} />
+			</Grid>
+			<Grid item xs={12} md={3}>
+				<Entrada texto="Cidade" valor={cidade} valorMudou={setCidade} />
+			</Grid>
+			<Grid item xs={12} md={2}>
+				<Entrada texto="UF" valor={estado} valorMudou={setEstado} />
+			</Grid>
+			<Grid item xs={12} md={2}>
+				<Entrada texto="Número" valor={numero} valorMudou={setNumero} />
+			</Grid>
+			<Grid item xs={12} md={3}>
 				<Entrada
 					texto="Complemento"
 					valor={complemento}
 					valorMudou={setComplemento}
-					className="col-span-2"
-					/>
-				<Entrada
-					texto="Obs"
-					valor={obs}
-					valorMudou={setObs}
-					className="col-span-2"
-					/>
-			</div>
-			<div className="grid grid-cols-1">
-				<div>
-					<table className="table-auto border border-gray-300 border-collapse">
-						<thead>
-							<tr>
-								<th className="px-4 py-2 border border-gray-300">CEP</th>
-								<th className="px-4 py-2 border border-gray-300">LOGRADOURO</th>
-								<th className="px-4 py-2 border border-gray-300">BAIRRO</th>
-								<th className="px-4 py-2 border border-gray-300">CIDADE</th>
-								<th className="px-4 py-2 border border-gray-300">ESTADO</th>
-								<th className="px-4 py-2 border border-gray-300">COMPLEMENTO</th>
-								<th className="px-4 py-2 border border-gray-300">OBS</th>
-							</tr>
-						</thead>
-						<tbody>
-							{enderecos.map((item, index) => (
-								<tr key={index}>
-									<td>{item.cep}</td>
-									<td>{item.logradouro}</td>
-									<td>{item.bairro}</td>
-									<td>{item.cidade}</td>
-									<td>{item.estado}</td>
-									<td>{item.complemento}</td>
-									<td>{item.obs}</td>
-								</tr>
-							))}
-							{enderecos.length === 0 && (
-								<tr key={1} >
-									<td colSpan={7}>Nenhum registro adicionado</td>
-								</tr>
-							)}
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div className="flex justify-end mt-4">
-				<Botao
-					cor="indigo-500"
-					className="mr-2"
+				/>
+			</Grid>
+			<Grid item xs={12}>
+				<Button
+					type="button"
+					variant="contained"
+					color="primary"
 					onClick={() => props.salvarCliente?.({ id, nome })}
 				>
 					{id ? "Alterar" : "Salvar"}
-				</Botao>
-				<Botao cor="red-600" onClick={props.exibirTabela}>
+				</Button>
+				<Button
+					type="button"
+					variant="contained"
+					color="error"
+					onClick={props.exibirTabela}
+				>
 					Voltar
-				</Botao>
-			</div>
-		</div>
+				</Button>
+			</Grid>
+		</Grid>
 	);
 }
