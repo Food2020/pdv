@@ -11,7 +11,7 @@ import {
 	UpdateUsuario,
 } from "../backend/bd/ResquestsUsuarios";
 
-export default function UseProduto() {
+export default function UseUsuario() {
 	const { usuario, setCarregando } = useAuth();
 
 	const {
@@ -60,16 +60,19 @@ export default function UseProduto() {
 	async function salvarUsuario({ id, nome, email, senha, cargo, ativo = 1 }) {
 		setCarregando(true);
 		id
-			? UpdateUsuario({ id, nome, email, senha, cargo, ativo }).then((resp) => {
+			? UpdateUsuario({ id, nome, email, senha, cargo, ativo })
+				.then((resp) => {
 					setCarregando(false);
 					obterTodos();
 			  })
-			: PostUsuario({ nome, email, senha, cargo, ativo } as any).then(
-					(resp) => {
+			: PostUsuario({ nome, email, senha, cargo, ativo } as any)
+				.then((resp) => {
 						setCarregando(false);
 						obterTodos();
-					}
-			  );
+					})
+				.catch((res) => {
+					return	console.log('err',res);
+						});
 	}
 
 	function novoUsuario() {
