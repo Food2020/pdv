@@ -1,4 +1,3 @@
-import { IMaskInput } from "react-imask";
 interface EntradaProps{
     tipo?: 'text' | 'number' | 'password' | 'email',
     texto: string,
@@ -10,7 +9,6 @@ interface EntradaProps{
 }
 
 export default function Entrada(props: EntradaProps){
-    
     return (
         <div>
             <div className = {`px-3 mb-4 ${props.className}`}>

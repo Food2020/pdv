@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Cliente from "../../../../core/Cliente";
 import { trataNull } from "../../../Util";
-import Botao from "../Botao";
 import Entrada from "../Entrada";
 import {
 	Button,
@@ -11,6 +10,7 @@ import {
 	TextField,
 	Typography,
 } from "@mui/material";
+import EntradaCpfCnpj from "../EntradaCpfCnpj";
 
 interface FormularioClienteProps {
 	cliente: Cliente;
@@ -90,7 +90,7 @@ export default function FormularioCliente(props) {
 				<Entrada texto="Tipo" valor={tipo} valorMudou={setTipo} />
 			</Grid>
 			<Grid item xs={12} md={3}>
-				<Entrada texto="CPF/CNPJ" valor={cpf} valorMudou={setCpf} />
+				<EntradaCpfCnpj texto="CPF/CNPJ" valor={cpf} valorMudou={setCpf} />
 			</Grid>
 			<Grid item xs={12} md={2}>
 				<Entrada texto="IE" valor={ie} valorMudou={setIe} />
