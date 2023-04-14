@@ -9,11 +9,10 @@ import Tabela from "../Tabela";
 import {renderizaSituacao, trataArrayNull} from "../../../Util"
 
 export default function TabelaUsuario(props){
-
+  const user = JSON.parse(props?.usuarios)
+ const dataUSer = Object.entries(user).map((user)=> {return user[1]})
   function renderizarAcoesTable({row}){
-      
-    const usuario = row.values;
-   
+    const usuario = row?.values;
     return (
         <div>
             { props.usuarioEditar ? (
@@ -54,8 +53,7 @@ export default function TabelaUsuario(props){
   }
 
   const flagExibeAcoes    = props.usuariooEditar || props.usuarioExcluir;
-  const Usuarios          = props.usuarios
-
+  const Usuarios          = dataUSer[0]
   const getData = () => {
     const data = trataArrayNull(Usuarios)
     return [...data]

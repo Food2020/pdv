@@ -33,17 +33,20 @@ export const renderizaLabelSelect = (valor, options) => {
 export const renderizaSituacao = (situacao) => {
 	return situacao === 1 ? "Ativo" : "Inativo";
 };
+
 export const trataArrayNull = (Array) => {
-	if (Array === null || !Array) {
-		return [];
-	} else {
-		return Array;
-	}
+	// if (Array === null || !Array) {
+	// 	return [];
+	// } else {
+	// 	return Array;
+	// }
+	return Array??[]
 };
 export const trataNull = (elem) => {
-	if (elem === null || !elem) {
-		return "";
-	} else {
-		return elem;
-	}
+	// if (elem === null || !elem) {
+	// 	return "";
+	// } else {
+	// 	return elem;
+	// }
+	return elem??""
 };

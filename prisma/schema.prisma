@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model bairros {
+  id        BigInt   @id @default(autoincrement())
+  nome      String   @db.VarChar(255)
+  ativo     Int
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model cancelamentos {
+  id        BigInt   @id @default(autoincrement())
+  motivo    String   @db.VarChar(255)
+  ativo     Int
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model cargos {
+  id        BigInt   @id @default(autoincrement())
+  nome      String   @db.VarChar(255)
+  ativo     Int
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model categoria {
+  id        BigInt   @id @default(autoincrement())
+  nome      String   @db.VarChar(255)
+  ativo     Int
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model clientes {
+  id        BigInt   @id @default(autoincrement())
+  nome      String   @db.VarChar(255)
+  ativo     Int
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model descontos {
+  id        BigInt   @id @default(autoincrement())
+  nome      String   @db.VarChar(255)
+  ativo     Int
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model forma_pagamentos {
+  id        BigInt   @id @default(autoincrement())
+  nome      String   @db.VarChar(255)
+  ativo     Int
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model products {
+  id        BigInt   @id @default(autoincrement())
+  nome      String   @db.VarChar(255)
+  codigo    String?  @db.VarChar(255)
+  unidade   String   @db.VarChar(255)
+  categoria String   @db.VarChar(255)
+  preco     Float
+  ativo     Int
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model taxa_entregas {
+  id        BigInt   @id @default(autoincrement())
+  nome      String   @db.VarChar(255)
+  valor     Float    @db.Float
+  ativo     Int
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model unidades {
+  id        BigInt   @id @default(autoincrement())
+  nome      String   @db.VarChar(255)
+  ativo     Int
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model usuarios {
+  id        BigInt   @id @default(autoincrement())
+  nome      String   @db.VarChar(255)
+  email     String   @db.VarChar(255)
+  senha     String   @db.VarChar(255)
+  cargo     String?  @db.VarChar(255)
+  ativo     Int
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
