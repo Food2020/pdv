@@ -11,6 +11,7 @@ import {
 	Typography,
 } from "@mui/material";
 import EntradaCpfCnpj from "../EntradaCpfCnpj";
+import EntradaCep from "../EntradaCep";
 
 interface FormularioClienteProps {
 	cliente: Cliente;
@@ -61,20 +62,12 @@ export default function FormularioCliente(props) {
 	);
 
 	const changeAddress = (data) => {
-		setLogradouro(data.logradouro)
-		setBairro(data.bairro)
-		setCidade(data.localidade)
-		setEstado(data.uf)
-	}
+		setLogradouro(data.logradouro);
+		setBairro(data.bairro);
+		setCidade(data.localidade);
+		setEstado(data.uf);
+	};
 
-	const handleSearch = () => {
-		if(cep.length === 8){
-			fetch(`https://viacep.com.br/ws/${cep}/json/`)
-			.then(response => response.json())
-			.then(data => changeAddress(data))
-			.catch(error => console.error(error));
-		}
-	  };
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={12}>
@@ -102,7 +95,11 @@ export default function FormularioCliente(props) {
 				<Divider textAlign="left">Endereço</Divider>
 			</Grid>
 			<Grid item xs={12} md={2}>
-				<Entrada texto="Cep" valor={cep} valorMudou={setCep} onKeyUp = {handleSearch} />
+				<EntradaCep
+					valor={cep}
+					valorMudou={setCep}
+					changeAddress={changeAddress}
+				/>
 			</Grid>
 			<Grid item xs={12} md={3}>
 				<Entrada
