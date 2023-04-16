@@ -7,6 +7,7 @@ import React from 'react'
 import SelectColumnFilter from '../../SelectColumnFilter'
 import Tabela from "../Tabela";
 import {renderizaSituacao, trataArrayNull} from "../../../Util"
+import { Tooltip } from "@mui/material";
 
 export default function TabelaCategoria(props){
 
@@ -16,18 +17,21 @@ export default function TabelaCategoria(props){
    
     return (
         <div>
-            { props.categoriaEditar ? (
-                <button onClick = {() => props.categoriaEditar(categoria)} className = {`
+            { props.categoriaEditar && (
+                <Tooltip title="Editar" placement="top">
+                  <button  onClick = {() => props.categoriaEditar(categoria)} className = {`
                     text-green-500
                     rounded-full
                     hover:bg-purple-50 
                     p-3
-                `}>
+                    `}>
                     { IconeEdicao }
                 </button>
-            ) : false 
+                </Tooltip>
+            ) 
             }
-            { props.categoriaExcluir ? (
+            { props.categoriaExcluir && (
+              <Tooltip title="Excluir" placement="top">
                     <button onClick = {() => props.categoriaExcluir(categoria)} className = {`
                         text-red-600
                         rounded-full
@@ -36,9 +40,11 @@ export default function TabelaCategoria(props){
                     `}>
                     { IconeLixo }
                     </button>
-                ) : false
+                    </Tooltip>
+                ) 
             }
-            { props.categoriaDuplicar ? (
+            { props.categoriaDuplicar && (
+              <Tooltip title="Duplicar" placement="top">
                     <button onClick = {() => props.categoriaDuplicar(categoria)} className = {`
                         text-black
                         rounded-full
@@ -47,7 +53,8 @@ export default function TabelaCategoria(props){
                     `}>
                     { IconeDuplicar }
                     </button>
-                ) : false
+                    </Tooltip>
+                ) 
             }
         </div>
     )

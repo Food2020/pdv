@@ -7,6 +7,7 @@ import React from 'react'
 import SelectColumnFilter from '../../SelectColumnFilter'
 import Tabela from "../Tabela";
 import {renderizaSituacao, trataArrayNull} from "../../../Util"
+import { Tooltip } from "@mui/material";
 
 export default function TabelaCliente(props){
 
@@ -16,7 +17,8 @@ export default function TabelaCliente(props){
    
     return (
         <div>
-            { props.clienteEditar ? (
+            { props.clienteEditar && (
+              <Tooltip title="Editar" placement="top">
                 <button onClick = {() => props.clienteEditar(cliente)} className = {`
                     text-green-500
                     rounded-full
@@ -25,9 +27,11 @@ export default function TabelaCliente(props){
                 `}>
                     { IconeEdicao }
                 </button>
-            ) : false 
+                </Tooltip>
+            ) 
             }
-            { props.clienteExcluir ? (
+            { props.clienteExcluir && (
+              <Tooltip title='Excluir' placement="top">
                     <button onClick = {() => props.clienteExcluir(cliente)} className = {`
                         text-red-600
                         rounded-full
@@ -36,9 +40,11 @@ export default function TabelaCliente(props){
                     `}>
                     { IconeLixo }
                     </button>
-                ) : false
+                    </Tooltip>
+                ) 
             }
-            { props.clienteDuplicar ? (
+            { props.clienteDuplicar && (
+              <Tooltip title="Duplicar" placement="top">
                     <button onClick = {() => props.clienteDuplicar(cliente)} className = {`
                         text-black
                         rounded-full
@@ -47,7 +53,8 @@ export default function TabelaCliente(props){
                     `}>
                     { IconeDuplicar }
                     </button>
-                ) : false
+                    </Tooltip>
+                ) 
             }
         </div>
     )
