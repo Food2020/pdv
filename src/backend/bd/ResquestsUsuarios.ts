@@ -1,7 +1,7 @@
 import { json } from "stream/consumers";
 import { Alert } from "flowbite-react";
 
-const url = "http://pdvfood.kinghost.net:21012/api/usuario";
+const url = "/api/usuario";
 
 export async function PostUsuario({ nome, email, senha, cargo }) {
 	let data = {
@@ -11,7 +11,7 @@ export async function PostUsuario({ nome, email, senha, cargo }) {
 		cargo,
 		ativo: 1,
 	};
-	return fetch('/api/usuario/test', {
+	return fetch(url, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -19,13 +19,13 @@ export async function PostUsuario({ nome, email, senha, cargo }) {
 		body: JSON.stringify(data),
 	})
 		.then((response) => response)
-		.catch(() => {
-			alert("Erro ao cadastrar Usuario!");
+		.catch((response) => {
+			return response.status.jso({message:'Erro ao cadastrar Usuario!'});
 		});
 }
 
 export async function GetUsuario() {
-	return fetch('/api/usuario/test', {
+	return fetch(url, {
 		method: "GET",
 		headers: {
 			"Content-Type": "application/json",
@@ -46,7 +46,7 @@ export async function UpdateUsuario({ id, nome, email, senha, cargo, ativo }) {
 		cargo,
 		ativo,
 	};
-	return await fetch(`/api/usuario/test`, {
+	return await fetch(url, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -63,7 +63,7 @@ export async function ExcluirUsuario(id) {
 	let data = {
 		id
 	};
-	return await fetch(`/api/usuario/test`, {
+	return await fetch(url, {
 		method: "DELETE",
 		headers: {
 			"Content-Type": "application/json",
