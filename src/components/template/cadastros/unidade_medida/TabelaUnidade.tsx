@@ -7,6 +7,7 @@ import React from 'react'
 import SelectColumnFilter from '../../SelectColumnFilter'
 import Tabela from "../Tabela";
 import {renderizaSituacao, trataArrayNull} from "../../../Util"
+import { Tooltip } from "@mui/material";
 
 export default function TabelaUnidade(props){
 
@@ -15,8 +16,9 @@ export default function TabelaUnidade(props){
    
     return (
         <div>
-            { props.unidadeEditar ? (
-                <button onClick = {() => props.unidadeEditar(unidade)} className = {`
+            { props.unidadeEditar && (
+               <Tooltip title="Editar" placement="top">
+                 <button onClick = {() => props.unidadeEditar(unidade)} className = {`
                     text-green-500
                     rounded-full
                     hover:bg-purple-50 
@@ -24,10 +26,12 @@ export default function TabelaUnidade(props){
                 `}>
                     { IconeEdicao }
                 </button>
-            ) : false 
+               </Tooltip>
+            )  
             }
-            { props.unidadeExcluir ? (
-                    <button onClick = {() => props.unidadeExcluir(unidade)} className = {`
+            { props.unidadeExcluir && (
+                    <Tooltip title="Excluir" placement="top">
+                      <button onClick = {() => props.unidadeExcluir(unidade)} className = {`
                         text-red-600
                         rounded-full
                         hover:bg-purple-50 
@@ -35,10 +39,12 @@ export default function TabelaUnidade(props){
                     `}>
                     { IconeLixo }
                     </button>
-                ) : false
+                    </Tooltip>
+                ) 
             }
-            { props.unidadeDuplicar ? (
-                    <button onClick = {() => props.unidadeDuplicar(unidade)} className = {`
+            { props.unidadeDuplicar && (
+                    <Tooltip title="Duplicar" placement="top">
+                      <button onClick = {() => props.unidadeDuplicar(unidade)} className = {`
                         text-black
                         rounded-full
                         hover:bg-purple-50 
@@ -46,7 +52,8 @@ export default function TabelaUnidade(props){
                     `}>
                     { IconeDuplicar }
                     </button>
-                ) : false
+                    </Tooltip>
+                ) 
             }
         </div>
     )

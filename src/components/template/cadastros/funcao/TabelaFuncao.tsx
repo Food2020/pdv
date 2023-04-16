@@ -7,6 +7,7 @@ import React from 'react'
 import SelectColumnFilter from '../../SelectColumnFilter'
 import Tabela from "../Tabela";
 import {renderizaSituacao, trataArrayNull} from "../../../Util"
+import { Tooltip } from "@mui/material";
 
 export default function TabelaFuncao(props){
 
@@ -16,7 +17,8 @@ export default function TabelaFuncao(props){
    
     return (
         <div>
-            { props.funcaoEditar ? (
+            { props.funcaoEditar && (
+              <Tooltip title="Editar" placement="top">
                 <button onClick = {() => props.funcaoEditar(funcao)} className = {`
                     text-green-500
                     rounded-full
@@ -25,9 +27,12 @@ export default function TabelaFuncao(props){
                 `}>
                     { IconeEdicao }
                 </button>
-            ) : false 
+                </Tooltip>
+            ) 
             }
-            { props.funcaoExcluir ? (
+            { props.funcaoExcluir && (
+              <Tooltip title="Excluir" placement="top">
+
                     <button onClick = {() => props.funcaoExcluir(funcao)} className = {`
                         text-red-600
                         rounded-full
@@ -36,9 +41,12 @@ export default function TabelaFuncao(props){
                     `}>
                     { IconeLixo }
                     </button>
-                ) : false
+                    </Tooltip>
+                ) 
             }
-            { props.funcaoDuplicar ? (
+            { props.funcaoDuplicar && (
+              <Tooltip title="Duplicar" placement="top">
+
                     <button onClick = {() => props.funcaoDuplicar(funcao)} className = {`
                         text-black
                         rounded-full
@@ -47,7 +55,8 @@ export default function TabelaFuncao(props){
                     `}>
                     { IconeDuplicar }
                     </button>
-                ) : false
+                    </Tooltip>
+                ) 
             }
         </div>
     )

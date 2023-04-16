@@ -9,6 +9,7 @@ import {
 	trataArrayNull,
 	renderizaSituacao
 } from "../../../Util";
+import { Tooltip } from "@mui/material";
 
 export default function TabelaProduto(props) {
 	function renderizarAcoesTable({ row }) {
@@ -16,8 +17,9 @@ export default function TabelaProduto(props) {
 
 		return (
 			<div>
-				{props.produtoEditar ? (
-					<button
+				{props.produtoEditar && (
+					<Tooltip title="Editar" placement="top">
+						<button
 						onClick={() => props.produtoEditar(produto)}
 						className={`
                     text-green-500
@@ -28,11 +30,13 @@ export default function TabelaProduto(props) {
 					>
 						{IconeEdicao}
 					</button>
-				) : (
-					false
-				)}
-				{props.produtoExcluir ? (
-					<button
+					</Tooltip>
+				) 
+				}
+				{props.produtoExcluir && (
+					
+					<Tooltip title="Excluir" placement="top">
+						<button
 						onClick={() => props.produtoExcluir(produto)}
 						className={`
                         text-red-600
@@ -43,11 +47,11 @@ export default function TabelaProduto(props) {
 					>
 						{IconeLixo}
 					</button>
-				) : (
-					false
-				)}
-				{props.produtoDuplicar ? (
-					<button
+					</Tooltip>
+				) }
+				{props.produtoDuplicar &&(
+					<Tooltip title="Duplicar" placement="top">
+						<button
 						onClick={() => props.produtoDuplicar(produto)}
 						className={`
                         text-black
@@ -58,9 +62,8 @@ export default function TabelaProduto(props) {
 					>
 						{IconeDuplicar}
 					</button>
-				) : (
-					false
-				)}
+					</Tooltip>
+				) }
 			</div>
 		);
 	}

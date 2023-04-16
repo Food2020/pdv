@@ -7,15 +7,16 @@ import React from 'react'
 import SelectColumnFilter from '../../SelectColumnFilter'
 import Tabela from "../Tabela";
 import {renderizaSituacao, trataArrayNull} from "../../../Util"
-
+import { Tooltip } from "@mui/material";
 export default function TabelaUsuario(props){
  
   function renderizarAcoesTable({row}){
     const usuario = row?.values;
     return (
         <div>
-            { props.usuarioEditar ? (
-                <button title="Editar" onClick = {() => props.usuarioEditar(usuario)} className = {`
+            { props.usuarioEditar && (
+              <Tooltip title="Editar" arrow placement="top">
+                <button  onClick = {() => props.usuarioEditar(usuario)} className = {`
                     text-green-500
                     rounded-full
                     hover:bg-purple-50 
@@ -23,10 +24,12 @@ export default function TabelaUsuario(props){
                 `}>
                     { IconeEdicao }
                 </button>
-            ) : false 
+              </Tooltip>
+            ) 
             }
-            { props.usuarioExcluir ? (
-                    <button title="excluir" onClick = {() => props.usuarioExcluir(usuario)} className = {`
+            { props.usuarioExcluir && (
+              <Tooltip title="Excluir" arrow placement="top">
+                    <button onClick = {() => props.usuarioExcluir(usuario)} className = {`
                         text-red-600
                         rounded-full
                         hover:bg-purple-50 
@@ -34,10 +37,12 @@ export default function TabelaUsuario(props){
                     `}>
                     { IconeLixo }
                     </button>
-                ) : false
+                </Tooltip>
+                ) 
             }
-            { props.usuarioDuplicar ? (
-                    <button title="Duplicar" onClick = {() => props.usuarioDuplicar(usuario)} className = {`
+            { props.usuarioDuplicar &&  (
+              <Tooltip title="Duplicar" arrow placement="top">
+                    <button  onClick = {() => props.usuarioDuplicar(usuario)} className = {`
                         text-black
                         rounded-full
                         hover:bg-purple-50 
@@ -45,7 +50,8 @@ export default function TabelaUsuario(props){
                     `}>
                     { IconeDuplicar }
                     </button>
-                ) : false
+                </Tooltip>
+                ) 
             }
         </div>
     )

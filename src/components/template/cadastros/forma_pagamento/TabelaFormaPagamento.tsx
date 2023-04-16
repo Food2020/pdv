@@ -7,6 +7,7 @@ import React from 'react'
 import SelectColumnFilter from '../../SelectColumnFilter'
 import Tabela from "../Tabela";
 import {renderizaSituacao, trataArrayNull} from "../../../Util"
+import { Tooltip } from "@mui/material";
 
 export default function TabelaFormaPagamento(props){
 
@@ -16,8 +17,9 @@ export default function TabelaFormaPagamento(props){
    
     return (
         <div>
-            { props.formaPagamentoEditar ? (
-                <button onClick = {() => props.formaPagamentoEditar(formaPagamento)} className = {`
+            { props.formaPagamentoEditar && (
+                <Tooltip title="Editar" placement="top">
+                  <button onClick = {() => props.formaPagamentoEditar(formaPagamento)} className = {`
                     text-green-500
                     rounded-full
                     hover:bg-purple-50 
@@ -25,9 +27,11 @@ export default function TabelaFormaPagamento(props){
                 `}>
                     { IconeEdicao }
                 </button>
-            ) : false 
+                </Tooltip>
+            ) 
             }
-            { props.formaPagamentoExcluir ? (
+            { props.formaPagamentoExcluir && (
+               <Tooltip title="Excluir" placement="top">
                     <button onClick = {() => props.formaPagamentoExcluir(formaPagamento)} className = {`
                         text-red-600
                         rounded-full
@@ -36,9 +40,12 @@ export default function TabelaFormaPagamento(props){
                     `}>
                     { IconeLixo }
                     </button>
-                ) : false
+                </Tooltip>
+                )
             }
-            { props.formaPagamentoDuplicar ? (
+            { props.formaPagamentoDuplicar && (
+               <Tooltip title="Duplicar" placement="top">
+              
                     <button onClick = {() => props.formaPagamentoDuplicar(formaPagamento)} className = {`
                         text-black
                         rounded-full
@@ -47,7 +54,8 @@ export default function TabelaFormaPagamento(props){
                     `}>
                     { IconeDuplicar }
                     </button>
-                ) : false
+                    </Tooltip>
+                ) 
             }
         </div>
     )
