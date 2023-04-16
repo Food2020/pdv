@@ -11,7 +11,8 @@ export async function PostUsuario({ nome, email, senha, cargo }) {
 		cargo,
 		ativo: 1,
 	};
-	return fetch(url, {
+	console.log(data)
+	return fetch('http://localhost:3000/api/usuario/create', {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
