@@ -9,14 +9,13 @@ import Tabela from "../Tabela";
 import {renderizaSituacao, trataArrayNull} from "../../../Util"
 
 export default function TabelaUsuario(props){
-  const user = JSON.parse(props?.usuarios)
- const dataUSer = Object.entries(user).map((user)=> {return user[1]})
+ 
   function renderizarAcoesTable({row}){
     const usuario = row?.values;
     return (
         <div>
             { props.usuarioEditar ? (
-                <button onClick = {() => props.usuarioEditar(usuario)} className = {`
+                <button title="Editar" onClick = {() => props.usuarioEditar(usuario)} className = {`
                     text-green-500
                     rounded-full
                     hover:bg-purple-50 
@@ -27,7 +26,7 @@ export default function TabelaUsuario(props){
             ) : false 
             }
             { props.usuarioExcluir ? (
-                    <button onClick = {() => props.usuarioExcluir(usuario)} className = {`
+                    <button title="excluir" onClick = {() => props.usuarioExcluir(usuario)} className = {`
                         text-red-600
                         rounded-full
                         hover:bg-purple-50 
@@ -38,7 +37,7 @@ export default function TabelaUsuario(props){
                 ) : false
             }
             { props.usuarioDuplicar ? (
-                    <button onClick = {() => props.usuarioDuplicar(usuario)} className = {`
+                    <button title="Duplicar" onClick = {() => props.usuarioDuplicar(usuario)} className = {`
                         text-black
                         rounded-full
                         hover:bg-purple-50 
@@ -53,7 +52,7 @@ export default function TabelaUsuario(props){
   }
 
   const flagExibeAcoes    = props.usuariooEditar || props.usuarioExcluir;
-  const Usuarios          = dataUSer[0]
+  const Usuarios          = props?.usuarios?.json
   const getData = () => {
     const data = trataArrayNull(Usuarios)
     return [...data]
