@@ -11,8 +11,7 @@ export async function PostUsuario({ nome, email, senha, cargo }) {
 		cargo,
 		ativo: 1,
 	};
-	console.log(data)
-	return fetch('http://localhost:3000/api/usuario/create', {
+	return fetch('/api/usuario/test', {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -26,7 +25,7 @@ export async function PostUsuario({ nome, email, senha, cargo }) {
 }
 
 export async function GetUsuario() {
-	return fetch(url, {
+	return fetch('/api/usuario/test', {
 		method: "GET",
 		headers: {
 			"Content-Type": "application/json",
@@ -40,13 +39,14 @@ export async function GetUsuario() {
 
 export async function UpdateUsuario({ id, nome, email, senha, cargo, ativo }) {
 	let data = {
+		id,
 		nome,
 		email,
 		senha,
 		cargo,
 		ativo,
 	};
-	return fetch(`${url}/${id}`, {
+	return await fetch(`/api/usuario/test`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -60,10 +60,17 @@ export async function UpdateUsuario({ id, nome, email, senha, cargo, ativo }) {
 }
 
 export async function ExcluirUsuario(id) {
-	return fetch(`${url}/${id}`, {
+	let data = {
+		id
+	};
+	return await fetch(`/api/usuario/test`, {
 		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(data),
 	})
-		.then((data) => data.json())
+		.then((data) => data)
 		.catch(() => {
 			alert("Erro ao deletar usuario !");
 		});
@@ -75,7 +82,7 @@ export async function checkUser(email, senha) {
 		senha,
 	};
 
-	return fetch(`${url}/login`, {
+	return  fetch(`${url}/login`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

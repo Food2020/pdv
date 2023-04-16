@@ -6,13 +6,8 @@ import Usuario from "../../core/Usuario";
 import UseUsuario from "../../hooks/UseUsuario";
 import Botao from "../../components/template/cadastros/Botao";
 import { prisma } from "../../lib/prisma";
-import { useState } from "react";
-import { usuarios } from "@prisma/client";
-import { type } from "os";
-import { GetServerSideProps } from "next";
-import superjson from 'superjson';
 
-export default function telaUsuario({usuarios}) {
+export default function telaUsuario() {
 	const {
 		exibirTabela,
 		tabelaVisivel,
@@ -46,7 +41,7 @@ export default function telaUsuario({usuarios}) {
 							</Botao>
 						</div>
 						<TabelaUsuario
-							usuarios={usuarios}
+							usuarios={Usuarios}
 							usuarioEditar={editarUsuario}
 							usuarioExcluir={excluirUsuario}
 							usuarioDuplicar={duplicarUsuario}
@@ -69,12 +64,4 @@ export default function telaUsuario({usuarios}) {
 			</LayoutCadastros>
 		</Layout>
 	);
-}
-export const getServerSideProps: GetServerSideProps = async()=>{
-	
-	const usuario = await prisma.usuarios.findMany();
-	const usuarios = superjson.stringify(usuario)
-	return {
-		props: {usuarios},
-	}
 }
