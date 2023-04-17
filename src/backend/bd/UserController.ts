@@ -9,7 +9,14 @@ export default class UserController {
     }
     async get(){
         try{
-            return this.prisma.usuarios.findMany();
+            return this.prisma.usuarios.findMany({
+                select:{
+                    nome:true,
+                    email:true,
+                    cargo:true,
+                    ativo:true
+                }
+            });
         }catch(e){
             return e
         }
@@ -58,6 +65,19 @@ export default class UserController {
             }})
         }catch(e){
             return e;
+        }
+    }
+
+    async login(data:usuarios){
+        try{
+           return this.prisma.usuarios.findFirst({
+                where:{
+                    email:data.email,
+                }
+            });
+        }
+        catch(e){
+            return e
         }
     }
 }
