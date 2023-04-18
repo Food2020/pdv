@@ -67,8 +67,8 @@ export default function TabelaProduto(props) {
 			</div>
 		);
 	}
-	const flagExibeAcoes = props.produtoEditar || props.produtoExcluir;
-	const Produtos = props.produtos;
+	const flagExibeAcoes = props?.produtoEditar || props?.produtoExcluir;
+	const Produtos = props?.produtos?.json;
 
 	const getData = () => {
 		const data = trataArrayNull(Produtos);
