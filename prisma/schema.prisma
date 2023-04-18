@@ -10,6 +10,7 @@ datasource db {
 model bairros {
   id        BigInt   @id @default(autoincrement())
   nome      String   @db.VarChar(255)
+  regiao    String   @db.VarChar(50)
   ativo     Int
   createdAt DateTime @db.DateTime(0)
   updatedAt DateTime @db.DateTime(0)
@@ -42,6 +43,12 @@ model categoria {
 model clientes {
   id        BigInt   @id @default(autoincrement())
   nome      String   @db.VarChar(255)
+  fone      String   @db.VarChar(11)
+  cep       String   @db.VarChar(11)
+  endereco  String   @db.VarChar(50)
+  numero    String   @db.VarChar(11)
+  cpf       String   @db.VarChar(50)
+  cnpj      String   @db.VarChar(50)
   ativo     Int
   createdAt DateTime @db.DateTime(0)
   updatedAt DateTime @db.DateTime(0)
@@ -64,15 +71,16 @@ model forma_pagamentos {
 }
 
 model products {
-  id        BigInt   @id @default(autoincrement())
-  nome      String   @db.VarChar(255)
-  codigo    String?  @db.VarChar(255)
-  unidade   String   @db.VarChar(255)
-  categoria String   @db.VarChar(255)
-  preco     Float
-  ativo     Int
-  createdAt DateTime @db.DateTime(0)
-  updatedAt DateTime @db.DateTime(0)
+  id         BigInt   @id @default(autoincrement())
+  nome       String   @db.VarChar(255)
+  codigo     String?  @db.VarChar(255)
+  unidade    String   @db.VarChar(255)
+  categoria  String   @db.VarChar(255)
+  cod_barras String   @db.VarChar(255)
+  preco      Float
+  ativo      Int
+  createdAt  DateTime @db.DateTime(0)
+  updatedAt  DateTime @db.DateTime(0)
 }
 
 model taxa_entregas {
