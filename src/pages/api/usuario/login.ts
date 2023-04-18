@@ -1,4 +1,4 @@
-import UserController from "../../../backend/bd/UserController"
+import UserController from "../../../backend/bd/Controller/UserController"
 import SuperJSON from "superjson";
 const bcrypt = require("bcryptjs");
 
