@@ -69,7 +69,6 @@ export default function TabelaProduto(props) {
 	}
 	const flagExibeAcoes = props?.produtoEditar || props?.produtoExcluir;
 	const Produtos = props?.produtos?.json;
-
 	const getData = () => {
 		const data = trataArrayNull(Produtos);
 		return [...data];
@@ -88,6 +87,10 @@ export default function TabelaProduto(props) {
 		{
 			Header: "Nome",
 			accessor: "nome",
+		},
+		{
+			Header: "Cod. Barra",
+			accessor: "codigoBarra",
 		},
 		{
 			Header: "Categoria",

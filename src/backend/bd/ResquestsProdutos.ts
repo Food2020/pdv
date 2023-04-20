@@ -4,14 +4,15 @@ import SuperJSON from "superjson";
 
 const url = "/api/produto/";
 
-export async function PostProduto({ codigo, nome, preco, categoria, unidade }) {
+export async function PostProduto({ ativo = 1,categoria,codigo,codigoBarra, nome, preco,  unidade }) {
 	let data = {
-		nome: nome,
-		preco: preco,
-		codigo: codigo,
-		categoria: categoria,
-		unidade: unidade,
-		ativo: 1,
+		nome,
+		preco,
+		codigo,
+		codigoBarra,
+		categoria,
+		unidade,
+		ativo,
 	};
 	return fetch(url, {
 		method: "POST",
@@ -40,20 +41,24 @@ export async function GetProduto() {
 }
 
 export async function UpdateProduto({
-	id,
+	ativo = 1,
+	categoria,
 	codigo,
+	codigoBarra,
+	id,
 	nome,
 	preco,
-	categoria,
 	unidade,
 }) {
 	let data = {
-		id:id,
-		nome: nome,
-		preco: preco,
-		codigo: codigo,
-		categoria: categoria,
-		unidade: unidade,
+		ativo,
+		id,
+		nome,
+		preco,
+		codigo,
+		codigoBarra,
+		categoria,
+		unidade,
 	};
 	return fetch(url, {
 		method: "PUT",

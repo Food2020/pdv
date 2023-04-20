@@ -28,7 +28,6 @@ export default async function handler(req,res){
 
        }
 
-       console.log(data.senha.toString()," ",usuarioLogado.json.senha.toString())
 
        if(!(await bcrypt.compare(data?.senha.toString(),usuarioLogado?.json?.senha.toString()))){
 

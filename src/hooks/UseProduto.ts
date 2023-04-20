@@ -57,16 +57,16 @@ export default function UseProduto() {
 		exibirFormulario();
 	}
 
-	async function salvarProduto(id, codigo, nome, preco, categoria, unidade) {
+	async function salvarProduto(id, codigo,codigoBarra, nome, preco, categoria, unidade) {
 		setCarregando(true);
 		id
-			? UpdateProduto({ id, codigo, nome, preco, categoria, unidade }).then(
+			? UpdateProduto({ id, codigo,codigoBarra, nome, preco, categoria, unidade }).then(
 					(resp) => {
 						setCarregando(false);
 						obterTodos();
 					}
 			  )
-			: PostProduto({ codigo, nome, preco, categoria, unidade }).then(
+			: PostProduto({ codigo, nome,codigoBarra, preco, categoria, unidade }).then(
 					(resp) => {
 						setCarregando(false);
 						obterTodos();

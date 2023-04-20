@@ -1,12 +1,12 @@
 import ProductController from "../../../backend/bd/Controller/ProductController"
 import SuperJSON from "superjson";
-import { usuarios } from "@prisma/client";
+import { products } from "@prisma/client";
 
 export default async  function handler(req, res) {
     const productController = new ProductController();
  
     if(req.method === "POST"){
-        const produto = req.body;
+      const produto = req.body;
         const produtoCadastrado =  await saveProduct(productController,produto)
         try{
           return res.status(200).json(produtoCadastrado);
@@ -21,6 +21,7 @@ export default async  function handler(req, res) {
     }
 
     if(req.method === "PUT"){
+      
       const data = JSON.parse(JSON.stringify(req.body));
       const produto = await updateProduct(productController,data)
       return res.status(200).json({"produto":produto});
@@ -48,7 +49,7 @@ export default async  function handler(req, res) {
     return await productController.get();
   }
 
-  async function updateProduct(productController,data:usuarios){
+  async function updateProduct(productController,data:products){
     return await productController.update(data);
   }
 

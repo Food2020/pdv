@@ -71,16 +71,16 @@ model forma_pagamentos {
 }
 
 model products {
-  id         Int      @id @default(autoincrement())
-  nome       String   @db.VarChar(255)
-  codigo     String?  @db.VarChar(255)
-  unidade    String   @db.VarChar(255)
-  categoria  String   @db.VarChar(255)
-  cod_barras String   @db.VarChar(255)
-  preco      Float
-  ativo      Int
-  createdAt  DateTime @db.DateTime(0)
-  updatedAt  DateTime @db.DateTime(0)
+  id          Int      @id @default(autoincrement())
+  nome        String   @db.VarChar(255)
+  codigo      String?  @db.VarChar(255)
+  unidade     String   @db.VarChar(255)
+  categoria   String   @db.VarChar(255)
+  codigoBarra String   @db.VarChar(255)
+  preco       Float
+  ativo       Int
+  createdAt   DateTime @db.DateTime(0)
+  updatedAt   DateTime @db.DateTime(0)
 }
 
 model taxa_entregas {

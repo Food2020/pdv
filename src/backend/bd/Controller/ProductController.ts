@@ -19,25 +19,27 @@ export default class UserController {
         try{
            const produto = this.prisma.products.create({
                 data:{
-                   nome:data.nome.toString(),
-                   preco:Number(data.preco),
-                   codigo:data.codigo.toString(),
-                   categoria:data.categoria.toString(),
-                    unidade:data.unidade.toString(),
                     ativo:Number(data.ativo),
                     createdAt:new Date(),
-                    updatedAt:new Date()
+                    unidade:data.unidade.toString(),
+                    updatedAt:new Date(),
+                   categoria:data.categoria.toString(),
+                   codigo:data.codigo.toString(),
+                   codigoBarra:data.codigoBarra,
+                   nome:data.nome.toString(),
+                   preco:Number(data.preco)
                 }
             })
             return SuperJSON.stringify({
+                ativo:(await produto).ativo,
+                categoria:(await produto).categoria,
+                codigo:(await produto).codigo,
+                codigoBarra:(await produto).codigoBarra,    
+                createdAt:(await produto).createdAt,
                 id:(await produto).id,
                 nome:(await produto).nome,
                 preco:(await produto).preco,
-                codigo:(await produto).codigo,
-                categoria:(await produto).categoria,
-                unidade:(await produto).unidade,
-                ativo:(await produto).ativo,
-                createdAt:(await produto).createdAt
+                unidade:(await produto).unidade
             });
         }catch(e){
             return e;
@@ -55,6 +57,7 @@ export default class UserController {
                     nome:data.nome,
                     preco:Number(data.preco),
                     codigo:data.codigo.toString(),
+                    codigoBarra:data.codigoBarra,
                     categoria:data.categoria.toString(),
                     unidade:data.unidade.toString(),
                     ativo:Number(1),
@@ -66,6 +69,7 @@ export default class UserController {
             nome:(await produto).nome,
             preco:(await produto).preco,
             codigo:(await produto).codigo,
+            codigoBarra:(await produto).codigoBarra,
             categoria:(await produto).categoria,
             unidade:(await produto).unidade,
             ativo:(await produto).ativo,
