@@ -61,7 +61,7 @@ export default function TabelaCategoria(props){
   }
 
   const flagExibeAcoes    = props.categoriaEditar || props.categoriaExcluir;
-  const Categorias          = props.categorias
+  const Categorias          = props.categorias.json
 
   const getData = () => {
     const data = trataArrayNull(Categorias)

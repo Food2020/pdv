@@ -1,7 +1,7 @@
 import { json } from "stream/consumers";
 import { Alert } from "flowbite-react";
 
-const url = "http://pdvfood.kinghost.net:21012/api/categoria";
+const url = "/api/categoria/";
 
 export async function PostCategoria({ nome }) {
 	let data = {
@@ -34,11 +34,13 @@ export async function GetCategoria() {
 		});
 }
 
-export async function UpdateCategoria({ id, nome }) {
+export async function UpdateCategoria({ id, nome ,ativo =1}) {
 	let data = {
+		id:id,
 		nome: nome,
+		ativo:ativo
 	};
-	return fetch(`${url}/${id}`, {
+	return fetch(url, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -52,8 +54,16 @@ export async function UpdateCategoria({ id, nome }) {
 }
 
 export async function ExcluirCategoria(id) {
-	return fetch(`${url}/${id}`, {
+	let data = {
+		id:id
+	};
+	return fetch(url, {
 		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(data),
+
 	})
 		.then((data) => data.json())
 		.catch(() => {
