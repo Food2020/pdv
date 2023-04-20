@@ -28,6 +28,9 @@ export default function FormularioProduto(props) {
 	const [preco, setPreco] = useState(
 		(props.produto?.preco || props.produtoDup?.preco) ?? 0
 	);
+	const [codigoBarra, setcodigoBarra] = useState(
+		(props.produto?.codigoBarra || props.produtoDup?.codigoBarra) ?? ''
+	);
 
 	return (
 		<>
@@ -53,6 +56,13 @@ export default function FormularioProduto(props) {
 					valor={nome}
 					valorMudou={setNome}
 					className="col-span-12"
+				/>
+				<Entrada
+					texto="Cod. de Barra"
+					valor={codigoBarra}
+					valorMudou={setcodigoBarra}
+					tipo="text"
+					className="col-span-4"
 				/>
 				<Entrada
 					texto="Preço"
@@ -86,6 +96,7 @@ export default function FormularioProduto(props) {
 						props.salvarProduto?.(
 							id,
 							codigo,
+							codigoBarra,
 							nome,
 							preco,
 							categoria,
