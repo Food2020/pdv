@@ -24,12 +24,21 @@ export default class UserController {
     }
     async create(data:Omit<usuarios,'id'>){
         try{
-           return this.prisma.usuarios.create({
+           const usuario = this.prisma.usuarios.create({
                 data:{
                     ...data,
                     createdAt:new Date(),
                     updatedAt:new Date()
                 }as any
+            })
+            return SuperJSON.stringify({
+                id:(await usuario).id,
+                nome:(await usuario).nome,
+                email:(await usuario).email,
+                cargo:(await usuario).cargo,
+                ativo:(await usuario).ativo,
+                ceatedAt:(await usuario).createdAt,
+                updatedAt:(await usuario).updatedAt
             })
         }catch(e){
             return e;
