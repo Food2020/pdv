@@ -71,7 +71,7 @@ model forma_pagamentos {
 }
 
 model products {
-  id         BigInt   @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   nome       String   @db.VarChar(255)
   codigo     String?  @db.VarChar(255)
   unidade    String   @db.VarChar(255)

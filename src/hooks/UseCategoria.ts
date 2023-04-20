@@ -33,7 +33,9 @@ export default function useCategoria() {
 
 	const obterTodos = useCallback(() => {
 		setCarregando(true);
-		GetCategoria().then((categoria) => {
+		GetCategoria()
+		.then((categoria) => {
+
 			setCategorias(categoria);
 			setCategoriasOptions(ArrayToOption(categoria));
 			exibirTabela();
@@ -46,7 +48,7 @@ export default function useCategoria() {
 	}, []);
 
 	function ArrayToOption(categoria) {
-		let categoriasOptions = categoria.map((categoria) => {
+		let categoriasOptions = categoria.json.map((categoria) => {
 			let properties = {
 				value: categoria.id,
 				label: categoria.nome,
