@@ -1,15 +1,16 @@
 import UserController from "../../../backend/bd/Controller/UserController"
 import SuperJSON from "superjson";
+import { usuarios } from "@prisma/client";
 const bcrypt = require("bcryptjs");
 
 export default async  function handler(req, res) {
     const userController = new UserController();
  
     if(req.method === "POST"){
-        const {senha,...user} = req.body;
+        let {senha,...user} = req.body;
         const salt = await bcrypt.genSalt(8);
-        const senhaHash = await bcrypt.hash(senha.toString(),salt);
-        const usuarioCad = {...user,senhaHash}
+         senha = await bcrypt.hash(senha.toString(),salt);
+        const usuarioCad = {...user,senha}
         const usuario =  await saveUser(userController,usuarioCad);
         res.status(200).json(usuario);
     }
@@ -34,7 +35,7 @@ export default async  function handler(req, res) {
 
   }
 
-  async function saveUser(userController,data){
+  async function saveUser(userController,data:usuarios){
     return await userController.create(data);
   }
   
@@ -43,10 +44,10 @@ export default async  function handler(req, res) {
     return await userController.get();
   }
 
-  async function updateUser(userController,data){
+  async function updateUser(userController,data:usuarios){
     return await userController.update(data);
   }
 
-  async function deleteUser(UserController,data){
+  async function deleteUser(UserController,data:usuarios){
     return await UserController.delete(data)
   }
