@@ -1,7 +1,8 @@
 import { json } from "stream/consumers";
 import { Alert } from "flowbite-react";
+import SuperJSON from "superjson";
 
-const url = "http://pdvfood.kinghost.net:21012/api/unidade";
+const url = "/api/unidade_medida";
 
 export async function PostUnidade({ nome }) {
 	let data = {
@@ -36,9 +37,10 @@ export async function GetUnidade() {
 
 export async function UpdateUnidade({ id, nome }) {
 	let data = {
+		id,
 		nome,
 	};
-	return fetch(`${url}/${id}`, {
+	return fetch(url, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -52,8 +54,13 @@ export async function UpdateUnidade({ id, nome }) {
 }
 
 export async function ExcluirUnidade(id) {
-	return fetch(`${url}/${id}`, {
+	let data = {
+		id:id
+	};
+	return fetch(url, {
 		method: "DELETE",
+		body: JSON.stringify(data),
+
 	})
 		.then((data) => data.json())
 		.catch(() => {
