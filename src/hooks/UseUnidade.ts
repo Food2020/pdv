@@ -43,7 +43,7 @@ export default function UseUnidade() {
 	}
 
 	function ArrayToOption(unidade) {
-		let unidadesOptions = unidade.map((unidade) => {
+		let unidadesOptions = unidade.json.map((unidade) => {
 			let properties = {
 				value: unidade.id,
 				label: unidade.nome,

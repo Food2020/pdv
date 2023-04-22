@@ -60,7 +60,7 @@ export default function TabelaUnidade(props){
   }
 
   const flagExibeAcoes    = props.unidadeEditar || props.unidadeExcluir;
-  const Unidades          = props.unidades
+  const Unidades          = props.unidades.json
 
   const getData = () => {
     const data = trataArrayNull(Unidades)
