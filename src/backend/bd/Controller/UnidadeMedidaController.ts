@@ -62,14 +62,15 @@ export default class UnidadeMedidaController {
     }
 
     async delete(data:unidades){
-      const unidade =  JSON.parse(data)
+        
+      const unidade = data
         try{
-           const unidades = this.prisma.unidades.delete({
+           const deletado = this.prisma.unidades.delete({
                 where:{ 
                     id:unidade.id
                 },
             });
-            return unidades;
+            return deletado;
         }catch(e){
             return e;
         }
