@@ -1,13 +1,8 @@
-import { json } from "stream/consumers";
-import { Alert } from "flowbite-react";
+import { clientes } from "@prisma/client";
 
-const url = "http://pdvfood.kinghost.net:21012/api/cliente";
+const url = "/api/cliente/";
 
-export async function PostCliente({ nome }) {
-	let data = {
-		nome: nome,
-		ativo: 1,
-	};
+export async function PostCliente(data) {
 	return fetch(url, {
 		method: "POST",
 		headers: {
@@ -34,11 +29,8 @@ export async function GetCliente() {
 		});
 }
 
-export async function UpdateCliente({ id, nome }) {
-	let data = {
-		nome: nome,
-	};
-	return fetch(`${url}/${id}`, {
+export async function UpdateCliente(data) {
+	return fetch(url, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -51,9 +43,16 @@ export async function UpdateCliente({ id, nome }) {
 		});
 }
 
-export async function ExcluirCliente(id) {
-	return fetch(`${url}/${id}`, {
+export async function ExcluirCliente(id:Number) {
+	let data ={
+		id:id
+	}
+	return fetch(url, {
 		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(data),
 	})
 		.then((data) => data.json())
 		.catch(() => {

@@ -41,17 +41,24 @@ model categoria {
 }
 
 model clientes {
-  id        BigInt   @id @default(autoincrement())
-  nome      String   @db.VarChar(255)
-  fone      String   @db.VarChar(11)
-  cep       String   @db.VarChar(11)
-  endereco  String   @db.VarChar(50)
-  numero    String   @db.VarChar(11)
-  cpf       String   @db.VarChar(50)
-  cnpj      String   @db.VarChar(50)
-  ativo     Int
-  createdAt DateTime @db.DateTime(0)
-  updatedAt DateTime @db.DateTime(0)
+  id          BigInt   @id @default(autoincrement())
+  nome        String   @db.VarChar(255)
+  fone        String   @db.VarChar(11)
+  cep         String   @db.VarChar(11)
+  endereco    String   @db.VarChar(50)
+  numero      String   @db.VarChar(11)
+  cpfCnpj     String   @db.VarChar(50)
+  ativo       Int
+  createdAt   DateTime @db.DateTime(0)
+  updatedAt   DateTime @db.DateTime(0)
+  razaoSocial String   @db.VarChar(100)
+  ie          String   @db.VarChar(20)
+  im          String   @db.VarChar(20)
+  bairro      String   @db.VarChar(100)
+  cidade      String   @db.VarChar(100)
+  uf          String   @db.VarChar(20)
+  complemento String   @db.VarChar(100)
+  tipo        String   @db.VarChar(20)
 }
 
 model descontos {

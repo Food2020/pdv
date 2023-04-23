@@ -1,5 +1,6 @@
 import { json } from "stream/consumers";
 import { Alert } from "flowbite-react";
+import 'regenerator-runtime/runtime';
 
 const url = "http://pdvfood.kinghost.net:21012/api/formaPagamento";
 

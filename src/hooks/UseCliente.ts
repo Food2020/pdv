@@ -1,6 +1,5 @@
-import Cliente from "../core/Cliente";
+import { clientes } from "@prisma/client";
 import { useState, useEffect, useMemo } from "react";
-import ColecaoCliente from "../backend/bd/ColecaoCliente";
 import useTabelaOuForm from "./UseTabelaOuForm";
 import useAuth from "../data/hook/useAuth";
 
@@ -35,8 +34,8 @@ export default function useCliente() {
 	function obterTodos() {
 		setCarregando(true);
 		GetCliente().then((cliente) => {
-			setClientes(cliente);
-			setClientesOptions(ArrayToOption(cliente));
+			setClientes(cliente.json);
+			setClientesOptions(ArrayToOption(cliente.json));
 			exibirTabela();
 			setCarregando(false);
 		});
@@ -71,14 +70,14 @@ export default function useCliente() {
 		exibirFormulario();
 	}
 
-	async function salvarCliente({ id, nome, ativo }) {
+	async function salvarCliente(data) {
 		setCarregando(true);
-		id
-			? UpdateCliente({ id, nome }).then((resp) => {
+		data.id
+			? UpdateCliente(data).then((resp) => {
 					setCarregando(false);
 					obterTodos();
 			  })
-			: PostCliente({ nome }).then((resp) => {
+			: PostCliente(data).then((resp) => {
 					setCarregando(false);
 					obterTodos();
 			  });
