@@ -15,7 +15,7 @@ export default class ClienteController {
 		try {
 			const cliente = prisma.clientes.create({
 				data: {
-					ativo:1,
+					ativo: 1,
 					bairro: data.bairro.toString(),
 					cep: data.cep,
 					cidade: data.cidade,
