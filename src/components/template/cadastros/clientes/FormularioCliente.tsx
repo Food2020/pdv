@@ -6,9 +6,6 @@ import {
 	Button,
 	Divider,
 	Grid,
-	Paper,
-	TextField,
-	Typography,
 } from "@mui/material";
 import EntradaCpfCnpj from "../EntradaCpfCnpj";
 import EntradaCep from "../EntradaCep";
@@ -24,14 +21,14 @@ export default function FormularioCliente(props) {
 	const [nome, setNome] = useState(
 		(props.cliente?.nome || props.clienteDup?.nome) ?? ""
 	);
-	const [razao, setRazao] = useState(
-		(props.cliente?.razao || props.clienteDup?.razao) ?? ""
+	const [razaoSocial, setRazaoSocial] = useState(
+		(props.cliente?.razaoSocial || props.clienteDup?.razaoSocial) ?? ""
 	);
 	const [cep, setCep] = useState(
 		(props.cliente?.cep || props.clienteDup?.cep) ?? ""
 	);
-	const [cpf, setCpf] = useState(
-		(props.cliente?.cpf || props.clienteDup?.cpf) ?? ""
+	const [cpfCnpj, setCpfCnpj] = useState(
+		(props.cliente?.cpfCnpj || props.clienteDup?.cpfCnpj) ?? ""
 	);
 	const [ie, setIe] = useState(
 		(props.cliente?.ie || props.clienteDup?.ie) ?? ""
@@ -39,8 +36,8 @@ export default function FormularioCliente(props) {
 	const [im, setIm] = useState(
 		(props.cliente?.im || props.clienteDup?.im) ?? ""
 	);
-	const [logradouro, setLogradouro] = useState(
-		(props.cliente?.logradouro || props.clienteDup?.logradouro) ?? ""
+	const [endereco, setEndereco] = useState(
+		(props.cliente?.endereco || props.clienteDup?.endereco) ?? ""
 	);
 	const [bairro, setBairro] = useState(
 		(props.cliente?.bairro || props.clienteDup?.bairro) ?? ""
@@ -48,8 +45,11 @@ export default function FormularioCliente(props) {
 	const [cidade, setCidade] = useState(
 		(props.cliente?.cidade || props.clienteDup?.cidade) ?? ""
 	);
-	const [estado, setEstado] = useState(
-		(props.cliente?.estado || props.clienteDup?.estado) ?? ""
+	const [fone, setFone] = useState(
+		(props.cliente?.fone || props.clienteDup?.fone) ?? ""
+	);
+	const [uf, setUf] = useState(
+		(props.cliente?.uf || props.clienteDup?.uf) ?? ""
 	);
 	const [numero, setNumero] = useState(
 		(props.cliente?.numero || props.clienteDup?.numero) ?? ""
@@ -62,10 +62,10 @@ export default function FormularioCliente(props) {
 	);
 
 	const changeAddress = (data) => {
-		setLogradouro(data.logradouro);
+		setEndereco(data.logradouro);
 		setBairro(data.bairro);
 		setCidade(data.localidade);
-		setEstado(data.uf);
+		setUf(data.uf);
 	};
 
 	return (
@@ -77,19 +77,30 @@ export default function FormularioCliente(props) {
 				<Entrada texto="Nome" valor={nome} valorMudou={setNome} />
 			</Grid>
 			<Grid item xs={12} md={3}>
-				<Entrada texto="Razão social" valor={razao} valorMudou={setRazao} />
+				<Entrada
+					texto="Razão social"
+					valor={razaoSocial}
+					valorMudou={setRazaoSocial}
+				/>
 			</Grid>
 			<Grid item xs={12} md={3}>
 				<Entrada texto="Tipo" valor={tipo} valorMudou={setTipo} />
 			</Grid>
 			<Grid item xs={12} md={3}>
-				<EntradaCpfCnpj texto="CPF/CNPJ" valor={cpf} valorMudou={setCpf} />
+				<EntradaCpfCnpj
+					texto="CPF/CNPJ"
+					valor={cpfCnpj}
+					valorMudou={setCpfCnpj}
+				/>
 			</Grid>
 			<Grid item xs={12} md={2}>
 				<Entrada texto="IE" valor={ie} valorMudou={setIe} />
 			</Grid>
 			<Grid item xs={12} md={2}>
 				<Entrada texto="IM" valor={im} valorMudou={setIm} />
+			</Grid>
+			<Grid item xs={12} md={2}>
+				<Entrada texto="Fone" valor={fone} valorMudou={setFone} />
 			</Grid>
 			<Grid item xs={12}>
 				<Divider textAlign="left">Endereço</Divider>
@@ -102,11 +113,7 @@ export default function FormularioCliente(props) {
 				/>
 			</Grid>
 			<Grid item xs={12} md={3}>
-				<Entrada
-					texto="Logradouro"
-					valor={logradouro}
-					valorMudou={setLogradouro}
-				/>
+				<Entrada texto="Endereço" valor={endereco} valorMudou={setEndereco} />
 			</Grid>
 			<Grid item xs={12} md={3}>
 				<Entrada texto="Bairro" valor={bairro} valorMudou={setBairro} />
@@ -115,7 +122,7 @@ export default function FormularioCliente(props) {
 				<Entrada texto="Cidade" valor={cidade} valorMudou={setCidade} />
 			</Grid>
 			<Grid item xs={12} md={2}>
-				<Entrada texto="UF" valor={estado} valorMudou={setEstado} />
+				<Entrada texto="UF" valor={uf} valorMudou={setUf} />
 			</Grid>
 			<Grid item xs={12} md={2}>
 				<Entrada texto="Número" valor={numero} valorMudou={setNumero} />
@@ -132,7 +139,25 @@ export default function FormularioCliente(props) {
 					type="button"
 					variant="contained"
 					color="primary"
-					onClick={() => props.salvarCliente?.({ id, nome })}
+					onClick={() =>
+						props.salvarCliente?.({
+							bairro,
+							cep,
+							cidade,
+							complemento,
+							cpfCnpj,
+							endereco,
+							fone,
+							uf,
+							id,
+							ie,
+							im,
+							nome,
+							numero,
+							razaoSocial,
+							tipo,
+						})
+					}
 				>
 					{id ? "Alterar" : "Salvar"}
 				</Button>

@@ -1,7 +1,7 @@
 import { AppProvider } from '../data/context/AppContext'
 import { AuthProvider } from '../data/context/AuthContext'
 import '../styles/globals.css'
-
+import 'regenerator-runtime/runtime';
 
 function MyApp({ Component, pageProps }) {
   return (
