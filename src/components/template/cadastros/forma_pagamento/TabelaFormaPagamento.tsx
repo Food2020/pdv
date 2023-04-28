@@ -62,8 +62,7 @@ export default function TabelaFormaPagamento(props){
   }
 
   const flagExibeAcoes    = props.formaPagamentoEditar || props.formaPagamentoExcluir;
-  const FormaPagamentos          = props.formaPagamentos
-
+  const FormaPagamentos          = props.formaPagamentos.json
   const getData = () => {
     const data = trataArrayNull(FormaPagamentos)
     return [...data]

@@ -2,7 +2,7 @@ import { json } from "stream/consumers";
 import { Alert } from "flowbite-react";
 import 'regenerator-runtime/runtime';
 
-const url = "http://pdvfood.kinghost.net:21012/api/formaPagamento";
+const url = "/api/formaPagamento";
 
 export async function PostFormaPagamento({ nome }) {
 	let data = {
@@ -37,9 +37,10 @@ export async function GetFormaPagamento() {
 
 export async function UpdateFormaPagamento({ id, nome }) {
 	let data = {
-		nome: nome,
+		id,
+		nome
 	};
-	return fetch(`${url}/${id}`, {
+	return fetch(`${url}	`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -53,8 +54,15 @@ export async function UpdateFormaPagamento({ id, nome }) {
 }
 
 export async function ExcluirFormaPagamento(id) {
-	return fetch(`${url}/${id}`, {
+	let data = {
+		id,
+	};
+	return fetch(`${url}`, {
 		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(data),
 	})
 		.then((data) => data.json())
 		.catch(() => {
