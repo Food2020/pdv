@@ -43,7 +43,7 @@ export default function useFormaPagamento() {
 	}
 
 	function ArrayToOption(formaPagamento) {
-		let formaPagamentosOptions = formaPagamento.map((formaPagamento) => {
+		let formaPagamentosOptions = formaPagamento.json.map((formaPagamento) => {
 			let properties = {
 				value: formaPagamento.id,
 				label: formaPagamento.nome,

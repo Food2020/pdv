@@ -49,7 +49,8 @@ export function AuthProvider(props) {
 		try {
 			setCarregando(true);
 			const usuarioLogado = await checkUser(email, senha).then(
-				(body) => body.usuarioLogado
+				(body) => body?.usuarioLogado
+							
 			);
 			await configurarSessao(usuarioLogado);
 			Router.push("/");

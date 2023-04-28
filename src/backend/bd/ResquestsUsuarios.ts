@@ -91,6 +91,6 @@ export async function checkUser(email, senha) {
 	})
 	.then((response) => response.json())
 	.catch((erro) => {
-		console.log(erro);
+		return erro;
 	});
 }
