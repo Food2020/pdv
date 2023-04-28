@@ -9,7 +9,7 @@ export default async  function handler(req, res) {
         const data = req.body;
         const unidadeMedida =  await saveUnidade(unidadeMedidaController,data);
         res.status(200).json(unidadeMedida);
-    }
+    } 
 
     if(req.method === "GET"){
      const unidadeMedidas = await getUnidade(unidadeMedidaController);
@@ -26,7 +26,7 @@ export default async  function handler(req, res) {
     if(req.method === 'DELETE'){
       const data = req.body
       const unidade =  await deleteUnidade(unidadeMedidaController,data)
-         res.status(200).json(unidade)
+         res.status(200).json({unidade,messaage:"unidade de medida deletada"})
     }
 
   }

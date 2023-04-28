@@ -45,7 +45,7 @@ export async function UpdateUnidade({ id, nome }) {
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: SuperJSON.stringify(data),
+		body: JSON.stringify(data),
 	})
 		.then((response) => response)
 		.catch(() => {
