@@ -35,21 +35,19 @@ export default class UnidadeMedidaController {
 
 	async update(data: unidades) {
 		try {
-			const unidades = prisma.unidades.update({
+			
+			const resposta = prisma.unidades.update({
 				where: {
 					id: Number(data.id),
 				},
 				data: {
 					nome: data.nome,
-					ativo: data.ativo,
 					updatedAt: new Date(),
 				},
 			});
 			return SuperJSON.stringify({
-				id: (await unidades).id,
-				nome: (await unidades).nome,
-				ativo: (await unidades).ativo,
-				updtedAt: (await unidades).updatedAt,
+				id: (await resposta).id,
+				nome: (await resposta).nome
 			});
 		} catch (e) {
 			return e;
