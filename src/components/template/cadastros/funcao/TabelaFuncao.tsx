@@ -63,7 +63,7 @@ export default function TabelaFuncao(props){
   }
 
   const flagExibeAcoes    = props.funcaoEditar || props.funcaoExcluir;
-  const Funcoes          = props.funcoes
+  const Funcoes          = props.funcoes.json
 
   const getData = () => {
     const data = trataArrayNull(Funcoes)

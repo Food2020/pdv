@@ -43,7 +43,7 @@ export default function useFuncao() {
 	}
 
 	function ArrayToOption(funcao) {
-		let funcoesOptions = funcao.map((funcao) => {
+		let funcoesOptions = funcao.json.map((funcao) => {
 			let properties = {
 				value: funcao.id,
 				label: funcao.nome,

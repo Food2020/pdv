@@ -1,7 +1,7 @@
 import { json } from "stream/consumers";
 import { Alert } from "flowbite-react";
 
-const url = "http://pdvfood.kinghost.net:21012/api/cargo";
+const url = "/api/funcao";
 
 export async function PostFuncao({ nome }) {
 	let data = {
@@ -36,9 +36,10 @@ export async function GetFuncao() {
 
 export async function UpdateFuncao({ id, nome }) {
 	let data = {
-		nome: nome,
+		id,
+		nome,
 	};
-	return fetch(`${url}/${id}`, {
+	return fetch(`${url}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -52,8 +53,15 @@ export async function UpdateFuncao({ id, nome }) {
 }
 
 export async function ExcluirFuncao(id) {
-	return fetch(`${url}/${id}`, {
+	let data = {
+		id
+	};
+	return fetch(`${url}`, {
 		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(data),
 	})
 		.then((data) => data.json())
 		.catch(() => {
