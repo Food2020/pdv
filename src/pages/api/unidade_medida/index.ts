@@ -18,7 +18,6 @@ export default async  function handler(req, res) {
 
     if(req.method === "PUT"){
       const data = req.body;
-
       const unidadeMedida = await updateUnidade(unidadeMedidaController,data);
       res.status(200).json(unidadeMedida);
     }
