@@ -57,14 +57,22 @@ export default class UnidadeMedidaController {
 	}
 
 	async delete(data: unidades) {
-		const unidade = data;
+		const unidade = JSON.parse(SuperJSON.stringify(data));
+		
+		
 		try {
 			const deletado = prisma.unidades.delete({
 				where: {
-					id: unidade.id,
+					id: Number(unidade.json.id),
 				},
 			});
-			return deletado;
+			return SuperJSON.stringify({
+				id:(await deletado).id,
+				nome:(await deletado).nome,
+				ativo: (await deletado).ativo,
+				createdAt: (await deletado).createdAt,
+				updtedAt: (await deletado).updatedAt
+			});
 		} catch (e) {
 			return e;
 		}
