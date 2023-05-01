@@ -5,7 +5,7 @@ import { prisma } from "../../../lib/prisma";
 export default class ParceiroController {
 	async get() {
 		try {
-			const parceiros = await prisma.parceiros.findMany();
+			let parceiros = await prisma.parceiros.findMany() as any;
 			const parceirosTipos = await prisma.parceiros_tipo.findMany();
 
 			if (parceiros.length > 0) {
@@ -20,7 +20,7 @@ export default class ParceiroController {
 			return e;
 		}
 	}
-	async create(data: parceiros) {
+	async create(data: any) {
 		try {
 			const parceiro = await prisma.parceiros.create({
 				data: {
@@ -81,7 +81,7 @@ export default class ParceiroController {
 		}
 	}
 
-	async update(data: parceiros) {
+	async update(data: any) {
 		try {
 			const parceiro = await prisma.parceiros.update({
 				where: {
