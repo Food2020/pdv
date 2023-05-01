@@ -58,7 +58,6 @@ model clientes {
   cidade      String   @db.VarChar(100)
   uf          String   @db.VarChar(20)
   complemento String   @db.VarChar(100)
-  tipo        String   @db.VarChar(20)
 }
 
 model descontos {
@@ -100,7 +99,7 @@ model taxa_entregas {
 }
 
 model unidades {
-  id        BigInt   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   nome      String   @db.VarChar(255)
   ativo     Int
   createdAt DateTime @db.DateTime(0)
@@ -116,4 +115,10 @@ model usuarios {
   ativo     Int
   createdAt DateTime @db.DateTime(0)
   updatedAt DateTime @db.DateTime(0)
+}
+
+model clientes_tipo {
+  id        BigInt @id @default(autoincrement())
+  idCliente BigInt
+  tipo      String @db.VarChar(20)
 }

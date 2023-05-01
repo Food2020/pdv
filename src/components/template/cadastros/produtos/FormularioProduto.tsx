@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Produto from "../../../../core/Produto";
-import { trataNull } from "../../../Util";
+import { trataNull, optionToValue, valueToOption, valueToOptionNumber } from "../../../Util";
 import Botao from "../Botao";
 import Entrada from "../Entrada";
 import Selecao from "../Selecao";
@@ -20,16 +20,24 @@ export default function FormularioProduto(props) {
 		(props.produto?.codigo || props.produtoDup?.codigo) ?? ""
 	);
 	const [unidade, setUnidade] = useState(
-		(props.produto?.unidade || props.produtoDup?.unidade) ?? ""
+		(valueToOptionNumber(props.produto?.unidade, false, props.unidadesOptions) ||
+		valueToOptionNumber(props.produtoDup?.unidade, false, props.unidadesOptions)) ??
+			null
 	);
 	const [categoria, setCategoria] = useState(
-		(props.produto?.categoria || props.produtoDup?.categoria) ?? ""
+		(valueToOptionNumber(props.produto?.categoria, false, props.categoriasOptions) ||
+		valueToOptionNumber(
+				props.produtoDup?.categoria,
+				false,
+				props.categoriasOptions
+			)) ??
+			null
 	);
 	const [preco, setPreco] = useState(
 		(props.produto?.preco || props.produtoDup?.preco) ?? 0
 	);
 	const [codigoBarra, setcodigoBarra] = useState(
-		(props.produto?.codigoBarra || props.produtoDup?.codigoBarra) ?? ''
+		(props.produto?.codigoBarra || props.produtoDup?.codigoBarra) ?? ""
 	);
 
 	return (
@@ -99,8 +107,8 @@ export default function FormularioProduto(props) {
 							codigoBarra,
 							nome,
 							preco,
-							categoria,
-							unidade
+							optionToValue(categoria),
+							optionToValue(unidade)
 						)
 					}
 				>

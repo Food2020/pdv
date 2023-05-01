@@ -1,14 +1,11 @@
 import { useState } from "react";
 import Cliente from "../../../../core/Cliente";
-import { trataNull } from "../../../Util";
+import { trataNull,optionToValue,valueToOption } from "../../../Util";
 import Entrada from "../Entrada";
-import {
-	Button,
-	Divider,
-	Grid,
-} from "@mui/material";
+import { Button, Divider, Grid } from "@mui/material";
 import EntradaCpfCnpj from "../EntradaCpfCnpj";
 import EntradaCep from "../EntradaCep";
+import Selecao from "../Selecao";
 
 interface FormularioClienteProps {
 	cliente: Cliente;
@@ -58,7 +55,7 @@ export default function FormularioCliente(props) {
 		(props.cliente?.complemento || props.clienteDup?.complemento) ?? ""
 	);
 	const [tipo, setTipo] = useState(
-		(props.cliente?.tipo || props.clienteDup?.tipo) ?? ""
+		(valueToOption(props.cliente?.tipo,true) || valueToOption(props.clienteDup?.tipo,true)) ?? null
 	);
 
 	const changeAddress = (data) => {
@@ -67,6 +64,17 @@ export default function FormularioCliente(props) {
 		setCidade(data.localidade);
 		setUf(data.uf);
 	};
+
+	const tipoParceiroOptions = [
+		{
+			value: "Cliente",
+			label: "Cliente",
+		},
+		{
+			value: "Fornecedor",
+			label: "Fornecedor",
+		},
+	];
 
 	return (
 		<Grid container spacing={3}>
@@ -84,7 +92,14 @@ export default function FormularioCliente(props) {
 				/>
 			</Grid>
 			<Grid item xs={12} md={3}>
-				<Entrada texto="Tipo" valor={tipo} valorMudou={setTipo} />
+				<Selecao
+					options={tipoParceiroOptions}
+					valorMudou={setTipo}
+					valor={tipo}
+					texto="Tipo"
+					isMulti={true}
+					className="col-span-4"
+				/>
 			</Grid>
 			<Grid item xs={12} md={3}>
 				<EntradaCpfCnpj
@@ -155,7 +170,7 @@ export default function FormularioCliente(props) {
 							nome,
 							numero,
 							razaoSocial,
-							tipo,
+							tipo:optionToValue(tipo,true),
 						})
 					}
 				>
