@@ -1,61 +1,63 @@
 import { useState } from "react";
-import Cliente from "../../../../core/Cliente";
-import { trataNull,optionToValue,valueToOption } from "../../../Util";
+import Parceiro from "../../../../core/Parceiro";
+import { trataNull, optionToValue, valueToOption } from "../../../Util";
 import Entrada from "../Entrada";
 import { Button, Divider, Grid } from "@mui/material";
 import EntradaCpfCnpj from "../EntradaCpfCnpj";
 import EntradaCep from "../EntradaCep";
 import Selecao from "../Selecao";
 
-interface FormularioClienteProps {
-	cliente: Cliente;
-	categoriaMudou?: (cliente: Cliente) => void;
+interface FormularioParceiroProps {
+	parceiro: Parceiro;
+	categoriaMudou?: (parceiro: Parceiro) => void;
 	cancelado?: () => void;
 }
 
-export default function FormularioCliente(props) {
-	const id = trataNull(props.cliente?.id);
+export default function FormularioParceiro(props) {
+	const id = trataNull(props.parceiro?.id);
 	const [nome, setNome] = useState(
-		(props.cliente?.nome || props.clienteDup?.nome) ?? ""
+		(props.parceiro?.nome || props.parceiroDup?.nome) ?? ""
 	);
 	const [razaoSocial, setRazaoSocial] = useState(
-		(props.cliente?.razaoSocial || props.clienteDup?.razaoSocial) ?? ""
+		(props.parceiro?.razaoSocial || props.parceiroDup?.razaoSocial) ?? ""
 	);
 	const [cep, setCep] = useState(
-		(props.cliente?.cep || props.clienteDup?.cep) ?? ""
+		(props.parceiro?.cep || props.parceiroDup?.cep) ?? ""
 	);
 	const [cpfCnpj, setCpfCnpj] = useState(
-		(props.cliente?.cpfCnpj || props.clienteDup?.cpfCnpj) ?? ""
+		(props.parceiro?.cpfCnpj || props.parceiroDup?.cpfCnpj) ?? ""
 	);
 	const [ie, setIe] = useState(
-		(props.cliente?.ie || props.clienteDup?.ie) ?? ""
+		(props.parceiro?.ie || props.parceiroDup?.ie) ?? ""
 	);
 	const [im, setIm] = useState(
-		(props.cliente?.im || props.clienteDup?.im) ?? ""
+		(props.parceiro?.im || props.parceiroDup?.im) ?? ""
 	);
 	const [endereco, setEndereco] = useState(
-		(props.cliente?.endereco || props.clienteDup?.endereco) ?? ""
+		(props.parceiro?.endereco || props.parceiroDup?.endereco) ?? ""
 	);
 	const [bairro, setBairro] = useState(
-		(props.cliente?.bairro || props.clienteDup?.bairro) ?? ""
+		(props.parceiro?.bairro || props.parceiroDup?.bairro) ?? ""
 	);
 	const [cidade, setCidade] = useState(
-		(props.cliente?.cidade || props.clienteDup?.cidade) ?? ""
+		(props.parceiro?.cidade || props.parceiroDup?.cidade) ?? ""
 	);
 	const [fone, setFone] = useState(
-		(props.cliente?.fone || props.clienteDup?.fone) ?? ""
+		(props.parceiro?.fone || props.parceiroDup?.fone) ?? ""
 	);
 	const [uf, setUf] = useState(
-		(props.cliente?.uf || props.clienteDup?.uf) ?? ""
+		(props.parceiro?.uf || props.parceiroDup?.uf) ?? ""
 	);
 	const [numero, setNumero] = useState(
-		(props.cliente?.numero || props.clienteDup?.numero) ?? ""
+		(props.parceiro?.numero || props.parceiroDup?.numero) ?? ""
 	);
 	const [complemento, setComplemento] = useState(
-		(props.cliente?.complemento || props.clienteDup?.complemento) ?? ""
+		(props.parceiro?.complemento || props.parceiroDup?.complemento) ?? ""
 	);
 	const [tipo, setTipo] = useState(
-		(valueToOption(props.cliente?.tipo,true) || valueToOption(props.clienteDup?.tipo,true)) ?? null
+		(valueToOption(props.parceiro?.tipo, true) ||
+			valueToOption(props.parceiroDup?.tipo, true)) ??
+			null
 	);
 
 	const changeAddress = (data) => {
@@ -67,8 +69,8 @@ export default function FormularioCliente(props) {
 
 	const tipoParceiroOptions = [
 		{
-			value: "Cliente",
-			label: "Cliente",
+			value: "Parceiro",
+			label: "Parceiro",
 		},
 		{
 			value: "Fornecedor",
@@ -155,7 +157,7 @@ export default function FormularioCliente(props) {
 					variant="contained"
 					color="primary"
 					onClick={() =>
-						props.salvarCliente?.({
+						props.salvarParceiro?.({
 							bairro,
 							cep,
 							cidade,
@@ -170,7 +172,7 @@ export default function FormularioCliente(props) {
 							nome,
 							numero,
 							razaoSocial,
-							tipo:optionToValue(tipo,true),
+							tipo: optionToValue(tipo, true),
 						})
 					}
 				>

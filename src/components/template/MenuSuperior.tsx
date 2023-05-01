@@ -31,8 +31,8 @@ export default function MenuSuperior() {
 			texto: "Cadastro Forma de Pagamentos",
 		},
 		{
-			url: "/operacional/cliente",
-			texto: "Cadastro Clientes",
+			url: "/operacional/parceiro",
+			texto: "Cadastro Parceiro",
 		},
 		{
 			url: "/operacional/cargo",

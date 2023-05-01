@@ -1,8 +1,6 @@
-import { clientes } from "@prisma/client";
+const url = "/api/parceiro/";
 
-const url = "/api/cliente/";
-
-export async function PostCliente(data) {
+export async function PostParceiro(data) {
 	return fetch(url, {
 		method: "POST",
 		headers: {
@@ -16,7 +14,7 @@ export async function PostCliente(data) {
 		});
 }
 
-export async function GetCliente() {
+export async function GetParceiro() {
 	return fetch(url, {
 		method: "GET",
 		headers: {
@@ -25,11 +23,11 @@ export async function GetCliente() {
 	})
 		.then((data) => data.json())
 		.catch(() => {
-			alert("Erro na consulta de Clientes!");
+			alert("Erro na consulta de Parceiros!");
 		});
 }
 
-export async function UpdateCliente(data) {
+export async function UpdateParceiro(data) {
 	return fetch(url, {
 		method: "PUT",
 		headers: {
@@ -39,14 +37,14 @@ export async function UpdateCliente(data) {
 	})
 		.then((response) => response)
 		.catch(() => {
-			alert("Erro ao editar Cliente !");
+			alert("Erro ao editar Parceiro !");
 		});
 }
 
-export async function ExcluirCliente(id:Number) {
-	let data ={
-		id:id
-	}
+export async function ExcluirParceiro(id: Number) {
+	let data = {
+		id: id,
+	};
 	return fetch(url, {
 		method: "DELETE",
 		headers: {
@@ -56,6 +54,6 @@ export async function ExcluirCliente(id:Number) {
 	})
 		.then((data) => data.json())
 		.catch(() => {
-			alert("Erro ao deletar Cliente !");
+			alert("Erro ao deletar Parceiro !");
 		});
 }
