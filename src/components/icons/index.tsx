@@ -103,7 +103,7 @@ export const IconeSol = (className = "h-6 w-6") => (
 		fill="none"
 		viewBox="0 0 24 24"
 		stroke="currentColor"
-		strokeWidth="2"
+		strokeWidth={2}
 	>
 		<path
 			strokeLinecap="round"
@@ -119,7 +119,7 @@ export const IconeLua = (className = "h-6 w-6") => (
 		fill="none"
 		viewBox="0 0 24 24"
 		stroke="currentColor"
-		strokeWidth="2"
+		strokeWidth={2}
 	>
 		<path
 			strokeLinecap="round"
@@ -184,7 +184,7 @@ export const ChevronLeftIcon = (className = "h-6 w-6") => (
 		className={className}
 		fill="none"
 		viewBox="0 0 24 24"
-		strokeWidth="1.5"
+		strokeWidth={1.5}
 		stroke="currentColor"
 	>
 		<path
@@ -201,7 +201,7 @@ export const ChevronRightIcon = (className = "h-6 w-6") => (
 		className={className}
 		fill="none"
 		viewBox="0 0 24 24"
-		strokeWidth="1.5"
+		strokeWidth={1.5}
 		stroke="currentColor"
 	>
 		<path
@@ -217,7 +217,7 @@ export const ChevronDobleRightIcon = (className = "h-6 w-6") => (
 		fill="none"
 		className={className}
 		viewBox="0 0 24 24"
-		strokeWidth="1.5"
+		strokeWidth={1.5}
 		stroke="currentColor"
 	>
 		<path
@@ -233,7 +233,7 @@ export const ChevronDobleLeftIcon = (className = "h-6 w-6") => (
 		fill="none"
 		className={className}
 		viewBox="0 0 24 24"
-		strokeWidth="1.5"
+		strokeWidth={1.5}
 		stroke="currentColor"
 	>
 		<path
@@ -250,7 +250,7 @@ export const documentArrow = (className = "h-6 w-6") => (
 		fill="none"
 		className={className}
 		viewBox="0 0 24 24"
-		strokeWidth="1.5"
+		strokeWidth={1.5}
 		stroke="currentColor"
 	>
 		<path
@@ -265,7 +265,7 @@ export const IconeDuplicar = (
 		xmlns="http://www.w3.org/2000/svg"
 		fill="none"
 		viewBox="0 0 24 24"
-		strokeWidth="1.5"
+		strokeWidth={1.5}
 		stroke="currentColor"
 		className="w-6 h-6"
 	>
@@ -276,19 +276,37 @@ export const IconeDuplicar = (
 		/>
 	</svg>
 );
-export const IconeUsuario = (
+export const IconeEstoque = (
 	<svg
-		xmlns="http://www.w3.org/2000/svg"
 		fill="none"
 		viewBox="0 0 24 24"
-		strokeWidth="1.5"
-		stroke="currentColor"
-		className="w-6 h-6"
+		height="1em"
+		width="1em"
+		className="h-6 w-6"
 	>
+		<path fill="currentColor" d="M10 12a1 1 0 100 2h4a1 1 0 000-2h-4z" />
 		<path
-			strokeLinecap="round"
-			strokeLinejoin="round"
-			d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+			fill="currentColor"
+			fillRule="evenodd"
+			d="M4 2a3 3 0 00-3 3v14a3 3 0 003 3h16a3 3 0 003-3V5a3 3 0 00-3-3H4zm16 2H4a1 1 0 00-1 1v3h18V5a1 1 0 00-1-1zM3 19v-9h18v9a1 1 0 01-1 1H4a1 1 0 01-1-1z"
+			clipRule="evenodd"
 		/>
 	</svg>
 );
+
+export const IconeUsuario = (
+	<svg
+	  xmlns="http://www.w3.org/2000/svg"
+	  fill="none"
+	  viewBox="0 0 24 24"
+	  strokeWidth="1.5"
+	  stroke="currentColor"
+	  className="w-6 h-6"
+	>
+	  <path
+		strokeLinecap="round"
+		strokeLinejoin="round"
+		d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+	  />
+	</svg>
+  );

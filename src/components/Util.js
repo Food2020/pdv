@@ -40,7 +40,7 @@ export const trataArrayNull = (Array) => {
 	// } else {
 	// 	return Array;
 	// }
-	return Array??[]
+	return Array ?? [];
 };
 export const trataNull = (elem) => {
 	// if (elem === null || !elem) {
@@ -48,5 +48,30 @@ export const trataNull = (elem) => {
 	// } else {
 	// 	return elem;
 	// }
-	return elem??""
+	return elem ?? "";
+};
+
+export const optionToValue = (valor, multiple) => {
+	return multiple ? valor.map((item) => item.value) : valor.value;
+};
+
+export const valueToOption = (valor, multiple) => {
+	return multiple
+		? valor?.map((item) => ({
+				value: item,
+				label: item,
+		  }))
+		: {
+				value: valor,
+				label: valor,
+		  };
+};
+
+export const valueToOptionNumber = (valor, multiple,options) => {
+	return multiple
+		? valor?.map((item) => ({
+				value: item,
+				label: item,
+		  }))
+		: options.find(option => Number(option.value) === Number(valor));
 };

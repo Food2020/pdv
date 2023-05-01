@@ -40,27 +40,6 @@ model categoria {
   updatedAt DateTime @db.DateTime(0)
 }
 
-model clientes {
-  id          BigInt   @id @default(autoincrement())
-  nome        String   @db.VarChar(255)
-  fone        String   @db.VarChar(11)
-  cep         String   @db.VarChar(11)
-  endereco    String   @db.VarChar(50)
-  numero      String   @db.VarChar(11)
-  cpfCnpj     String   @db.VarChar(50)
-  ativo       Int
-  createdAt   DateTime @db.DateTime(0)
-  updatedAt   DateTime @db.DateTime(0)
-  razaoSocial String   @db.VarChar(100)
-  ie          String   @db.VarChar(20)
-  im          String   @db.VarChar(20)
-  bairro      String   @db.VarChar(100)
-  cidade      String   @db.VarChar(100)
-  uf          String   @db.VarChar(20)
-  complemento String   @db.VarChar(100)
-  tipo        String   @db.VarChar(20)
-}
-
 model descontos {
   id        BigInt   @id @default(autoincrement())
   nome      String   @db.VarChar(255)
@@ -100,7 +79,7 @@ model taxa_entregas {
 }
 
 model unidades {
-  id        BigInt   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   nome      String   @db.VarChar(255)
   ativo     Int
   createdAt DateTime @db.DateTime(0)
@@ -116,4 +95,31 @@ model usuarios {
   ativo     Int
   createdAt DateTime @db.DateTime(0)
   updatedAt DateTime @db.DateTime(0)
+}
+
+model parceiros {
+  id          BigInt   @id @default(autoincrement())
+  nome        String   @db.VarChar(255)
+  fone        String   @db.VarChar(11)
+  cep         String   @db.VarChar(11)
+  endereco    String   @db.VarChar(50)
+  numero      String   @db.VarChar(11)
+  cpfCnpj     String   @db.VarChar(50)
+  ativo       Int
+  createdAt   DateTime @db.DateTime(0)
+  updatedAt   DateTime @db.DateTime(0)
+  razaoSocial String   @db.VarChar(100)
+  ie          String   @db.VarChar(20)
+  im          String   @db.VarChar(20)
+  bairro      String   @db.VarChar(100)
+  cidade      String   @db.VarChar(100)
+  uf          String   @db.VarChar(20)
+  complemento String   @db.VarChar(100)
+}
+
+model parceiros_tipo {
+  idParceiro BigInt
+  tipo       String @db.VarChar(20)
+
+  @@id([idParceiro, tipo])
 }
