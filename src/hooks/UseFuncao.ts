@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import ColecaoFuncao from "../backend/bd/ColecaoFuncao";
 import useTabelaOuForm from "./UseTabelaOuForm";
 import useAuth from "../data/hook/useAuth";
-
+import Alert from '@mui/material/Alert'
 import {
 	PostFuncao,
 	GetFuncao,
@@ -29,6 +29,8 @@ export default function useFuncao() {
 	const [FuncaoDup, setFuncaoDup] = useState([]);
 	const [Funcoes, setFuncoes] = useState([]);
 	const [FuncoesOptions, setFuncoesOptions] = useState([]);
+
+
 
 	useEffect(obterTodos, []);
 
@@ -72,16 +74,25 @@ export default function useFuncao() {
 	}
 
 	async function salvarFuncao({ id, nome, ativo }) {
-		setCarregando(true);
-		id
-			? UpdateFuncao({ id, nome }).then((resp) => {
-					setCarregando(false);
+	
+		if(id){
+			const response = await UpdateFuncao({ id, nome })
+				setCarregando(false);
+				setTimeout(()=>{
+
 					obterTodos();
-			  })
-			: PostFuncao({ nome }).then((resp) => {
-					setCarregando(false);
-					obterTodos();
-			  });
+				},300)
+				return response;
+		}
+		else{
+			PostFuncao({ nome }).then((resp) => {
+				setCarregando(false);
+				obterTodos();
+		  });
+				
+		}
+
+		
 	}
 
 	function novoFuncao() {
