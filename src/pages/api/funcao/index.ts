@@ -19,12 +19,11 @@ export default async  function handler(req, res) {
     if(req.method === "PUT"){
       const data = req.body;
       const funcao = await updateFuncao(funcaoController,data);
-      res.status(200).json(funcao);
+      res.status(200).json({funcao:funcao,method:'PUT'});
     }
 
     if(req.method === 'DELETE'){
       const data = req.body
-      console.log(data)
       const funcao =  await deleteFuncao(funcaoController,data)
          res.status(200).json(funcao)
     }

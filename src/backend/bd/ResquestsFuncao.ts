@@ -39,17 +39,17 @@ export async function UpdateFuncao({ id, nome }) {
 		id,
 		nome,
 	};
-	return fetch(`${url}`, {
+	const resultado = await fetch(`${url}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(data),
-	})
-		.then((response) => response)
-		.catch(() => {
+	}).then((response) => response.json())
+	  .catch((err) => {
 			alert("Erro ao editar Função !");
 		});
+		return resultado;
 }
 
 export async function ExcluirFuncao(id) {
