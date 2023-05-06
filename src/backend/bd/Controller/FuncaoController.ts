@@ -45,10 +45,10 @@ export default class FuncaoController {
 					updatedAt: new Date(),
 				},
 			});
-			return SuperJSON.stringify({
+			return JSON.parse(SuperJSON.stringify({
 				id: (await resposta).id,
 				nome: (await resposta).nome
-			});
+			}));
 		} catch (e) {
 			return e;
 		}
