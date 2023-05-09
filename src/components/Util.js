@@ -73,5 +73,5 @@ export const valueToOptionNumber = (valor, multiple,options) => {
 				value: item,
 				label: item,
 		  }))
-		: options.find(option => Number(option.value) === Number(valor));
+		: options?.find(option => Number(option.value) === Number(valor));
 };
