@@ -4,22 +4,25 @@ import Funcao from "../../../../core/Funcao";
 import { trataNull } from "../../../Util";
 import Botao from "../Botao";
 import Entrada from "../Entrada";
-interface FormularioFuncaoProps {
-	funcao: Funcao;
-	funcaoMudou?: (funcao: Funcao) => void;
-	cancelado?: () => void;
-}
 
 interface MessageProps {
 	ativo?: boolean;
 	message?: String;
 }
 
-export default function FormularioFuncao(props) {
-	const id = trataNull(props.funcao?.id);
+export default function FormularioLocalEstoque({
+    local_estoque,
+    local_estoqueDup,
+    salvarLocalEstoque,
+    exibirTabela
+}) {
+	const id = trataNull(local_estoque?.id);
 	const [nome, setNome] = useState(
-		(props.funcao?.nome || props.funcaoDup?.nome) ?? ""
+		(local_estoque?.nome || local_estoqueDup?.nome) ?? ""
 	);
+	const [descricao, setDescricao] = useState(
+		(local_estoque?.descricao || local_estoqueDup.descricao) ?? ""
+	)
 
 	const [mostrarMensagem, setMostrarMensagem] = useState<MessageProps>({
 		ativo: false,
@@ -29,8 +32,7 @@ export default function FormularioFuncao(props) {
 	const [open, setOpen] = useState(false);
 
 	const handleClick = () => {
-		props
-			.salvarFuncao?.({ id, nome })
+		salvarLocalEstoque?.({ id, nome,descricao })
 			.then((response) => {
 				const msg =
 					response?.method === "PUT"
@@ -74,6 +76,13 @@ export default function FormularioFuncao(props) {
 					valorMudou={setNome}
 					className="col-span-4"
 				/>
+				<Entrada
+					texto="Descricao"
+					tipo="textarea"
+					valor={descricao}
+					valorMudou={setDescricao}
+					className="col-span-4"
+				/>
 			</div>
 			<div className="flex justify-end mt-4">
 				<Botao
@@ -85,7 +94,7 @@ export default function FormularioFuncao(props) {
 				>
 					{id ? "Alterar" : "Salvar"}
 				</Botao>
-				<Botao cor="red-600" onClick={props.exibirTabela}>
+				<Botao cor="red-600" onClick={exibirTabela}>
 					Voltar
 				</Botao>
 			</div>

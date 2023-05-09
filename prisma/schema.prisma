@@ -64,6 +64,9 @@ model products {
   categoria   String   @db.VarChar(255)
   codigoBarra String   @db.VarChar(255)
   preco       Float
+  insumo      Int
+  venda       Int
+  composicao  Int
   ativo       Int
   createdAt   DateTime @db.DateTime(0)
   updatedAt   DateTime @db.DateTime(0)
@@ -122,4 +125,18 @@ model parceiros_tipo {
   tipo       String @db.VarChar(20)
 
   @@id([idParceiro, tipo])
+}
+
+model local_estoque {
+  id        BigInt   @id @default(autoincrement())
+  nome      String   @db.VarChar(50)
+  descricao String   @db.VarChar(250)
+  ativo     Int
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model tipo_produto {
+  id   BigInt @id @default(autoincrement())
+  nome String @db.VarChar(250)
 }

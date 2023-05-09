@@ -81,7 +81,7 @@ export default function useFuncao() {
 				setTimeout(()=>{
 
 					obterTodos();
-				},300)
+				},500)
 				return response;
 		}
 		else{

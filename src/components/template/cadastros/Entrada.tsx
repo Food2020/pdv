@@ -1,5 +1,5 @@
 interface EntradaProps{
-    tipo?: 'text' | 'number' | 'password' | 'email',
+    tipo?: 'text' | 'number' | 'password' | 'email'|'textarea',
     texto: string,
     valor: any,
     somenteLeitura?:boolean

@@ -38,6 +38,10 @@ export default function MenuSuperior() {
 			url: "/operacional/cargo",
 			texto: "Cadastro Funções",
 		},
+		{
+			url: "/operacional/local_estoque",
+			texto: "Cadastro Local Estoque",
+		},
 	];
 
 	const urlsConfig = [
