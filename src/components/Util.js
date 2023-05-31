@@ -1,14 +1,15 @@
+import { format,parse } from 'date-fns';
+
+function _checkZero(data) {
+	if (data.length == 1) {
+		data = "0" + data;
+	}
+	return data;
+}
 export function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
 }
 export const renderizaDateTime = (dateTime) => {
-	function checkZero(data) {
-		if (data.length == 1) {
-			data = "0" + data;
-		}
-		return data;
-	}
-
 	var date = new Date(dateTime);
 	var day = date.getDate() + "";
 	var month = date.getMonth() + 1 + "";
@@ -17,14 +18,22 @@ export const renderizaDateTime = (dateTime) => {
 	var minutes = date.getMinutes() + "";
 	var seconds = date.getSeconds() + "";
 
-	day = checkZero(day);
-	month = checkZero(month);
-	year = checkZero(year);
-	hour = checkZero(hour);
-	minutes = checkZero(minutes);
-	seconds = checkZero(seconds);
+	day = _checkZero(day);
+	month = _checkZero(month);
+	year = _checkZero(year);
+	hour = _checkZero(hour);
+	minutes = _checkZero(minutes);
+	seconds = _checkZero(seconds);
 
 	return day + "/" + month + "/" + year + " " + hour + ":" + minutes;
+};
+export const dateBrToDate = (dateBr) => {
+	if(!dateBr){
+		return "";
+	}
+	let timeStamp = parse(dateBr, 'dd/MM/yyyy', new Date());
+	var date = new Date(timeStamp);
+	return date;
 };
 export const renderizaLabelSelect = (valor, options) => {
 	let obj = options.find((item) => item.value == valor);
@@ -50,7 +59,17 @@ export const trataNull = (elem) => {
 	// }
 	return elem ?? "";
 };
+export const arrayToOption = (array,isProd) => {
+	let arrayOptions = array.map((item) => {
+		let properties = {
+			value: isProd ? item.idProduto : item.id,
+			label: item.nome,
+		};
+		return properties;
+	});
 
+	return arrayOptions;
+}
 export const optionToValue = (valor, multiple) => {
 	return multiple ? valor.map((item) => item.value) : valor.value;
 };

@@ -1,4 +1,3 @@
-import { parceiros } from "@prisma/client";
 import { useState, useEffect, useMemo } from "react";
 import useTabelaOuForm from "./UseTabelaOuForm";
 import useAuth from "../data/hook/useAuth";
@@ -8,6 +7,7 @@ import {
 	GetParceiro,
 	ExcluirParceiro,
 	UpdateParceiro,
+	GetFornecedores,
 } from "../backend/bd/ResquestsParceiro";
 
 export default function useParceiro() {
@@ -28,6 +28,7 @@ export default function useParceiro() {
 	const [ParceiroDup, setParceiroDup] = useState([]);
 	const [Parceiros, setParceiros] = useState([]);
 	const [ParceirosOptions, setParceirosOptions] = useState([]);
+	const [FornecedoresOptions, setFornecedoresOptions] = useState([]);
 
 	useEffect(obterTodos, []);
 
@@ -38,6 +39,9 @@ export default function useParceiro() {
 			setParceirosOptions(ArrayToOption(parceiro.json));
 			exibirTabela();
 			setCarregando(false);
+		});
+		GetFornecedores().then((fornecedores) => {
+			setFornecedoresOptions(ArrayToOption(fornecedores.json));
 		});
 	}
 
@@ -89,14 +93,6 @@ export default function useParceiro() {
 		exibirFormulario();
 	}
 
-	function TratarVariavel(variavel) {
-		if (typeof variavel == "string") {
-			return variavel.toLowerCase();
-		} else {
-			return variavel;
-		}
-	}
-
 	return {
 		Parceiro,
 		Parceiros,
@@ -115,5 +111,6 @@ export default function useParceiro() {
 		alterarOrdenacao,
 		getClassNamesFor,
 		ParceiroDup,
+		FornecedoresOptions
 	};
 }

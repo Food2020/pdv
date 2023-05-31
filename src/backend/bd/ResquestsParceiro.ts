@@ -27,6 +27,19 @@ export async function GetParceiro() {
 		});
 }
 
+export async function GetFornecedores() {
+	return fetch(`${url}/fornecedor`, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	})
+		.then((data) => data.json())
+		.catch(() => {
+			alert("Erro na consulta de Parceiros!");
+		});
+}
+
 export async function UpdateParceiro(data) {
 	return fetch(url, {
 		method: "PUT",

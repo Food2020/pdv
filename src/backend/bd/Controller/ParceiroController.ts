@@ -5,7 +5,7 @@ import { prisma } from "../../../lib/prisma";
 export default class ParceiroController {
 	async get() {
 		try {
-			let parceiros = await prisma.parceiros.findMany() as any;
+			let parceiros = (await prisma.parceiros.findMany()) as any;
 			const parceirosTipos = await prisma.parceiros_tipo.findMany();
 
 			if (parceiros.length > 0) {
@@ -16,6 +16,34 @@ export default class ParceiroController {
 				}
 			}
 			return parceiros;
+		} catch (e) {
+			return e;
+		}
+	}
+	async getFornecedores() {
+		try {
+			const idFornecedores = await prisma.parceiros_tipo.findMany({
+				where: {
+					tipo: "Fornecedor",
+				},
+				select: {
+					idParceiro: true,
+				},
+			});
+
+			const ids = idFornecedores.map(
+				(parceiro_tipo) => parceiro_tipo.idParceiro
+			);
+
+			const fornecedores = await prisma.parceiros.findMany({
+				where: {
+					id: {
+						in: ids,
+					},
+				},
+			});
+
+			return fornecedores;
 		} catch (e) {
 			return e;
 		}
@@ -164,7 +192,7 @@ export default class ParceiroController {
 					idParceiro: Number(parceiro.id),
 				},
 			});
-			
+
 			return parceiro;
 		} catch (e) {
 			console.log("e", e);

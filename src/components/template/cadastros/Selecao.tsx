@@ -8,6 +8,7 @@ export default function Selecao(props) {
 		if (props.loadOptions) {
 			return (
 				<AsyncSelect
+					isDisabled={props.somenteLeitura}
 					value={props.valor}
 					onChange={(newValue) => {
                         props.valorMudou?.(newValue.value);
@@ -18,6 +19,7 @@ export default function Selecao(props) {
 		} else {
 			return (
 				<Select
+					isDisabled={props.somenteLeitura}
 					value={props.valor}
                     onChange={(newValue) => {
                         props.valorMudou?.(newValue);

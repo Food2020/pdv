@@ -10,6 +10,7 @@ import {
 	ExcluirProduto,
 	UpdateProduto,
 } from "../backend/bd/ResquestsProdutos";
+import { arrayToOption } from "../components/Util";
 
 export default function UseProduto() {
 	const { usuario, setCarregando } = useAuth();
@@ -28,12 +29,14 @@ export default function UseProduto() {
 	const [Produto, setProduto] = useState([]);
 	const [ProdutoDup, setProdutoDup] = useState([]);
 	const [Produtos, setProdutos] = useState([]);
+	const [ProdutosOptions, setProdutosOptions] = useState([]);
 
 	useEffect(obterTodos, []);
 
 	function obterTodos() {
 		setCarregando(true);
 		GetProduto().then((prods) => {
+			setProdutosOptions(arrayToOption(prods.json,true));
 			setProdutos(prods);
 			exibirTabela();
 			setCarregando(false);
@@ -105,5 +108,6 @@ export default function UseProduto() {
 		alterarOrdenacao,
 		getClassNamesFor,
 		ProdutoDup,
+		ProdutosOptions
 	};
 }
