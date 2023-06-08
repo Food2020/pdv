@@ -5,48 +5,63 @@ import { prisma } from "../../../lib/prisma";
 export default class UserController {
 	async get() {
 		try {
-			const produtos = prisma.products.findMany();
+			let produtos = (await prisma.products.findMany()) as any;
+			const produtoComposicao =await prisma.produto_composicao.findMany();
+
+			if (produtos.length > 0) {
+				for (let i = 0; i < produtos.length; i++) {
+					produtos[i].produtoComposicao = produtoComposicao
+					.filter((item) => item.idProduto === produtos[i].idProduto);
+				}
+			}
 			return produtos;
 		} catch (e) {
+			console.log(e);
 			return e;
 		}
 	}
-	async create(data: products) {
-		try {
-			const produto = prisma.products.create({
+	async create(data: any) {
+		const insumo = data.tipo.includes("Insumo") ? 1 : 0;
+		const venda = data.tipo.includes("Venda") ? 1 : 0;
+		const composicao = data.composicao ? 1 : 0;
+		const estoque = data.local_estoque?.value ?? 0;
+
+		const produto = await prisma.products
+			.create({
 				data: {
-					ativo: Number(data.ativo),
-					createdAt: new Date(),
-					unidade: data.unidade.toString(),
-					updatedAt: new Date(),
-					categoria: data.categoria.toString(),
-					codigo: data.codigo.toString(),
+					ativo: data.ativo,
+					categoria: data.categoria,
 					codigoBarra: data.codigoBarra,
-					nome: data.nome.toString(),
+					composicao: composicao,
+					codigo: data.codigo,
+					nome: data.nome,
 					preco: Number(data.preco),
-				},
+					unidade: String(data.unidade),
+					local_estoque:estoque,
+					insumo: insumo,
+					venda: venda,
+					createdAt: new Date(),
+					updatedAt: new Date(),
+				} as any,
+			})
+			.then((response) => {
+				return SuperJSON.stringify(response);
+			})
+			.catch((e) => {
+				console.log(e);
+				return e;
 			});
-			return SuperJSON.stringify({
-				ativo: (await produto).ativo,
-				categoria: (await produto).categoria,
-				codigo: (await produto).codigo,
-				codigoBarra: (await produto).codigoBarra,
-				createdAt: (await produto).createdAt,
-				id: (await produto).id,
-				nome: (await produto).nome,
-				preco: (await produto).preco,
-				unidade: (await produto).unidade,
-			});
-		} catch (e) {
-			return e;
-		}
 	}
 
-	async update(data: products) {
+	async update(data) {
 		try {
-			const produto = prisma.products.update({
+			const Pinsumo = data.tipo.includes("Insumo") ? 1 : 0;
+			const Pvenda = data.tipo.includes("Venda") ? 1 : 0;
+			const Pcomposicao = data.composicao ? 1 : 0;
+			const estoque = data.local_estoque?.value ?? 0;
+			const produto = await prisma.products.update({
 				where: {
-					id: Number(data.id),
+					idProduto: data.id,
 				},
 				data: {
 					nome: data.nome,
@@ -55,36 +70,87 @@ export default class UserController {
 					codigoBarra: data.codigoBarra,
 					categoria: data.categoria.toString(),
 					unidade: data.unidade.toString(),
+					localEstoque: estoque,
+					insumo: Pinsumo,
+					venda: Pvenda,
+					composicao: Pcomposicao,
 					ativo: Number(1),
 					updatedAt: new Date(),
 				},
 			});
+			const insumo = data.insumo;
+			if (insumo.length) {
+				for (const produto of insumo) {
+					await prisma.produto_composicao
+						.create({
+							data: {
+								idProduto: Number(data.id),
+								quantidade: Number(produto?.quantidade),
+								dataCriacao: new Date(),
+								dataAtualizacao: new Date(),
+							} as any,
+						})
+						.catch((e) => {
+							console.log(e);
+						});
+				}
+			}
+			const tipos = data.tipo;
+			if (tipos.length) {
+				for (const tipo of tipos) {
+					await prisma.tipo_produto.create({
+						data: {
+							idProduto: data.id,
+							nome: tipo,
+							dataCriacao: new Date(),
+							dataAtualizacao: new Date(),
+						} as any,
+					});
+				}
+			}
 			return SuperJSON.stringify({
-				id: (await produto).id,
-				nome: (await produto).nome,
-				preco: (await produto).preco,
-				codigo: (await produto).codigo,
-				codigoBarra: (await produto).codigoBarra,
-				categoria: (await produto).categoria,
-				unidade: (await produto).unidade,
-				ativo: (await produto).ativo,
-				createdAt: (await produto).createdAt,
-				updateAt: (await produto).updatedAt,
+				idProduto: produto.idProduto,
+				nome: produto.nome,
+				preco: produto.preco,
+				codigo: produto.codigo,
+				codigoBarra: produto.codigoBarra,
+				categoria: produto.categoria,
+				unidade: produto.unidade,
+				ativo: produto.ativo,
+				createdAt: produto.createdAt,
+				updateAt: produto.updatedAt,
+				insumo: insumo,
 			});
 		} catch (e) {
+			console.log(e);
 			return e;
 		}
 	}
 
-	async delete(data: products) {
+	async delete(data) {
 		try {
 			const produto = prisma.products.delete({
 				where: {
-					id: Number(data.id),
+					idProduto: data.id,
 				},
 			});
 			return produto;
 		} catch (e) {
+			console.log("eerr", e);
+			return e;
+		}
+	}
+
+	async getInsumo() {
+		try {
+			const insumos = prisma.products.findMany({
+				where: {
+					insumo: 1,
+				},
+			});
+			return insumos;
+		} catch (e) {
+			console.log(e);
 			return e;
 		}
 	}

@@ -4,15 +4,29 @@ import SuperJSON from "superjson";
 
 const url = "/api/produto/";
 
-export async function PostProduto({ ativo = 1,categoria,codigo,codigoBarra, nome, preco,  unidade }) {
+export async function PostProduto({
+	ativo = 1,
+	categoria,
+	codigo,
+	codigoBarra,
+	composicao,
+	local_estoque,
+	nome,
+	preco,
+	tipo,
+	unidade,
+}) {
 	let data = {
-		nome,
-		preco,
+		ativo,
+		categoria,
 		codigo,
 		codigoBarra,
-		categoria,
+		composicao,
+		local_estoque,
+		nome,
+		preco,
+		tipo,
 		unidade,
-		ativo,
 	};
 	return fetch(url, {
 		method: "POST",
@@ -28,66 +42,61 @@ export async function PostProduto({ ativo = 1,categoria,codigo,codigoBarra, nome
 }
 
 export async function GetProduto() {
-	return fetch(url, {
+	return await fetch(url, {
 		method: "GET",
 		headers: {
 			"Content-Type": "application/json",
 		},
 	})
 		.then((data) => data.json())
+		.then((response) => response)
 		.catch(() => {
 			alert("Erro na consulta de produtos!");
 		});
 }
 
-export async function UpdateProduto({
-	ativo = 1,
-	categoria,
-	codigo,
-	codigoBarra,
-	id,
-	nome,
-	preco,
-	unidade,
-}) {
-	let data = {
-		ativo,
-		id,
-		nome,
-		preco,
-		codigo,
-		codigoBarra,
-		categoria,
-		unidade,
-	};
+export async function UpdateProduto(produto) {
 	return fetch(url, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify(data),
+		body: JSON.stringify(produto),
 	})
 		.then((response) => response)
 		.catch((error) => {
-			
 			alert("Erro ao editar Produto !");
 		});
 }
 
-export async function ExcluirProduto(id:number) {
-	let data ={
-		id:id
-	}
+export async function ExcluirProduto(id: number) {
+	let data = {
+		id: id,
+	};
 	return fetch(url, {
 		method: "DELETE",
 		headers: {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(data),
-
 	})
 		.then((data) => data.json())
 		.catch(() => {
 			alert("Erro ao deletar produto !");
+		});
+}
+
+export async function GetProdutoInsumo() {
+	return await fetch(`/api/produto/insumo`, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	})
+		.then((data) => {
+			return data.json();
+		})
+		.catch(() => {
+			alert("Erro na consulta de produtos insumos!");
 		});
 }
