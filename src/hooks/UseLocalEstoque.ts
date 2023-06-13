@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import useTabelaOuForm from "./UseTabelaOuForm";
 import useAuth from "../data/hook/useAuth";
-import Alert from '@mui/material/Alert'
+import Alert from "@mui/material/Alert";
 import {
 	PostLocalEstoque,
 	GetLocalEstoque,
@@ -28,26 +28,24 @@ export default function useFuncao() {
 	const [LocalEstoques, setLocalEstoques] = useState([]);
 	const [LocalEstoquesOptions, setLocalEstoquesOptions] = useState([]);
 
-
-
 	useEffect(obterTodos, []);
 
 	function obterTodos() {
 		setCarregando(true);
 		GetLocalEstoque()
-		.then((local_estoque) => {
-			setLocalEstoques(local_estoque);
-			setLocalEstoquesOptions(ArrayToOption(local_estoque));
-			exibirTabela();
-			setCarregando(false);
-		})
-		.catch((e)=>e)
+			.then((local_estoque) => {
+				setLocalEstoques(local_estoque);
+				setLocalEstoquesOptions(ArrayToOption(local_estoque));
+				exibirTabela();
+				setCarregando(false);
+			})
+			.catch((e) => e);
 	}
 
 	function ArrayToOption(local_estoque) {
 		let funcoesOptions = local_estoque.json.map((local_estoque) => {
 			let properties = {
-				value: local_estoque.id,
+				value: local_estoque.idLocalEstoque,
 				label: local_estoque.nome,
 			};
 			return properties;
@@ -73,27 +71,22 @@ export default function useFuncao() {
 		exibirFormulario();
 	}
 
-	async function salvarLocalEstoque({ id, nome,descricao, ativo}) {
-	
-		if(id){
-			const response = await UpdateLocalEstoque({ id, nome,descricao,ativo })
+	async function salvarLocalEstoque({ id, nome, descricao, ativo }) {
+		if (id) {
+			const response = await UpdateLocalEstoque({ id, nome, descricao, ativo });
+			setCarregando(false);
+			setTimeout(() => {
+				obterTodos();
+			}, 500);
+			return response;
+		} else {
+			PostLocalEstoque({ nome, descricao }).then((resp) => {
 				setCarregando(false);
-				setTimeout(()=>{
+				setTimeout(() => {
 					obterTodos();
-				},500)
-				return response;
+				}, 500);
+			});
 		}
-		else{
-			PostLocalEstoque({ nome,descricao }).then((resp) => {
-				setCarregando(false);
-				setTimeout(()=>{
-					obterTodos();
-				},500)
-		  });
-				
-		}
-
-		
 	}
 
 	function novoLocalEstoque() {
