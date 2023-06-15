@@ -7,68 +7,66 @@ import {
 	renderizaDateTime,
 	renderizaLabelSelect,
 	trataArrayNull,
-	renderizaSituacao
+	renderizaSituacao,
+	renderizarSimOuNao,
 } from "../../../Util";
 import { Tooltip } from "@mui/material";
 
 export default function TabelaProduto(props) {
 	function renderizarAcoesTable({ row }) {
 		const produto = row.original;
-
 		return (
 			<div>
 				{props.produtoEditar && (
 					<Tooltip title="Editar" placement="top">
 						<button
-						onClick={() => props.produtoEditar(produto)}
-						className={`
+							onClick={() => props.produtoEditar(produto)}
+							className={`
                     text-green-500
                     rounded-full
                     hover:bg-purple-50 
                     p-3
                 `}
-					>
-						{IconeEdicao}
-					</button>
+						>
+							{IconeEdicao}
+						</button>
 					</Tooltip>
-				) 
-				}
+				)}
 				{props.produtoExcluir && (
-					
 					<Tooltip title="Excluir" placement="top">
 						<button
-						onClick={() => props.produtoExcluir(produto)}
-						className={`
+							onClick={() => props.produtoExcluir(produto)}
+							className={`
                         text-red-600
                         rounded-full
                         hover:bg-purple-50 
                         p-3
                     `}
-					>
-						{IconeLixo}
-					</button>
+						>
+							{IconeLixo}
+						</button>
 					</Tooltip>
-				) }
-				{props.produtoDuplicar &&(
+				)}
+				{props.produtoDuplicar && (
 					<Tooltip title="Duplicar" placement="top">
 						<button
-						onClick={() => props.produtoDuplicar(produto)}
-						className={`
+							onClick={() => props.produtoDuplicar(produto)}
+							className={`
                         text-black
                         rounded-full
                         hover:bg-purple-50 
                         p-3
                     `}
-					>
-						{IconeDuplicar}
-					</button>
+						>
+							{IconeDuplicar}
+						</button>
 					</Tooltip>
-				) }
+				)}
 			</div>
 		);
 	}
 	const flagExibeAcoes = props?.produtoEditar || props?.produtoExcluir;
-	const Produtos = props?.produtos?.json;
+	const Produtos = props?.produtos;
 	const getData = () => {
 		const data = trataArrayNull(Produtos);
 		return [...data];
@@ -94,13 +92,15 @@ export default function TabelaProduto(props) {
 		},
 		{
 			Header: "Categoria",
-			accessor: row => renderizaLabelSelect(row.categoria, props.categoriasOptions),
+			accessor: (row) =>
+				renderizaLabelSelect(row.categoria, props.categoriasOptions),
 			Cell: ({ row }) =>
 				renderizaLabelSelect(row.original.categoria, props.categoriasOptions),
 		},
 		{
 			Header: "Unidade",
-			accessor: row => renderizaLabelSelect(row.unidade, props.unidadesOptions),
+			accessor: (row) =>
+				renderizaLabelSelect(row.unidade, props.unidadesOptions),
 			Cell: ({ row }) =>
 				renderizaLabelSelect(row.original.unidade, props.unidadesOptions),
 		},
@@ -109,15 +109,26 @@ export default function TabelaProduto(props) {
 			accessor: "preco",
 		},
 		{
+			Header: "Composicao",
+			accessor: (row) => renderizarSimOuNao(row.composicao),
+		},
+		{
+			Header: "Venda",
+			accessor: (row) => renderizarSimOuNao(row.venda),
+		},
+		{
+			Header: "Insumo",
+			accessor: (row) => renderizarSimOuNao(row.insumo),
+		},
+		{
 			Header: "Dt criação",
-			accessor: row => renderizaDateTime(row.createdAt),
+			accessor: (row) => renderizaDateTime(row.createdAt),
 			Cell: ({ row }) => renderizaDateTime(row.original.createdAt),
 		},
 		{
 			Header: "Situação",
-			accessor: row => renderizaSituacao(row.ativo),
-			Cell: ({ row }) =>
-			renderizaSituacao(row.original.ativo),
+			accessor: (row) => renderizaSituacao(row.ativo),
+			Cell: ({ row }) => renderizaSituacao(row.original.ativo),
 		},
 		{
 			Header: "Ações",

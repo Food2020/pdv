@@ -9,6 +9,7 @@ import {
 	GetProduto,
 	ExcluirProduto,
 	UpdateProduto,
+	GetProdutoInsumo,
 } from "../backend/bd/ResquestsProdutos";
 
 export default function UseProduto() {
@@ -28,16 +29,50 @@ export default function UseProduto() {
 	const [Produto, setProduto] = useState([]);
 	const [ProdutoDup, setProdutoDup] = useState([]);
 	const [Produtos, setProdutos] = useState([]);
+	const [ProdutosOptions, setProdutosOptions] = useState([]);
+	const [InsumosOptions, setInsumoOptions] = useState([]);
 
 	useEffect(obterTodos, []);
 
+	function ArrayToOption(Produto) {
+		let produtosOptions = Produto.json.map((produto) => {
+			let properties = {
+				value: produto.idProduto,
+				label: produto.nome,
+				unidade: produto.unidade,
+			};
+			return properties;
+		});
+
+		return produtosOptions;
+	}
+
 	function obterTodos() {
 		setCarregando(true);
-		GetProduto().then((prods) => {
-			setProdutos(prods);
-			exibirTabela();
-			setCarregando(false);
-		});
+		GetProduto()
+			.then((prods) => {
+				setProdutos(prods.json);
+				setProdutosOptions(ArrayToOption(prods));
+				exibirTabela();
+				setCarregando(false);
+			})
+			.catch((e) => {
+				return e;
+			});
+
+		GetProdutoInsumo()
+			.then((response) => setInsumoOptions(ArrayToOption(response)))
+			.catch((e) => {
+				console.log(e);
+			});
+	}
+
+	function obterInsumos() {
+		GetProdutoInsumo()
+			.then((response) => setInsumoOptions(ArrayToOption(response)))
+			.catch((e) => {
+				console.log(e);
+			});
 	}
 
 	function editarProduto(Produto) {
@@ -47,7 +82,7 @@ export default function UseProduto() {
 	}
 
 	async function excluirProduto(Produto) {
-		await ExcluirProduto(Produto.id);
+		await ExcluirProduto(Produto.idProduto);
 		obterTodos();
 	}
 
@@ -57,21 +92,17 @@ export default function UseProduto() {
 		exibirFormulario();
 	}
 
-	async function salvarProduto(id, codigo,codigoBarra, nome, preco, categoria, unidade) {
+	async function salvarProduto(produto) {
 		setCarregando(true);
-		id
-			? UpdateProduto({ id, codigo,codigoBarra, nome, preco, categoria, unidade }).then(
-					(resp) => {
-						setCarregando(false);
-						obterTodos();
-					}
-			  )
-			: PostProduto({ codigo, nome,codigoBarra, preco, categoria, unidade }).then(
-					(resp) => {
-						setCarregando(false);
-						obterTodos();
-					}
-			  );
+		produto.id
+			? UpdateProduto(produto).then((resp) => {
+					setCarregando(false);
+					obterTodos();
+			  })
+			: PostProduto(produto).then((resp) => {
+					setCarregando(false);
+					obterTodos();
+			  });
 	}
 
 	function novoProduto() {
@@ -89,21 +120,24 @@ export default function UseProduto() {
 	}
 
 	return {
-		Produto,
-		Produtos,
-		novoProduto,
-		salvarProduto,
-		excluirProduto,
-		editarProduto,
-		duplicarProduto,
-		obterTodos,
-		formularioVisivel,
-		tabelaVisivel,
-		exibirTabela,
-		ordenacao,
-		setOrdenacao,
 		alterarOrdenacao,
+		duplicarProduto,
+		editarProduto,
+		excluirProduto,
+		exibirTabela,
+		formularioVisivel,
 		getClassNamesFor,
+		InsumosOptions,
+		novoProduto,
+		obterInsumos,
+		obterTodos,
+		ordenacao,
+		Produto,
 		ProdutoDup,
+		Produtos,
+		ProdutosOptions,
+		salvarProduto,
+		setOrdenacao,
+		tabelaVisivel,
 	};
 }
