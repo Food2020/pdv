@@ -27,7 +27,7 @@ export const renderizaDateTime = (dateTime) => {
 	return day + "/" + month + "/" + year + " " + hour + ":" + minutes;
 };
 export const renderizaLabelSelect = (valor, options) => {
-	let obj = options.find((item) => item.value == valor);
+	let obj = options?.find((item) => item.value == valor);
 	return obj ? obj.label : "";
 };
 export const renderizaSituacao = (situacao) => {
@@ -52,7 +52,7 @@ export const trataNull = (elem) => {
 };
 
 export const optionToValue = (valor, multiple) => {
-	return multiple ? valor.map((item) => item.value) : valor.value;
+	return multiple ? valor.map((item) => item.value) : valor?.value;
 };
 
 export const valueToOption = (valor, multiple) => {
@@ -67,11 +67,15 @@ export const valueToOption = (valor, multiple) => {
 		  };
 };
 
-export const valueToOptionNumber = (valor, multiple,options) => {
+export const valueToOptionNumber = (valor, multiple, options) => {
 	return multiple
 		? valor?.map((item) => ({
 				value: item,
 				label: item,
 		  }))
-		: options?.find(option => Number(option.value) === Number(valor));
+		: options?.find((option) => Number(option.value) === Number(valor));
+};
+
+export const renderizarSimOuNao = (valor) => {
+	return valor === 1 ? "Sim" : "Nao";
 };

@@ -27,7 +27,7 @@ export async function GetProduto() {
 		},
 	})
 		.then((data) => data.json())
-		.then((response) => {console.log('response',response);return response})
+		.then((response) => {return response})
 		.catch(() => {
 			alert("Erro na consulta de produtos!");
 		});
