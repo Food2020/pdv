@@ -26,7 +26,7 @@ export default class LocalEstoqueController {
 			{	
 
 				return JSON.parse(SuperJSON.stringify({
-					id: Number( response.id),
+					id: Number( response.idLocalEstoque),
 					nome: ( response).nome,
 					descricao:( response).descricao,
 					ativo: ( response).ativo,
