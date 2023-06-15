@@ -109,7 +109,7 @@ export default function FormularioProduto({
 	);
 	const [composicao, setComposicao] = useState(produto.composicao);
 	const [quantidade, setQuantidade] = useState(0);
-	const [insumo, setInsumo] = useState<Insumo[]>([...produto.produtoComposicao]);
+	const [insumo, setInsumo] = useState<Insumo[]>(produto.produtoComposicao||[]);
 
 	
 	const retornaNomeProduto = (id) => {
@@ -168,7 +168,6 @@ export default function FormularioProduto({
 		novaLista.splice(index, 1);
 		setInsumo(novaLista);
 	}
-	console.log('insumo',insumo)
 	return (
 		<>
 			<Box sx={{ width: "100%" }}>
