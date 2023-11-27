@@ -34,6 +34,26 @@ interface Insumo {
 	quantidade?: string;
 }
 
+interface Produto{
+	ativo?:number,
+	categoria?:number,
+	codigo?:string,
+	codigoBarra?:string,
+	composicao?:number,
+	createdAt:string,
+	idProduto?:number,
+	insumo?:number,
+	localEstoque?:number,
+	nome?:string,
+	preco?:number,
+	produtoComposicao?:Insumo[],
+	quantidade?:number,
+	unidade:number,
+	updatedAt:string,
+	venda?:number,
+	tipo?:string[],
+}
+
 interface LocalEstoque {
 	value?: String;
 	label?: String;
@@ -50,28 +70,6 @@ export default function FormularioProduto({
 	salvarProduto,
 	exibirTabela,
 }) {
-	const id = trataNull(produto?.idProduto);
-	const [nome, setNome] = useState((produto?.nome || produtoDup?.nome) ?? "");
-	const [codigo, setCodigo] = useState(
-		(produto?.codigo || produtoDup?.codigo) ?? ""
-	);
-	const [unidade, setUnidade] = useState(
-		(valueToOptionNumber(produto?.unidade, false, unidadesOptions) ||
-			valueToOptionNumber(produtoDup?.unidade, false, unidadesOptions)) ??
-			null
-	);
-	const [categoria, setCategoria] = useState(
-		(valueToOptionNumber(produto?.categoria, false, categoriasOptions) ||
-			valueToOptionNumber(produtoDup?.categoria, false, categoriasOptions)) ??
-			null
-	);
-	const [preco, setPreco] = useState(
-		(produto?.preco || produtoDup?.preco) ?? 0
-	);
-	const [codigoBarra, setcodigoBarra] = useState(
-		(produto?.codigoBarra || produtoDup?.codigoBarra) ?? ""
-	);
-
 	const retornaArrayTipo = (venda, insumo) => {
 		let Arr = [];
 		if (venda === 1) {
@@ -89,25 +87,67 @@ export default function FormularioProduto({
 		return Arr;
 	};
 
-	const [tipo, setTipo] = useState(
-		retornaArrayTipo(produto.venda, produto.insumo) ?? []
-	);
+	const [produtoData,setProdutoData] = useState<Produto>({
+		categoria:(valueToOptionNumber(produto?.categoria, false, categoriasOptions) ||
+		valueToOptionNumber(produtoDup?.categoria, false, categoriasOptions)) ?? null,
+		codigoBarra:(produto?.codigoBarra || produtoDup?.codigoBarra) ?? "",
+		codigo:(produto?.codigo || produtoDup?.codigo) ?? "",
+		composicao:produto.composicao,
+		idProduto:produto?.idProduto,
+		localEstoque:(valueToOptionNumber(produto?.localEstoque, false, localEstoqueOptions) ||
+		valueToOptionNumber(produtoDup?.localEstoque,false,localEstoqueOptions)) ??	null,
+		nome:(produto?.nome || produtoDup?.nome) ?? "",
+		preco:(produto?.preco || produtoDup?.preco) ?? 0,
+		produtoComposicao:produto.produtoComposicao||[],
+		quantidade:0,
+		tipo:retornaArrayTipo(produto.venda, produto.insumo) ?? [],
+		unidade:(valueToOptionNumber(produto?.unidade, false, unidadesOptions) ||
+		valueToOptionNumber(produtoDup?.unidade, false, unidadesOptions)) ?? null,
+	}as Produto)
 
-	const [localEstoque, setLocalEstoque] = useState<LocalEstoque>(
-		(valueToOptionNumber(produto?.localEstoque, false, localEstoqueOptions) ||
-			valueToOptionNumber(
-				produtoDup?.localEstoque,
-				false,
-				localEstoqueOptions
-			)) ??
-			null
-	);
+	// const id = trataNull(produto?.idProduto);
+	// const [nome, setNome] = useState((produto?.nome || produtoDup?.nome) ?? "");
+	// const [codigo, setCodigo] = useState(
+	// 	(produto?.codigo || produtoDup?.codigo) ?? ""
+	// );
+	// const [unidade, setUnidade] = useState(
+	// 	(valueToOptionNumber(produto?.unidade, false, unidadesOptions) ||
+	// 		valueToOptionNumber(produtoDup?.unidade, false, unidadesOptions)) ??
+	// 		null
+	// );
+	// const [categoria, setCategoria] = useState(
+	// 	(valueToOptionNumber(produto?.categoria, false, categoriasOptions) ||
+	// 		valueToOptionNumber(produtoDup?.categoria, false, categoriasOptions)) ??
+	// 		null
+	// );
+	// const [preco, setPreco] = useState(
+	// 	(produto?.preco || produtoDup?.preco) ?? 0
+	// );
+	// const [codigoBarra, setcodigoBarra] = useState(
+	// 	(produto?.codigoBarra || produtoDup?.codigoBarra) ?? ""
+	// );
+
+	
+
+	// const [tipo, setTipo] = useState(
+	// 	retornaArrayTipo(produto.venda, produto.insumo) ?? []
+	// );
+
+	// const [localEstoque, setLocalEstoque] = useState<LocalEstoque>(
+	// 	(valueToOptionNumber(produto?.localEstoque, false, localEstoqueOptions) ||
+	// 		valueToOptionNumber(
+	// 			produtoDup?.localEstoque,
+	// 			false,
+	// 			localEstoqueOptions
+	// 		)) ??
+	// 		null
+	// );
 	const [produtoInsumo, setProdutoInsumo] = useState(
 		(valueToOptionNumber(produto, false, produtoOptions) ||
 			valueToOptionNumber(produtoDup, false, produtoOptions)) ??
 			null
 	);
-	const [composicao, setComposicao] = useState(produto.composicao);
+	// const [composicao, setComposicao] = useState(produto.composicao);
 	const [quantidade, setQuantidade] = useState(0);
 	const [insumo, setInsumo] = useState<Insumo[]>(produto.produtoComposicao||[]);
 
@@ -123,7 +163,7 @@ export default function FormularioProduto({
 		},
 	];
 
-	if (!composicao) {
+	if (!produtoData.composicao) {
 		tipoProdutoOptions.push({
 			value: "Insumo",
 			label: "Insumo",
@@ -168,6 +208,7 @@ export default function FormularioProduto({
 		novaLista.splice(index, 1);
 		setInsumo(novaLista);
 	}
+	console.log(produtoData.composicao)
 	return (
 		<>
 			<Box sx={{ width: "100%" }}>
@@ -178,16 +219,16 @@ export default function FormularioProduto({
 						aria-label="basic tabs example"
 					>
 						<Tab label="Geral" {...a11yProps(0)} />
-						<Tab label="Composicao" {...a11yProps(1)} disabled={!composicao} />
+						<Tab label="Composicao" {...a11yProps(1)} disabled={!!produtoData.composicao} />
 					</Tabs>
 				</Box>
 				<TabPanel value={value} index={0}>
 					<div className="grid grid-cols-1 md:grid-cols-4">
-						{id ? (
+						{produtoData?.idProduto ? (
 							<Entrada
 								somenteLeitura
 								texto="Id"
-								valor={id}
+								valor={produtoData?.idProduto}
 								className="col-span-12"
 							/>
 						) : (
@@ -195,27 +236,27 @@ export default function FormularioProduto({
 						)}
 						<Entrada
 							texto="Código"
-							valor={codigo}
-							valorMudou={setCodigo}
+							valor={produtoData.codigo}
+							valorMudou={(produtoData)=>setProdutoData({...produtoData, codigo:produtoData.codigo})}
 							className="col-span-12"
 						/>
 						<Entrada
 							texto="Nome"
-							valor={nome}
-							valorMudou={setNome}
+							valor={produtoData?.nome}
+							valorMudou={(produtoData)=>setProdutoData({...produtoData, nome:produtoData.nome})}
 							className="col-span-12"
 						/>
 						<Entrada
 							texto="Cod. de Barra"
-							valor={codigoBarra}
-							valorMudou={setcodigoBarra}
+							valor={produtoData?.codigoBarra}
+							valorMudou={(produtoData)=>setProdutoData({...produtoData, codigoBarra:produtoData.codigoBarra})}
 							tipo="text"
 							className="col-span-4"
 						/>
 						<Entrada
 							texto="Preço"
-							valor={preco}
-							valorMudou={setPreco}
+							valor={produtoData?.preco}
+							valorMudou={(produtoData)=>setProdutoData({...produtoData, preco:produtoData.preco})}
 							tipo="number"
 							className="col-span-4"
 						/>
@@ -223,43 +264,43 @@ export default function FormularioProduto({
 					<div className="grid grid-cols-1 md:grid-cols-4">
 						<Selecao
 							options={categoriasOptions}
-							valorMudou={setCategoria}
-							valor={categoria}
+							valorMudou={(produtoData)=>setProdutoData({...produtoData, categoria:produtoData.categoria})}
+							valor={produtoData?.categoria}
 							texto="Categoria"
 							className="col-span-4"
 						/>
 						<Selecao
 							options={unidadesOptions}
-							valorMudou={setUnidade}
-							valor={unidade}
+							valorMudou={(produtoData)=>setProdutoData({...produtoData, unidade:produtoData.unidade})}
+							valor={produtoData?.unidade}
 							texto="Unidade"
 							className="col-span-4"
 						/>
 						<Selecao
 							options={tipoProdutoOptions}
-							valorMudou={setTipo}
-							valor={tipo}
+							valorMudou={(produtoData)=>setProdutoData({...produtoData, tipo:produtoData.tipo})}
+							valor={produtoData?.tipo}
 							texto="Tipo"
 							isMulti={true}
 							className="col-span-4"
 						/>
-						{optionToValue(tipo, true).includes("Insumo") && (
+						{optionToValue(produtoData.tipo, true).includes("Insumo") && (
 							<Selecao
 								options={localEstoqueOptions}
-								valorMudou={setLocalEstoque}
-								valor={localEstoque}
+								valorMudou={(produtoData)=>setProdutoData({...produtoData, localEstoque:produtoData.localEstoque})}
+								valor={produtoData?.localEstoque}
 								texto="Local Estoque"
 								className="col-span-4"
 							/>
 						)}
-						{!optionToValue(tipo, true).includes("Insumo") && (
-							<ToggleButton check={composicao} valorMudou={setComposicao} />
+						{!optionToValue(produtoData.tipo, true).includes("Insumo") && (
+							<ToggleButton check={produtoData?.composicao} valorMudou={(produtoData)=>setProdutoData({...produtoData, composicao:produtoData.composicao})} />
 						)}
 					</div>
 				</TabPanel>
 
 				<TabPanel value={value} index={1}>
-					<div className="col-span-2">
+				<div className="col-span-2">
 						<Selecao
 							options={produtoOptions}
 							valorMudou={setProdutoInsumo}
@@ -279,10 +320,7 @@ export default function FormularioProduto({
 							cor="indigo-500"
 							className="mr-2"
 							onClick={() => {
-								if (!produtoInsumo) {
-									alert("Informe o produto");
-									return;
-								}
+								
 								if (quantidade === 0) {
 									alert("Informe a quantidade");
 									return;
@@ -321,7 +359,7 @@ export default function FormularioProduto({
 								</tr>
 							</thead>
 							<tbody className="bg-white divide-y divide-gray-200 text-center">
-								{insumo?.map((itens, i) => {
+								{produtoData.produtoComposicao?.map((itens, i) => {
 									return (
 										<tr key={i} className={i % 2 === 0 ? "" : "bg-gray-100"}>
 											<td className="px-6  whitespace-nowrap ">
@@ -364,22 +402,16 @@ export default function FormularioProduto({
 					cor="indigo-500"
 					className="mr-2"
 					onClick={() =>
-						salvarProduto?.({
-							codigo,
-							codigoBarra,
-							composicao,
-							id,
-							nome,
-							categoria: optionToValue(categoria),
-							tipo: optionToValue(tipo, true),
-							unidade: optionToValue(unidade),
-							preco,
-							localEstoque,
-							insumo,
+						salvarProduto?.(
+							{
+							...produtoData,							
+							categoria: optionToValue(produtoData.categoria),
+							tipo: optionToValue(produtoData.tipo, true),
+							unidade: optionToValue(produtoData.unidade),
 						})
 					}
 				>
-					{id ? "Alterar" : "Salvar"}
+					{produtoData.idProduto ? "Alterar" : "Salvar"}
 				</Botao>
 				<Botao cor="red-600" onClick={exibirTabela}>
 					Voltar

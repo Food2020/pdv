@@ -85,7 +85,7 @@ const columns = React.useMemo(
 () => [
  {
    Header: "Id",
-   accessor: "id",
+   accessor: "idLocalEstoque",
  },
  {
    Header: "Nome",

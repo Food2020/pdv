@@ -12,15 +12,22 @@ import {
 } from "../../../Util";
 import { Tooltip } from "@mui/material";
 
-export default function TabelaProduto(props) {
+export default function TabelaProduto({
+	categoriasOptions,
+	produtoDuplicar,
+	produtoEditar,
+	produtoExcluir,
+	produtos,
+	unidadesOptions,
+}) {
 	function renderizarAcoesTable({ row }) {
 		const produto = row.original;
 		return (
 			<div>
-				{props.produtoEditar && (
+				{produtoEditar && (
 					<Tooltip title="Editar" placement="top">
 						<button
-							onClick={() => props.produtoEditar(produto)}
+							onClick={() => produtoEditar(produto)}
 							className={`
                     text-green-500
                     rounded-full
@@ -32,10 +39,10 @@ export default function TabelaProduto(props) {
 						</button>
 					</Tooltip>
 				)}
-				{props.produtoExcluir && (
+				{produtoExcluir && (
 					<Tooltip title="Excluir" placement="top">
 						<button
-							onClick={() => props.produtoExcluir(produto)}
+							onClick={() => produtoExcluir(produto)}
 							className={`
                         text-red-600
                         rounded-full
@@ -47,10 +54,10 @@ export default function TabelaProduto(props) {
 						</button>
 					</Tooltip>
 				)}
-				{props.produtoDuplicar && (
+				{produtoDuplicar && (
 					<Tooltip title="Duplicar" placement="top">
 						<button
-							onClick={() => props.produtoDuplicar(produto)}
+							onClick={() => produtoDuplicar(produto)}
 							className={`
                         text-black
                         rounded-full
@@ -65,8 +72,10 @@ export default function TabelaProduto(props) {
 			</div>
 		);
 	}
-	const flagExibeAcoes = props?.produtoEditar || props?.produtoExcluir;
-	const Produtos = props?.produtos;
+
+	const flagExibeAcoes = produtoEditar || produtoExcluir;
+	const Produtos = produtos;
+
 	const getData = () => {
 		const data = trataArrayNull(Produtos);
 		return [...data];
@@ -76,7 +85,7 @@ export default function TabelaProduto(props) {
 	const columns = [
 		{
 			Header: "Id",
-			accessor: "id",
+			accessor: "idProduto",
 		},
 		{
 			Header: "Código",
@@ -93,16 +102,16 @@ export default function TabelaProduto(props) {
 		{
 			Header: "Categoria",
 			accessor: (row) =>
-				renderizaLabelSelect(row.categoria, props.categoriasOptions),
+				renderizaLabelSelect(row.categoria, categoriasOptions),
 			Cell: ({ row }) =>
-				renderizaLabelSelect(row.original.categoria, props.categoriasOptions),
+				renderizaLabelSelect(row.original.categoria, categoriasOptions),
 		},
 		{
 			Header: "Unidade",
 			accessor: (row) =>
-				renderizaLabelSelect(row.unidade, props.unidadesOptions),
+				renderizaLabelSelect(row.unidade, unidadesOptions),
 			Cell: ({ row }) =>
-				renderizaLabelSelect(row.original.unidade, props.unidadesOptions),
+				renderizaLabelSelect(row.original.unidade, unidadesOptions),
 		},
 		{
 			Header: "Preço",

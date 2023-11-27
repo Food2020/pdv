@@ -52,7 +52,7 @@ export const trataNull = (elem) => {
 };
 
 export const optionToValue = (valor, multiple) => {
-	return multiple ? valor.map((item) => item.value) : valor?.value;
+	return multiple ? valor?.map((item) => item.value) : valor?.value;
 };
 
 export const valueToOption = (valor, multiple) => {

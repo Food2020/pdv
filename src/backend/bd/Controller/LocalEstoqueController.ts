@@ -26,12 +26,12 @@ export default class LocalEstoqueController {
 			{	
 
 				return JSON.parse(SuperJSON.stringify({
-					id: Number( response.idLocalEstoque),
-					nome: ( response).nome,
-					descricao:( response).descricao,
-					ativo: ( response).ativo,
-					createdAt:( response).createdAt,
-					updatedAt:( response).updatedAt
+					id: Number(localEstoque.idLocalEstoque),
+					nome: localEstoque.nome,
+					descricao:localEstoque.descricao,
+					ativo:  localEstoque.ativo,
+					createdAt: localEstoque.createdAt,
+					updatedAt: localEstoque.updatedAt
 				}));}
 			)
 			.catch((e)=>{
@@ -46,9 +46,9 @@ export default class LocalEstoqueController {
 	async update(data: local_estoque) {
 		try {
 			
-			const resposta = prisma.local_estoque.update({
+			const resposta = await prisma.local_estoque.update({
 				where: {
-					id: Number(data.id),
+					idLocalEstoque: Number(data.idLocalEstoque),
 				},
 				data: {
 					nome: data.nome,
@@ -57,8 +57,8 @@ export default class LocalEstoqueController {
 				},
 			});
 			return JSON.parse(SuperJSON.stringify({
-				id: (await resposta).id,
-				nome: (await resposta).nome
+				id: resposta.idLocalEstoque,
+				nome:  resposta.nome
 			}));
 		} catch (e) {
 			return e;
@@ -70,17 +70,17 @@ export default class LocalEstoqueController {
 		
 		
 		try {
-			const deletado = prisma.local_estoque.delete({
+			const deletado = await prisma.local_estoque.delete({
 				where: {
-					id: Number(unidade.json.id),
+					idLocalEstoque: Number(unidade.idLocalEstoque),
 				},
 			});
 			return SuperJSON.stringify({
-				id:(await deletado).id,
-				nome:(await deletado).nome,
-				ativo: (await deletado).ativo,
-				createdAt: (await deletado).createdAt,
-				updtedAt: (await deletado).updatedAt
+				id: deletado.idLocalEstoque,
+				nome:deletado.nome,
+				ativo:  deletado.ativo,
+				createdAt:  deletado.createdAt,
+				updtedAt: deletado.updatedAt
 			});
 		} catch (e) {
 			return e;
