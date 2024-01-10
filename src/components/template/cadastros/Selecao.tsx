@@ -24,6 +24,7 @@ export default function Selecao(props) {
                     }}
 					options={props.options}
 					isMulti={props.isMulti}
+					required={props.require}
 				/>
 			);
 		}

@@ -4,14 +4,14 @@ const ProductTable = ({
         produto = []
 }) => {
 
-  const [products, setProducts] = useState([produto]);
+  const [products, setProducts] = useState<any>([produto]);
 
   const [editingProductId, setEditingProductId] = useState(null);
   const [newProductName, setNewProductName] = useState('');
   const [quantidade, setQuantidade] = useState('');
 
   const handleEditClick = (productId) => {
-    const product = products.find((p) => p.id === productId);
+    const product = products.find((p :any) => p.id === productId);
     setEditingProductId(productId);
     setNewProductName(product.name);
     setQuantidade(product.price);
@@ -52,7 +52,7 @@ const ProductTable = ({
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {products.map((product) => (
+          {products.map((product: any) => (
             <tr key={product.id}>
               <td className="px-6 py-4 whitespace-nowrap">{product.id}</td>
               <td className="px-6 py-4 whitespace-nowrap">
