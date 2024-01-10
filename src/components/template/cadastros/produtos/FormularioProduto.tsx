@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Produto from "../../../../core/Produto";
 import {
 	trataNull,
 	optionToValue,

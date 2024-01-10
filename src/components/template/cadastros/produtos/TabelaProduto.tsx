@@ -19,6 +19,7 @@ export default function TabelaProduto({
 	produtoExcluir,
 	produtos,
 	unidadesOptions,
+	...restProps
 }) {
 	function renderizarAcoesTable({ row }) {
 		const produto = row.original;
